@@ -5,6 +5,8 @@ import Card from "../../components/card/Card";
 import ActivityCard from "../../components/ActivityCard/ActivityCard";
 import PostCard from "../../components/PostCard/PostCard";
 import { actions, activities } from "./content";
+import { motion } from 'framer-motion'
+import { useRef, useEffect, useState } from "react";
 import "./HomePage.css";
 
 function HomePage() {
@@ -33,20 +35,24 @@ function HomePage() {
         </div>
         <div className="featuredActivities">
           <div className="activities">
+
             <ActivityCard
               key={activities[0].id}
               src={activities[0].src}
               name={activities[0].name}
+              link={activities[0].link}
             />
             <ActivityCard
               key={activities[1].id}
               src={activities[1].src}
               name={activities[1].name}
+              link={activities[1].link}
             />
             <ActivityCard
               key={activities[2].id}
               src={activities[2].src}
               name={activities[2].name}
+              link={activities[2].link}
             />
           </div>
         </div>

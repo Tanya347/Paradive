@@ -108,7 +108,7 @@ function Register() {
               name="username"
               onChange={handleChange}
               id="username"
-            //   value={data.username}
+              //   value={data.username}
               required
             />
 
@@ -118,7 +118,7 @@ function Register() {
               name="email"
               onChange={handleChange}
               id="email"
-            //   value={data.email}
+              //   value={data.email}
               required
             />
 
@@ -128,7 +128,7 @@ function Register() {
               name="password"
               onChange={handleChange}
               id="password"
-            //   value={data.password}
+              //   value={data.password}
               required
             />
 
@@ -142,6 +142,8 @@ function Register() {
             />
 
             <button onClick={handleClick}>Register</button>
+            <p>Already Registered? <Link to="/login">Login</Link></p>
+
           </form>
           {/* <form>
                         <div className="txt_field">

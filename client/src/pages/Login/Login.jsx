@@ -4,12 +4,12 @@ import Navbar from '../../components/Navbar/Navbar';
 import "./login.css";
 import axios from "axios"
 import { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { AuthContext } from "../../context/authContext"
 
 
 
-function Login() {
+function Login({ title, link }) {
 
     const [credentials, setCredentials] = useState({
         username: undefined,
@@ -30,7 +30,7 @@ function Login() {
             const url = "http://localhost:7700/api/auth/login"
             const res = await axios.post(url, credentials)
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details })
-            navigate("/")
+            navigate(`${link}`)
         } catch (err) {
             dispatch({ type: "LOGIN_FAILURE", payload: err.response.data })
         }
@@ -43,7 +43,7 @@ function Login() {
             <Navbar />
             <div className="loginCard">
                 <div className='center'>
-                    <h1>Welcome Back!</h1>
+                    <h1>{title}</h1>
                     <form>
                         <input
                             type="text"
@@ -60,6 +60,7 @@ function Login() {
                             className="lInput"
                         />
                         <button onClick={handleClick}>Login</button>
+                        <p>Not registered? <Link to="/register">Register</Link></p>
                     </form>
                     {/* <form>
                         <div className="txt_field">

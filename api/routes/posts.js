@@ -12,8 +12,8 @@ import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
 const router = express.Router();
 
 router.post("/", createPost);
-router.put("/:id", verifyUser, updatePost);
-router.delete("/:id", verifyUser, deletePost);
+router.put("/:id", updatePost);
+router.delete("/:id", deletePost);
 router.get("/:id", getPost);
 router.get("/", getPosts);
 

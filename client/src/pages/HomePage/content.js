@@ -23,17 +23,20 @@ export const actions = [
 export const activities = [
     {
         id: 0,
-        src: "/Assets/act1.png",
-        name: "Rafting"
+        src: "/Assets/activities/parasailing.avif",
+        name: "Parasailing",
+        link: "parasailing"
     },
     {
         id: 1,
-        src: "/Assets/act2.png",
-        name: "Banana Boating"
+        src: "/Assets/activities/bananaboat.avif",
+        name: "Banana Boat",
+        link: "bananaboat"
     },
     {
         id: 2,
-        src: "/Assets/act3.png",
-        name: "Hang Gliding"
+        src: "/Assets/activities/diving.avif",
+        name: "Diving",
+        link: "diving"
     }
 ]

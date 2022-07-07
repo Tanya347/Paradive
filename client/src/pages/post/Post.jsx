@@ -8,19 +8,31 @@ import {
   faPersonSwimming,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import useFetch from "../../Hooks/useFetch";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 function Post() {
   const location = useLocation();
   const id = location.pathname.split("/")[1];
   const { data, loading } = useFetch(`/posts/${id}`);
-  console.log(data);
+  const { user } = useContext(AuthContext);
   const images = data.photos;
-  console.log(images);
+  const isUser = data.userId === user._id;
+  const navigate = useNavigate();
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:7700/api/posts/${data._id}`);
+      navigate('/explore')
+    } catch (err) {
+      console.log(err)
+    }
+  };
 
   return (
     <div className="postPage">
@@ -58,8 +70,10 @@ function Post() {
                 <span> Location : </span>
                 {data.location}
               </p>
-              <button>Edit</button>
-              <button>Delete</button>
+              <Link to="edit">
+                {isUser && <button>Edit</button>}
+              </Link>
+              {isUser && <button onClick={handleDelete}>Delete</button>}
             </div>
           </div>
 

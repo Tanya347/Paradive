@@ -47,7 +47,8 @@ function CreatePost() {
       };
 
       await axios.post("http://localhost:7700/api/posts", newpost);
-      navigate(`/${info._id}`);
+      navigate('/explore');
+
     } catch (err) {
       console.log(err);
     }

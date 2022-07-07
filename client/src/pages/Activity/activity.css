@@ -1,45 +1,28 @@
-.activityContainer {
+.activityHero {
+    position: relative;
+    height: 500px;
+    background-repeat: no-repeat;
+}
+
+
+
+.activityHeroContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-}
-
-.heroimg img{
-    width: 100vw;
-    height: 360px;
-}
-
-.title {
-    display: flex;
     align-items: center;
-    margin-top: 30px;
-    margin-left: 40px;
 }
 
-.title h1 {
-    font-weight: bold;
-    font-size: 50px;
-    padding: 0 0 20px 0;
-    color: #132c33;
+.activityHeroContent h1 {
+    font-size: 4rem;
+    font-family: 'Smooch', cursive;
 }
 
-.para {
-    display: flex;
-    align-items: center;
-    margin: 10px;
-    margin-left: 50px;
-    margin-right: 50px;
-}
-
-.postContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.postRow {
-    width: 100vw;
-    height: 100vh;
+.activityHeroContent p {
+    text-align: center;
+    font-size: 1.5rem;
 }
