@@ -1,6 +1,5 @@
 import Post from "../models/Post.js";
 
-
 export const createPost = async (req, res, next) => {
 
   const newPost = new Post(req.body);
@@ -62,6 +61,7 @@ export const getPost = async (req, res, next) => {
 
 export const getPosts = async (req, res, next) => {
   try {
+    console.log(geocoder)
     const posts = await Post.find();
     res.status(200).json(posts);
   } catch (err) {

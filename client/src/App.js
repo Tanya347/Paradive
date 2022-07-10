@@ -5,10 +5,10 @@ import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
 import Post from "./pages/post/Post";
 import CreatePost from "./pages/createPost/CreatePost";
-import EditPost from "./pages/editPost/EditPost";
+// import EditPost from "./pages/editPost/EditPost";
 import { useContext } from "react"
 import { AuthContext } from "./context/authContext"
-import { Navigate } from "react-router-dom"
+// import { Navigate } from "react-router-dom"
 import Activity from "./pages/Activity/Activity";
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
         <Route path="/login" element={<Login title="Welcome Back!" link="/" />} />
         <Route path="/register" element={<Register />} />
         <Route path="/:id" element={<Post />} />
-        <Route path="/:id/edit" element={<EditPost />} />
+        {/* <Route path="/:id/edit" element={<EditPost />} /> */}
         <Route path="/activity/:id" element={<Activity />} />
         <Route path="/new" element={
           <ProtectedRoute>

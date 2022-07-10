@@ -70,9 +70,9 @@ function Post() {
                 <span> Location : </span>
                 {data.location}
               </p>
-              <Link to="edit">
+              {/* <Link to="edit">
                 {isUser && <button>Edit</button>}
-              </Link>
+              </Link> */}
               {isUser && <button onClick={handleDelete}>Delete</button>}
             </div>
           </div>

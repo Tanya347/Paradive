@@ -196,9 +196,8 @@ function EditPost() {
                                     <input
                                         onChange={handleChange}
                                         type="text"
-                                        value={data.date}
                                         id="date"
-                                        placeholder=""
+                                        placeholder={data.date}
                                     />
                                 </div>
                                 <div className="input" id="lastInput">
@@ -206,9 +205,8 @@ function EditPost() {
                                     <input
                                         onChange={handleChange}
                                         type="text"
-                                        value={data.desc}
                                         id="desc"
-                                        placeholder=""
+                                        placeholder={data.desc}
                                     />
                                 </div>
                                 <div className="input">
