@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Smooch&display=swap');
 
+body,
+html {
+    overflow-x: hidden;
+}
+
 .hero {
     position: relative;
     height: 800px;
