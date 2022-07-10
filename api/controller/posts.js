@@ -61,7 +61,7 @@ export const getPost = async (req, res, next) => {
 
 export const getPosts = async (req, res, next) => {
   try {
-    console.log(geocoder)
+    //console.log(geocoder)
     const posts = await Post.find();
     res.status(200).json(posts);
   } catch (err) {

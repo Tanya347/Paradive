@@ -13,7 +13,7 @@
   flex-wrap: wrap;
   background: url("../../../public/Assets/postbg.png");
   background-size: cover;
-  height: 800px;
+  height: 100%;
 }
 
 .container .card {
