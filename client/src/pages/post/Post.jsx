@@ -7,20 +7,15 @@ import {
   faCalendar,
   faPersonSwimming,
   faMapLocationDot,
+  faCircleArrowLeft,
+  faCircleArrowRight
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import useFetch from "../../Hooks/useFetch";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
-import { Swiper, SwiperSlide } from "swiper/react"
-import 'swiper/css';
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/bundle";
-
-import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 
 
 function Post() {
@@ -28,6 +23,7 @@ function Post() {
   const id = location.pathname.split("/")[1];
   const { data } = useFetch(`/posts/${id}`);
   const { user } = useContext(AuthContext);
+  const [slideNumber, setSlideNumber] = useState(0);
   let isUser
   if (user) {
     isUser = data.userId === user._id;
@@ -44,10 +40,24 @@ function Post() {
   };
 
 
+
+  const handleMove = (direction) => {
+    let newSlideNumber;
+    const size = data.photos.length
+    console.log(size)
+    if (direction === "l") {
+      newSlideNumber = slideNumber === 0 ? size : slideNumber - 1;
+    } else {
+      newSlideNumber = slideNumber === size - 1 ? 0 : slideNumber + 1;
+    }
+    console.log(newSlideNumber)
+    setSlideNumber(newSlideNumber)
+  }
+
   return (
     <div className="postPage">
       <Navbar />
-      <div className="search">
+      <div className="postPageBG">
         <div className="upperContent">
           <h1>{data.title}</h1>
           <p>{data.desc}</p>
@@ -58,32 +68,36 @@ function Post() {
 
         <div className="leftContainer">
 
-          <Swiper
-            cssMode={true}
-            navigation={true}
-            pagination={true}
-            mousewheel={true}
-            keyboard={true}
-            modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-            className="mySwiper"
-          >
-            <div className="images">
-              {data.photos?.map((photo, i) => (
-                <SwiperSlide>
-                  <div className="postImgWrapper" key={i}>
-                    <img
-                      src={photo}
-                      alt=""
-                      className="postImg"
-                      width="300px"
-                      id={`image${i}`}
-                      height="250px"
-                    />
-                  </div>
-                </SwiperSlide>
-              ))}
+
+          {data.photos ? (<div className="images">
+
+
+            <img src={data.photos[slideNumber]} height="300px" alt="" />
+            {/* {data.photos?.map((photo, i) => (
+              <div className="postImgWrapper" key={i}>
+                <img
+                  src={photo}
+                  alt=""
+                  className="postImg"
+                  width="300px"
+                  id={`image${i}`}
+                  height="250px"
+                />
+              </div>
+            ))} */}
+            <div className="arrows">
+              <FontAwesomeIcon
+                icon={faCircleArrowLeft}
+                className="arrow"
+                onClick={() => handleMove("l")}
+              />
+              <FontAwesomeIcon
+                icon={faCircleArrowRight}
+                className="arrow"
+                onClick={() => handleMove("r")}
+              />
             </div>
-          </Swiper>
+          </div>) : ("no Images")}
 
         </div>
 

@@ -19,7 +19,7 @@ html {
     flex-wrap: wrap;
 }
 
-.search {
+.postPageBG {
     position: relative;
     height: 300px;
     background: url("../../../public/Assets/postpage.jpg");
@@ -27,7 +27,7 @@ html {
     width: 100%;
 }
 
-.search .upperContent {
+.postPageBG .upperContent {
     width: 90%;
     position: absolute;
     top: 50%;
@@ -49,6 +49,24 @@ html {
     margin-top: 10px;
     font-size: 1.2rem;
     color: white;
+}
+
+.images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.images .arrows {
+    display: flex;
+    justify-content: center;
+}
+
+.images .arrow {
+    margin: 20px;
+    font-size: 40px;
+    color: lightgray;
+    cursor: pointer;
 }
 
 .leftContainer {
