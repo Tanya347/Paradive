@@ -7,7 +7,7 @@ html {
     background: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .5)), url("../../../public/Assets/register-bg.png");
     background-size: cover;
     background-repeat: no-repeat;
-    height: 800px;
+    height: 100vh;
     overflow: hidden;
     padding-top: 20px;
 }
@@ -40,6 +40,11 @@ form .txt_field {
     margin: 30px 0;
 }
 
+form .txt_field_img {
+    position: relative;
+    margin-top: 10px;
+}
+
 .txt_field {
     width: 100%;
     padding: 0 5px;
@@ -50,48 +55,14 @@ form .txt_field {
     outline: none;
 }
 
-.txt_field label {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    color: #adadad;
-    transform: translateY(-50%);
+.txt_field input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
     font-size: 16px;
-    pointer-events: none;
-    transition: 0.5s;
-}
-
-.txt_field span::before {
-    content: "";
-    position: absolute;
-    top: 40px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #2691d9;
-    transition: 0.5s;
-}
-
-.txt_field input:focus~label,
-.txt_field input:valid~label {
-    top: -5px;
-    width: 100%;
-    color: #2691d9;
-}
-
-.txt_field input:focus~span::before,
-.txt_field input:valid~span::before {
-    width: 100%;
-}
-
-.pass {
-    margin: -5px 0 20px 5px;
-    color: #a6a6a6;
-    cursor: pointer;
-}
-
-.pass:hover {
-    text-decoration: underline;
+    border: none;
+    background: none;
+    outline: none;
 }
 
 .register input {
@@ -107,15 +78,24 @@ form .txt_field {
     outline: none;
 }
 
-.register .button {
-    transition: 0.5s;
-}
-
-.register .button {
+.login_button .button {
     width: 100%;
     height: 50px;
     border: none;
-    background: #2691d9;
+    background: transparent;
+    border-radius: 25px;
+    font-size: 18px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+.login_button {
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: #26AEC0;
     border-radius: 25px;
     font-size: 18px;
     color: white;
@@ -132,7 +112,7 @@ form .txt_field {
 }
 
 .signup_link a {
-    color: #2691d9;
+    color: #26AEC0;
     text-decoration: none;
 }
 
