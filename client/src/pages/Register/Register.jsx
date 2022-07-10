@@ -52,8 +52,8 @@ function Register() {
     }
   };
 
-  console.log(file)
-  console.log(info)
+  console.log(file);
+  console.log(info);
   //   const handleChange = ({ currentTarget: input }) => {
   //     setData({ ...data, [input.name]: input.value });
   //   };
@@ -92,58 +92,72 @@ function Register() {
               height="100px"
             />
             <div className="formInput">
-              <label htmlFor="file">
-                Image <FontAwesomeIcon className="icon" icon={faPlusCircle} />
-              </label>
-              <input
-                type="file"
-                id="file"
-                onChange={(e) => setFile(e.target.files[0])}
-                style={{ display: "none" }}
-              />
+              <div className="txt_field_img">
+                <label htmlFor="file">
+                  Image <FontAwesomeIcon className="icon" icon={faPlusCircle} />
+                </label>
+                <input
+                  type="file"
+                  id="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  style={{ display: "none" }}
+                />
+              </div>
+
+              <div className="txt_field">
+                <input
+                  type="text"
+                  placeholder="username"
+                  name="username"
+                  onChange={handleChange}
+                  id="username"
+                  //   value={data.username}
+                  required
+                />
+              </div>
+              <div className="txt_field">
+                <input
+                  type="email"
+                  placeholder="email"
+                  name="email"
+                  onChange={handleChange}
+                  id="email"
+                  //   value={data.email}
+                  required
+                />
+              </div>
+              <div className="txt_field">
+                <input
+                  type="password"
+                  placeholder="password"
+                  name="password"
+                  onChange={handleChange}
+                  id="password"
+                  //   value={data.password}
+                  required
+                />
+              </div>
+              <div className="txt_field">
+                <input
+                  type="text"
+                  placeholder="Write bio"
+                  name="desc"
+                  onChange={handleChange}
+                  id="desc"
+                  //   value={data.desc}
+                />
+              </div>
             </div>
-            <input
-              type="text"
-              placeholder="username"
-              name="username"
-              onChange={handleChange}
-              id="username"
-              //   value={data.username}
-              required
-            />
-
-            <input
-              type="email"
-              placeholder="email"
-              name="email"
-              onChange={handleChange}
-              id="email"
-              //   value={data.email}
-              required
-            />
-
-            <input
-              type="password"
-              placeholder="password"
-              name="password"
-              onChange={handleChange}
-              id="password"
-              //   value={data.password}
-              required
-            />
-
-            <input
-              type="text"
-              placeholder="Write bio"
-              name="desc"
-              onChange={handleChange}
-              id="desc"
-            //   value={data.desc}
-            />
-
-            <button onClick={handleClick}>Register</button>
-            <p>Already Registered? <Link to="/login">Login</Link></p>
-
+            <div className="login_button">
+              <button className="button" onClick={handleClick}>
+                Register
+              </button>
+            </div>
+            <div className="signup_link">
+              <p>
+                Already Registered? <Link to="/login">Login</Link>
+              </p>
+            </div>
           </form>
           {/* <form>
                         <div className="txt_field">
