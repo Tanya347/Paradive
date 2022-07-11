@@ -74,10 +74,6 @@ function CreatePost() {
   return (
     <div className="createPostContainer">
       <Navbar />
-      <div className="txt">
-        <h1>Create a post</h1>
-        <h1>Create a post</h1>
-      </div>
       <div className="formContainer">
         <form action="">
           <div className="picsContainer">
@@ -163,6 +159,8 @@ function CreatePost() {
               </div>
             </div>
           </div>
+
+
           <div className="inputContainer">
             <div className="columns">
               <div className="column">
