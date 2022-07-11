@@ -14,8 +14,6 @@ function SearchPage() {
     "/posts"
   );
 
-  console.log(query)
-
   const keys = ["type", "title", "location"]
 
   const search = (data) => {

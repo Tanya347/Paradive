@@ -17,7 +17,7 @@ function Activity() {
 
     let index;
 
-    for (let i = 0; i < activities.size; i++) {
+    for (let i = 0; i < activities.length; i++) {
         if (activities[i].type === id)
             index = i;
     }
@@ -31,16 +31,17 @@ function Activity() {
     }
 
     return (
+
         <div className='activityContainer'>
             <Navbar />
-            <div className="search">
+            <div className="activityPageHero">
                 <h1>{activities[index].placeholder}</h1>
-                <img src={activities[index].src} alt="" />
+                <img src={activities[index].src} alt="" height="200px" />
                 <p>{activities[index].desc}</p>
             </div>
             <div className="searchedPosts">
-                {loading ? (
-                    "loading"
+                {data ? (
+                    <><p style={{ color: "white", padding: "10px 0" }}>No content to display</p></>
                 ) : (
                     <>
 

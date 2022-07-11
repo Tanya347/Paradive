@@ -8,6 +8,7 @@ import { actions, activities } from "./content";
 import { motion } from 'framer-motion'
 import { useRef, useEffect, useState } from "react";
 import "./HomePage.css";
+import { Link } from "react-router-dom"
 
 function HomePage() {
 
@@ -55,6 +56,9 @@ function HomePage() {
               link={activities[2].link}
             />
           </div>
+          <Link to="all">
+            <button className="viewMore">View More</button>
+          </Link>
         </div>
         <div className="featuredPosts">
           <div className="postBackground">

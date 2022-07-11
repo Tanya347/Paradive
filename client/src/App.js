@@ -10,6 +10,7 @@ import { useContext } from "react"
 import { AuthContext } from "./context/authContext"
 // import { Navigate } from "react-router-dom"
 import Activity from "./pages/Activity/Activity";
+import AllActivity from "./pages/allActivity/AllActivity";
 
 function App() {
   const { user } = useContext(AuthContext)
@@ -41,6 +42,7 @@ function App() {
         }
         />
         <Route path="/explore" element={<SearchPage />} />
+        <Route path="/all" element={<AllActivity />} />
       </Routes>
     </BrowserRouter>
   );

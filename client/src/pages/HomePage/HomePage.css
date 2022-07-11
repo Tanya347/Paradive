@@ -39,7 +39,7 @@ html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 100px 0;
+    margin: 100px 0 50px 0;
 }
 
 .activities {
@@ -68,6 +68,24 @@ html {
     flex-wrap: wrap;
 }
 
+.viewMore {
+    margin-top: 80px;
+    background-color: #51c4d3;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.viewMore:hover {
+    background-color: #26aec0;
+    transform: translateY(-2px);
+}
+
 @media screen and (max-width: 900px) {
 
     .featuredActivities {
@@ -80,6 +98,9 @@ html {
 
     .heroBackground img {
         filter: brightness(60%);
+    }
 
+    .viewMore {
+        margin-top: 40px;
     }
 }
