@@ -12,7 +12,7 @@ function CreatePost() {
   const [files, setFiles] = useState("");
   const [info, setInfo] = useState({});
   const [rating, setRating] = useState(0);
-  const { user, dispatch } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   console.log(user);
   const navigate = useNavigate();
 
@@ -47,8 +47,7 @@ function CreatePost() {
       };
 
       await axios.post("http://localhost:7700/api/posts", newpost);
-      navigate('/explore');
-
+      navigate("/explore");
     } catch (err) {
       console.log(err);
     }
@@ -75,11 +74,15 @@ function CreatePost() {
   return (
     <div className="createPostContainer">
       <Navbar />
+      <div className="txt">
+        <h1>Create a post</h1>
+        <h1>Create a post</h1>
+      </div>
       <div className="formContainer">
         <form action="">
           <div className="picsContainer">
-            <h1>Upload Images (Max 6)</h1>
             <div className="formInput">
+              <h1>Upload Images (Max 6)</h1>
               <label htmlFor="file">
                 <FontAwesomeIcon className="icon" icon={faPlusCircle} />
               </label>
@@ -92,60 +95,72 @@ function CreatePost() {
               />
             </div>
             <div className="uploadedPictures">
-              <img
-                src={
-                  files[0]
-                    ? URL.createObjectURL(files[0])
-                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-                }
-                alt=""
-                height="100px"
-              />
-              <img
-                src={
-                  files[1]
-                    ? URL.createObjectURL(files[1])
-                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-                }
-                alt=""
-                height="100px"
-              />
-              <img
-                src={
-                  files[2]
-                    ? URL.createObjectURL(files[2])
-                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-                }
-                alt=""
-                height="100px"
-              />
-              <img
-                src={
-                  files[3]
-                    ? URL.createObjectURL(files[3])
-                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-                }
-                alt=""
-                height="100px"
-              />
-              <img
-                src={
-                  files[4]
-                    ? URL.createObjectURL(files[4])
-                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-                }
-                alt=""
-                height="100px"
-              />
-              <img
-                src={
-                  files[5]
-                    ? URL.createObjectURL(files[5])
-                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-                }
-                alt=""
-                height="100px"
-              />
+              <div className="upload_pic">
+                <img
+                  src={
+                    files[0]
+                      ? URL.createObjectURL(files[0])
+                      : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                  }
+                  alt=""
+                  height="100px"
+                />
+              </div>
+              <div className="upload_pic">
+                <img
+                  src={
+                    files[1]
+                      ? URL.createObjectURL(files[1])
+                      : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                  }
+                  alt=""
+                  height="100px"
+                />
+              </div>
+              <div className="upload_pic">
+                <img
+                  src={
+                    files[2]
+                      ? URL.createObjectURL(files[2])
+                      : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                  }
+                  alt=""
+                  height="100px"
+                />
+              </div>
+              <div className="upload_pic">
+                <img
+                  src={
+                    files[3]
+                      ? URL.createObjectURL(files[3])
+                      : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                  }
+                  alt=""
+                  height="100px"
+                />
+              </div>
+              <div className="upload_pic">
+                <img
+                  src={
+                    files[4]
+                      ? URL.createObjectURL(files[4])
+                      : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                  }
+                  alt=""
+                  height="100px"
+                />
+              </div>
+              <div className="upload_pic">
+                <img
+                  src={
+                    files[5]
+                      ? URL.createObjectURL(files[5])
+                      : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                  }
+                  alt=""
+                  height="100px"
+                />
+              </div>
             </div>
           </div>
           <div className="inputContainer">
@@ -172,7 +187,7 @@ function CreatePost() {
                 <div className="input">
                   <div className="formInput">
                     <label>Activity Type</label>
-                    <select id="type" onChange={handleChange}>
+                    <select id="type" className="type" onChange={handleChange}>
                       {types.map((item) => (
                         <option value={item.type}>{item.placeholder}</option>
                       ))}
@@ -187,7 +202,7 @@ function CreatePost() {
                     onChange={handleChange}
                     type="text"
                     id="priceRange"
-                    placeholder=""
+                    placeholder="Enter price range"
                   />
                 </div>
                 <div className="input">
@@ -196,7 +211,7 @@ function CreatePost() {
                     onChange={handleChange}
                     type="text"
                     id="date"
-                    placeholder=""
+                    placeholder="Enter the date"
                   />
                 </div>
                 <div className="input" id="lastInput">
@@ -205,7 +220,7 @@ function CreatePost() {
                     onChange={handleChange}
                     type="text"
                     id="desc"
-                    placeholder=""
+                    placeholder="A brief description"
                   />
                 </div>
                 <div className="input">
@@ -275,10 +290,11 @@ function CreatePost() {
                 </div>
               </div>
             </div>
-
-            <button onClick={handleClick} type="submit">
-              Post
-            </button>
+            <div className="post_button">
+              <button className="button" onClick={handleClick} type="submit">
+                Post
+              </button>
+            </div>
           </div>
         </form>
       </div>

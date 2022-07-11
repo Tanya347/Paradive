@@ -7,7 +7,29 @@ html {
     background: url("../../../public/Assets/createbg.png");
     background-size: cover;
     background-repeat: repeat;
-    height: 900px;
+    height: 100%;
+}
+
+.txt {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.txt h1 {
+    font-size: 60px;
+    font-weight: 900;
+    color: #51c4d3;
+    display: block;
+    padding: 0.5em;
+}
+
+.txt h1:nth-child(2) {
+    position: absolute;
+    color: #fff;
+    clip-path: inset(-1% -1% 50% -1%);
 }
 
 .formContainer {
@@ -30,8 +52,20 @@ html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-right: 40px;
     width: 50%;
     gap: 40px;
+}
+
+.picsContainer h1 {
+    text-align: center;
+    padding: 0 0 20px 0;
+    font-size: 25px;   
+}
+
+.picsContainer label {
+    display: flex;
+    justify-content: center;
 }
 
 .picsContainer #upload {
@@ -51,25 +85,78 @@ html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    /* width: 50%; */
 }
 
 .columns {
     display: flex;
-    gap: 10px;
+    gap: 20px;
 }
 
 .column {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 
 #lastInput {
     align-self: flex-start;
 }
 
-.input {
+.column .input label {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.column input {
+    display: flex;
+    /* flex-direction: column; */
+    font-size: 15px;
+    padding: 0 15px;
+    height: 40px;
+    border: 3px solid #126e82;
+    background: #bbe5e9;
+    border-radius: 5px;
+    /* width: 100%; */
+}
+
+.column .input .formInput {
     display: flex;
     flex-direction: column;
+}
+
+.column .input .type {
+    width : 70%;
+    margin: 10px;
+    height: 35px;
+    border: 3px solid #126e82;
+    background: #bbe5e9;
+    border-radius: 5px;
+    color: #0c4957;
+}
+
+.post_button {
+    width: 50%;
+    height: 50px;
+    border: none;
+    background: #26AEC0;
+    border-radius: 25px;
+    font-size: 18px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+.post_button .button {
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: transparent;
+    border-radius: 25px;
+    font-size: 18px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
 }
