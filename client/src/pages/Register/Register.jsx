@@ -82,16 +82,17 @@ function Register() {
           <h1>Join Us</h1>
 
           <form>
-            <img
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt=""
-              height="100px"
-            />
-            <div className="formInput">
+            <div className="image">
+              <img
+                src={
+                  file
+                    ? URL.createObjectURL(file)
+                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                }
+                alt=""
+                height="100px"
+              />
+
               <div className="txt_field_img">
                 <label htmlFor="file">
                   Image <FontAwesomeIcon className="icon" icon={faPlusCircle} />
@@ -103,6 +104,10 @@ function Register() {
                   style={{ display: "none" }}
                 />
               </div>
+            </div>
+
+            <div className="formInput">
+
 
               <div className="txt_field">
                 <input
@@ -144,7 +149,7 @@ function Register() {
                   name="desc"
                   onChange={handleChange}
                   id="desc"
-                  //   value={data.desc}
+                //   value={data.desc}
                 />
               </div>
             </div>

@@ -7,12 +7,12 @@ html {
     background: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .5)), url("../../../public/Assets/register-bg.png");
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 800px;
     overflow: hidden;
     padding-top: 20px;
 }
 
-.center {
+.registerCard .center {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -20,6 +20,7 @@ html {
     width: 400px;
     background: white;
     border-radius: 10px;
+    margin: 70px;
 }
 
 .center h1 {
@@ -63,6 +64,14 @@ form .txt_field_img {
     border: none;
     background: none;
     outline: none;
+}
+
+.registerCard form .image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .register input {
@@ -118,4 +127,10 @@ form .txt_field_img {
 
 .signup_link a:hover {
     text-decoration: underline;
+}
+
+@media screen and (max-width: 500px) {
+    .center {
+        width: 80%;
+    }
 }
