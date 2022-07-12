@@ -4,8 +4,8 @@ export const actions = [
         id: 0,
         src: "/Assets/login.png",
         para: "Excited? Join our Community to have more fun!",
-        button: "Login",
-        link: "login"
+        button: "Register",
+        link: "register"
     },
     {
         id: 1,
