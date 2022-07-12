@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import activities from "../Activity/activities"
 
 function CreatePost() {
   const [files, setFiles] = useState("");
@@ -56,27 +57,30 @@ function CreatePost() {
   console.log(files);
   console.log(rating);
 
-  const types = [
-    { type: "wakeboarding", placeholder: "Wake Boarding" },
-    { type: "surfing", placeholder: "Surfing" },
-    { type: "canoeing", placeholder: "Canoeing" },
-    { type: "jetskiing", placeholder: "Jet Skiing" },
-    { type: "parasailing", placeholder: "Parasailing" },
-    { type: "diving", placeholder: "Diving" },
-    { type: "rafting", placeholder: "Rafting" },
-    { type: "bananaboat", placeholder: "Banana Boat" },
-    { type: "hanggliding", placeholder: "Hang Gliding" },
-    { type: "paragliding", placeholder: "Paragliding" },
-    { type: "swimming", placeholder: "Swimming" },
-    { type: "fishing", placeholder: "Fishing" },
-  ];
+  // const types = [
+  //   { type: "wakeboarding", placeholder: "Wake Boarding" },
+  //   { type: "surfing", placeholder: "Surfing" },
+  //   { type: "canoeing", placeholder: "Canoeing" },
+  //   { type: "jetskiing", placeholder: "Jet Skiing" },
+  //   { type: "parasailing", placeholder: "Parasailing" },
+  //   { type: "diving", placeholder: "Diving" },
+  //   { type: "rafting", placeholder: "Rafting" },
+  //   { type: "bananaboat", placeholder: "Banana Boat" },
+  //   { type: "hanggliding", placeholder: "Hang Gliding" },
+  //   { type: "paragliding", placeholder: "Paragliding" },
+  //   { type: "swimming", placeholder: "Swimming" },
+  //   { type: "fishing", placeholder: "Fishing" },
+  // ];
 
   return (
     <div className="createPostContainer">
       <Navbar />
-      <div className="formContainer">
-        <form action="">
+      <div className="cpContainer">
+
+        <div className="formContainer">
+
           <div className="picsContainer">
+
             <div className="formInput">
               <h1>Upload Images (Max 6)</h1>
               <label htmlFor="file">
@@ -96,10 +100,10 @@ function CreatePost() {
                   src={
                     files[0]
                       ? URL.createObjectURL(files[0])
-                      : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                      : "Assets/transparent.png"
                   }
                   alt=""
-                  height="100px"
+                  height="80px"
                 />
               </div>
               <div className="upload_pic">
@@ -107,10 +111,10 @@ function CreatePost() {
                   src={
                     files[1]
                       ? URL.createObjectURL(files[1])
-                      : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                      : "Assets/transparent.png"
                   }
                   alt=""
-                  height="100px"
+                  height="80px"
                 />
               </div>
               <div className="upload_pic">
@@ -118,10 +122,10 @@ function CreatePost() {
                   src={
                     files[2]
                       ? URL.createObjectURL(files[2])
-                      : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                      : "Assets/transparent.png"
                   }
                   alt=""
-                  height="100px"
+                  height="80px"
                 />
               </div>
               <div className="upload_pic">
@@ -129,10 +133,10 @@ function CreatePost() {
                   src={
                     files[3]
                       ? URL.createObjectURL(files[3])
-                      : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                      : "Assets/transparent.png"
                   }
                   alt=""
-                  height="100px"
+                  height="80px"
                 />
               </div>
               <div className="upload_pic">
@@ -140,10 +144,10 @@ function CreatePost() {
                   src={
                     files[4]
                       ? URL.createObjectURL(files[4])
-                      : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                      : "Assets/transparent.png"
                   }
                   alt=""
-                  height="100px"
+                  height="80px"
                 />
               </div>
               <div className="upload_pic">
@@ -151,19 +155,21 @@ function CreatePost() {
                   src={
                     files[5]
                       ? URL.createObjectURL(files[5])
-                      : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                      : "Assets/transparent.png"
                   }
                   alt=""
-                  height="100px"
+                  height="80px"
                 />
               </div>
             </div>
+
           </div>
 
-
           <div className="inputContainer">
+
             <div className="columns">
               <div className="column">
+
                 <div className="input">
                   <label htmlFor="title">Title</label>
                   <input
@@ -173,6 +179,7 @@ function CreatePost() {
                     placeholder="Enter Title"
                   />
                 </div>
+
                 <div className="input">
                   <label htmlFor="location">Location</label>
                   <input
@@ -182,18 +189,22 @@ function CreatePost() {
                     placeholder="Enter location"
                   />
                 </div>
+
                 <div className="input">
                   <div className="formInput">
                     <label>Activity Type</label>
                     <select id="type" className="type" onChange={handleChange}>
-                      {types.map((item) => (
+                      {activities.map((item) => (
                         <option value={item.type}>{item.placeholder}</option>
                       ))}
                     </select>
                   </div>
                 </div>
+
               </div>
+
               <div className="column">
+
                 <div className="input">
                   <label htmlFor="price">Price Range</label>
                   <input
@@ -203,6 +214,7 @@ function CreatePost() {
                     placeholder="Enter price range"
                   />
                 </div>
+
                 <div className="input">
                   <label htmlFor="date">Visited On</label>
                   <input
@@ -212,15 +224,7 @@ function CreatePost() {
                     placeholder="Enter the date"
                   />
                 </div>
-                <div className="input" id="lastInput">
-                  <label htmlFor="desc">Description</label>
-                  <input
-                    onChange={handleChange}
-                    type="text"
-                    id="desc"
-                    placeholder="A brief description"
-                  />
-                </div>
+
                 <div className="input">
                   <label htmlFor="rate">Rate your Experience</label>
 
@@ -286,15 +290,25 @@ function CreatePost() {
                     </label>
                   </fieldset>
                 </div>
+
               </div>
             </div>
-            <div className="post_button">
-              <button className="button" onClick={handleClick} type="submit">
-                Post
-              </button>
+            <div className="input" id="lastInput">
+              <label htmlFor="desc">Description</label>
+              <input
+                onChange={handleChange}
+                type="text"
+                id="desc"
+                placeholder="A brief description"
+              />
             </div>
+
+            <button className="button" onClick={handleClick} type="submit">
+              Post
+            </button>
           </div>
-        </form>
+        </div>
+
       </div>
       <Footer />
     </div>

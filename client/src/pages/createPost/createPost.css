@@ -10,31 +10,74 @@ html {
     height: 100%;
 }
 
-.formContainer {
+.cpContainer {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     color: white;
+    width: 100%;
     padding: 50px;
 }
 
-.formContainer form {
-    margin-top: 100px;
+.formContainer {
+    width: 90%;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    padding: 100px 0;
     flex-wrap: wrap;
 }
 
-.picsContainer {
+.inputContainer {
+    width: 70%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
-    width: 40%;
-    gap: 40px;
-    padding: 0 40px;
+    align-items: center;
+
+}
+
+.inputContainer button {
+    width: 100px;
+}
+
+.picsContainer {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 0 50px;
+
+}
+
+.picsContainer .formInput {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.picsContainer .formInput label {
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.picsContainer .formInput label:hover {
+    transform: translateY(-2px);
+}
+
+.picsContainer .uploadedPictures {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
 }
 
 .picsContainer h1 {
@@ -44,55 +87,60 @@ html {
     font-size: 1.2rem;
 }
 
-.picsContainer label {
-    display: flex;
-    justify-content: center;
-}
-
-.picsContainer #upload {
-    margin: 30px 0;
-}
-
-.uploadedPictures {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.inputContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 40%;
-}
-
 .columns {
     display: flex;
-    gap: 20px;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .column {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding: 0 20px;
+    width: 50%;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 #lastInput {
-    align-self: flex-start;
+    width: 95%;
+    padding-left: 0.8rem;
+
 }
 
-.column .input label {
+.column .input .formInput {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    gap: 10px;
+}
+
+.input label {
     font-size: 1rem;
     font-weight: bold;
 }
 
-.column input {
-    display: flex;
-    /* flex-direction: column; */
-    font-size: 15px;
+button {
+    width: 50%;
+    height: 40px;
+    margin-top: 20px;
+    border: none;
+    background: #26AEC0;
+    border-radius: 25px;
+    font-size: 18px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+.input input {
+    font-size: 1rem;
     height: 40px;
     width: 100%;
     font-size: 1rem;
@@ -101,13 +149,68 @@ html {
     border-bottom: 1px solid white;
     background: transparent;
     color: white;
-    /* width: 100%; */
 }
 
-.column .input .formInput {
-    display: flex;
-    flex-direction: column;
+.column .input .type {
+    text-align: center;
+    height: 35px;
+    background: white;
+    border-radius: 5px;
+    color: #0c4957;
+    cursor: pointer;
+    font-weight: bold;
 }
+
+@media screen and (max-width: 800px) {
+    .inputContainer {
+        width: 80%;
+    }
+
+    .picsContainer {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .cpContainer {
+        padding: 0;
+    }
+
+    .formContainer {
+        width: 90%;
+    }
+
+    .inputContainer {
+        width: 100%;
+    }
+
+    .column {
+        width: 100%;
+        margin-top: 50px;
+
+    }
+
+    .picsContainer {
+        width: 90%;
+    }
+
+    .picsContainer .uploadedPictures {
+        width: 100%;
+    }
+
+    .picsContainer .uploadedPictures img {
+        height: 50px;
+    }
+}
+
+/* 
+
+
+
+.column input {
+    
+}
+
 
 .column .input .type {
     width: 70%;
@@ -131,25 +234,6 @@ html {
     outline: none;
 }
 
-.post_button .button {
-    width: 100%;
-    height: 50px;
-    border: none;
-    background: transparent;
-    border-radius: 25px;
-    font-size: 18px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    outline: none;
-}
+.post_button .
 
-@media screen and (max-width: 600px) {
-    .inputContainer {
-        width: 80%;
-    }
-
-    .picsContainer {
-        width: 80%;
-    }
-}
+ */

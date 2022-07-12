@@ -39,14 +39,14 @@ function Post() {
     }
   };
 
-
+  let size;
 
   const handleMove = (direction) => {
     let newSlideNumber;
-    const size = data.photos.length
+    size = data.photos.length
     console.log(size)
     if (direction === "l") {
-      newSlideNumber = slideNumber === 0 ? size : slideNumber - 1;
+      newSlideNumber = slideNumber === 0 ? size - 1 : slideNumber - 1;
     } else {
       newSlideNumber = slideNumber === size - 1 ? 0 : slideNumber + 1;
     }
