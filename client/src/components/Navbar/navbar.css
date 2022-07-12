@@ -36,7 +36,7 @@
     float: left;
 }
 
-.navbar ul li a {
+.navbar ul li p {
     font-size: 1rem;
     padding: 20px;
     color: white;
@@ -44,7 +44,7 @@
     transition: all 1s;
 }
 
-.navbar ul li a:hover {
+.navbar ul li p:hover {
     transform: translateY(-1px);
     border-bottom: solid 2px white;
 }
@@ -81,11 +81,11 @@
         width: 100%;
     }
 
-    .navbar ul li a {
+    .navbar ul li p {
         color: black;
     }
 
-    .navbar ul li a:hover {
+    .navbar ul li p:hover {
         transform: translateY(-1px);
 
         border-bottom: none;

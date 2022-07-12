@@ -29,7 +29,7 @@ const Navbar = () => {
     return (
         <div className={navbar ? 'navContainer active' : 'navContainer'}>
             <Link to="/">
-                <a className='navLogo'><img src={process.env.PUBLIC_URL + "/Assets/brand.png"} alt="" /></a>
+                <p className='navLogo'><img src={process.env.PUBLIC_URL + "/Assets/brand.png"} alt="" /></p>
             </Link>
 
             <input type="checkbox" id='menu-bar' />
@@ -37,22 +37,25 @@ const Navbar = () => {
             <nav className='navbar'>
                 <ul>
                     <Link to="/explore">
-                        <li><a>Explore</a></li>
+                        <li><p>Explore</p></li>
                     </Link>
                     <Link to="/new">
-                        <li><a>New Post</a></li>
+                        <li><p>New Post</p></li>
+                    </Link>
+                    <Link to="/all">
+                        <li><p>Activities</p></li>
                     </Link>
                     {user ? (
-                        <li onClick={handleClick} style={{ cursor: "pointer" }}><a>Logout</a></li>
+                        <li onClick={handleClick} style={{ cursor: "pointer" }}><p>Logout</p></li>
                     )
                         :
                         (
                             <>
                                 <Link to="/register">
-                                    <li><a>Register</a></li>
+                                    <li><p>Register</p></li>
                                 </Link>
                                 <Link to="/login">
-                                    <li><a>Login</a></li>
+                                    <li><p>Login</p></li>
                                 </Link>
                             </>
                         )}
