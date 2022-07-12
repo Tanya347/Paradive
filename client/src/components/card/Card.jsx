@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./card.css";
 
 function Card(props) {
@@ -8,10 +9,11 @@ function Card(props) {
         <div className="actionDetails">
           <img src={props.src} alt="" />
           <p>{props.para}</p>
-          <button>{props.button}</button>
+          <Link to={`/${props.link}`}>
+            <button>{props.button}</button>
+          </Link>
         </div>
       </div>
-
     </div>
   );
 }

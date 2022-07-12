@@ -4,19 +4,22 @@ export const actions = [
         id: 0,
         src: "/Assets/login.png",
         para: "Excited? Join our Community to have more fun!",
-        button: "Login"
+        button: "Login",
+        link: "login"
     },
     {
         id: 1,
         src: "/Assets/post.png",
         para: "Show the world your excursions, create a post",
-        button: "Post"
+        button: "Post",
+        link: "new"
     },
     {
         id: 2,
         src: "/Assets/search.png",
         para: "Want to have a look at what all you can do this summer?",
-        button: "Explore"
+        button: "Explore",
+        link: "explore"
     },
 ]
 

@@ -11,7 +11,7 @@ html {
 .heroBackground img {
     /* background-attachment: fixed; */
     /* background-size: cover; */
-    height: 100vh;
+    height: 700px;
     width: 100vw;
     filter: brightness(50%);
 }
