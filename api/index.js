@@ -27,6 +27,8 @@ mongoose.connection.on("disconnected", () => {
   console.log("mongoDB disconnected!");
 });
 
+app.get('/', (req, res) => { res.send('Hello from Express!') });
+
 //middlewares
 app.use(cookieParser())
 app.use(express.json());
