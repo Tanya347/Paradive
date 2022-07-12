@@ -72,16 +72,19 @@ function HomePage() {
               src={actions[0].src}
               para={actions[0].para}
               button={actions[0].button}
+              link={actions[0].link}
             />
             <Card
               src={actions[1].src}
               para={actions[1].para}
               button={actions[1].button}
+              link={actions[1].link}
             />
             <Card
               src={actions[2].src}
               para={actions[2].para}
               button={actions[2].button}
+              link={actions[2].link}
             />
           </div>
         </div>
