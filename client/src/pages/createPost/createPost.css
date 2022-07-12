@@ -125,7 +125,7 @@ html {
     font-weight: bold;
 }
 
-button {
+.inputContainer button {
     width: 50%;
     height: 40px;
     margin-top: 20px;

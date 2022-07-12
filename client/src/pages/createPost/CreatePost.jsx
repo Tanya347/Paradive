@@ -57,21 +57,6 @@ function CreatePost() {
   console.log(files);
   console.log(rating);
 
-  // const types = [
-  //   { type: "wakeboarding", placeholder: "Wake Boarding" },
-  //   { type: "surfing", placeholder: "Surfing" },
-  //   { type: "canoeing", placeholder: "Canoeing" },
-  //   { type: "jetskiing", placeholder: "Jet Skiing" },
-  //   { type: "parasailing", placeholder: "Parasailing" },
-  //   { type: "diving", placeholder: "Diving" },
-  //   { type: "rafting", placeholder: "Rafting" },
-  //   { type: "bananaboat", placeholder: "Banana Boat" },
-  //   { type: "hanggliding", placeholder: "Hang Gliding" },
-  //   { type: "paragliding", placeholder: "Paragliding" },
-  //   { type: "swimming", placeholder: "Swimming" },
-  //   { type: "fishing", placeholder: "Fishing" },
-  // ];
-
   return (
     <div className="createPostContainer">
       <Navbar />

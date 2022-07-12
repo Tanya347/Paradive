@@ -4,7 +4,7 @@ import "./postcard.css";
 import { Link } from "react-router-dom"
 
 function ActivityCard() {
-  const { data, loading, error, reFetch } = useFetch(
+  const { data, loading } = useFetch(
     "/posts"
   );
 

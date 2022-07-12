@@ -5,8 +5,6 @@ import Card from "../../components/card/Card";
 import ActivityCard from "../../components/ActivityCard/ActivityCard";
 import PostCard from "../../components/PostCard/PostCard";
 import { actions, activities } from "./content";
-import { motion } from 'framer-motion'
-import { useRef, useEffect, useState } from "react";
 import "./HomePage.css";
 import { Link } from "react-router-dom"
 

@@ -73,18 +73,7 @@ function Post() {
 
 
             <img src={data.photos[slideNumber]} height="300px" alt="" />
-            {/* {data.photos?.map((photo, i) => (
-              <div className="postImgWrapper" key={i}>
-                <img
-                  src={photo}
-                  alt=""
-                  className="postImg"
-                  width="300px"
-                  id={`image${i}`}
-                  height="250px"
-                />
-              </div>
-            ))} */}
+
             <div className="arrows">
               <FontAwesomeIcon
                 icon={faCircleArrowLeft}

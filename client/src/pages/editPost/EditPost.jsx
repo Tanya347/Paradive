@@ -16,10 +16,10 @@ function EditPost() {
     const [files, setFiles] = useState("");
     const [info, setInfo] = useState({});
     const [rating, setRating] = useState(0);
-    const { user, dispatch } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     console.log(user);
     const navigate = useNavigate();
-    const { data, loading } = useFetch(`/posts/${id}`);
+    const { data } = useFetch(`/posts/${id}`);
 
     const handleChange = (e) => {
         setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));

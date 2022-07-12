@@ -25,15 +25,15 @@ function Footer() {
         <h2 className="footerElement">Contact Us</h2>
         <div className="footerElement">
           <FontAwesomeIcon className="icon" icon={faLocationDot} />
-          <p> xyz block, Golden Street, Ashok Nagar, Delhi, India 110077</p>
+          <p> Delhi </p>
         </div>
         <div className="footerElement">
           <FontAwesomeIcon className="icon" icon={faPhone} />
-          <p> 12345678910</p>
+          <p>07102020</p>
         </div>
         <div className="footerElement">
           <FontAwesomeIcon className="icon" icon={faEnvelope} />
-          <p> abc@gmail.com</p>
+          <p> paradive@gmail.com</p>
         </div>
       </div>
       <div className="footerColumn others last">

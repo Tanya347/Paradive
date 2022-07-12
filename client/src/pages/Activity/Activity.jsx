@@ -11,7 +11,7 @@ function Activity() {
     const location = useLocation();
     const id = location.pathname.split("/")[2];
 
-    const { data, loading } = useFetch(
+    const { data } = useFetch(
         "/posts"
     );
 

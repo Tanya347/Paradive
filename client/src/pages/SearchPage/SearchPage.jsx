@@ -10,7 +10,7 @@ import { Link } from "react-router-dom"
 
 function SearchPage() {
   const [query, setQuery] = useState("");
-  const { data, loading, error, reFetch } = useFetch(
+  const { data, loading } = useFetch(
     "/posts"
   );
 
@@ -21,19 +21,11 @@ function SearchPage() {
       (item) => keys.some(key => item[key].toLowerCase().includes(query))
     )
   }
-  // console.log(data)
 
   return (
     <div className="searchContainer">
       <Navbar />
       <div className="search">
-        {/* <div className="searchBackground">
-          <img
-            id="surfer"
-            src={process.env.PUBLIC_URL + "/Assets/canoeing.jpg"}
-            alt=""
-          />
-        </div> */}
         <div className="searchBar">
           <h2>Explore</h2>
           <div className="searchInput">
