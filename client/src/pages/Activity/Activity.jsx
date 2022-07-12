@@ -41,10 +41,7 @@ function Activity() {
             </div>
             <div className="searchedPosts">
                 {data ? (
-                    <><p style={{ color: "white", padding: "10px 0" }}>No content to display</p></>
-                ) : (
                     <>
-
                         {
                             search(data).map((item, i) => (
                                 <div className="card" key={item._id}>
@@ -66,6 +63,8 @@ function Activity() {
                             ))
                         }
                     </>
+                ) : (
+                    <><p style={{ color: "white", padding: "10px 0" }}>No content to display</p></>
                 )}
             </div>
 
