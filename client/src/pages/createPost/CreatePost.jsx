@@ -31,7 +31,7 @@ function CreatePost() {
           data.append("upload_preset", "upload");
           const uploadRes = await axios.post(
             "https://api.cloudinary.com/v1_1/dmjd7myiw/image/upload",
-            data
+            data, { withcredentials: false }
           );
 
           const { url } = uploadRes.data;
@@ -47,7 +47,8 @@ function CreatePost() {
         rating: rating,
       };
 
-      await axios.post("http://localhost:7700/api/posts", newpost);
+      await axios.post("https://paradive-server.herokuapp.com/api/posts", newpost);
+      // await axios.post("http://localhost:7700/api/posts", newpost);
       navigate("/explore");
     } catch (err) {
       console.log(err);

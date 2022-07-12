@@ -27,7 +27,7 @@ function Register() {
     try {
       const uploadRes = await axios.post(
         "https://api.cloudinary.com/v1_1/dmjd7myiw/image/upload",
-        data
+        data, { withcredentials: false }
       );
 
       const { url } = uploadRes.data;
@@ -37,7 +37,8 @@ function Register() {
         img: url,
       };
 
-      await axios.post("/auth/register", newUser);
+      await axios.post("https://paradive-server.herokuapp.com/api/auth/register", newUser);
+      // await axios.post("/auth/register", newUser);
       navigate("/login");
     } catch (err) {
       console.log(err);
