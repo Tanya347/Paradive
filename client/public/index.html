@@ -15,6 +15,37 @@
       font-family: 'Quicksand', sans-serif;
       margin: 0;
     }
+
+    .loading {
+      -webkit-animation: sk-scaleout 1s infinite ease-in-out;
+      animation: sk-scaleout 1s infinite ease-in-out;
+      background-color: #124c62;
+      border-radius: 100%;
+      height: 6em;
+      width: 6em;
+    }
+
+    .container {
+      align-items: center;
+      background-color: white;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      width: 100vw;
+    }
+
+    @keyframes sk-scaleout {
+      0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+      }
+
+      100% {
+        -webkit-transform: scale(1);
+        opacity: 0.5;
+        transform: scale(1);
+      }
+    }
   </style>
   <link rel="icon" href="favicon.ico" />
 
@@ -22,7 +53,12 @@
 </head>
 
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="spinner" class="container">
+    <!-- <div class="loading"></div> -->
+    <iframe src="https://giphy.com/embed/xT39Dbyi999nDnJF84" width="480" height="480" frameBorder="0"
+      class="giphy-embed" allowFullScreen></iframe>
+    <p><a href="https://giphy.com/gifs/art-fun-design-xT39Dbyi999nDnJF84">via GIPHY</a></p>
+  </div>
   <div id="root"></div>
 </body>
 
