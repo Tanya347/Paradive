@@ -1,43 +1,42 @@
 import React from "react";
 import useFetch from "../../Hooks/useFetch";
 import "./postcard.css";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 function ActivityCard() {
-  const { data, loading } = useFetch(
-    "/posts"
-  );
+  const { data, loading } = useFetch("/posts");
 
   const posts = data.slice(0, 3);
 
   return (
-
     <div className="container">
       {loading ? (
-        "loading"
+        // "loading"
+        <div class="load-3">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
       ) : (
         <>
-
-          {
-            posts.map((item, i) => (
-              <div className="card" key={item._id}>
-                <div class="content">
-                  <img id="post-image" src={item.photos[0]} alt="" />
-                  <h4>{item.title}</h4>
-                  <h6>
-                    <span>Posted By : </span> {item.username}
-                  </h6>
-                  <h6>
-                    <span>Date : </span> {item.date}
-                  </h6>
-                  <p>{item.desc}</p>
-                  <Link to={`/${item._id}`}>
-                    <button>Read More</button>
-                  </Link>
-                </div>
-              </div >
-            ))
-          }
+          {posts.map((item, i) => (
+            <div className="card" key={item._id}>
+              <div class="content">
+                <img id="post-image" src={item.photos[0]} alt="" />
+                <h4>{item.title}</h4>
+                <h6>
+                  <span>Posted By : </span> {item.username}
+                </h6>
+                <h6>
+                  <span>Date : </span> {item.date}
+                </h6>
+                <p>{item.desc}</p>
+                <Link to={`/${item._id}`}>
+                  <button>Read More</button>
+                </Link>
+              </div>
+            </div>
+          ))}
           {/* <div className="card" key={data[0]._id}>
             <div class="content">
               <img id="post-image" src={data[0].img[0]} alt="" />
@@ -85,7 +84,6 @@ function ActivityCard() {
         </>
       )}
     </div>
-
   );
 }
 
