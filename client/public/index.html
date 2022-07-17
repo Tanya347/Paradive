@@ -27,11 +27,22 @@
 
     .loader_container {
       align-items: center;
+      position: relative;
       background-color: white;
       display: flex;
+      flex-direction: column;
+      text-align: center;
       height: 100vh;
       justify-content: center;
       width: 100vw;
+    }
+
+    .loader_container img {
+      height: 200px;
+      /* position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); */
     }
 
     @keyframes sk-scaleout {
@@ -55,9 +66,8 @@
 <body>
   <div id="spinner" class="loader_container">
     <!-- <div class="loading"></div> -->
-    <iframe src="https://giphy.com/embed/AvxcYoWVzmVukD5F4Q" width="480" height="480" frameBorder="0"
-      class="giphy-embed" allowFullScreen></iframe>
-    <p><a href="https://giphy.com/stickers/wave-surf-surfing-AvxcYoWVzmVukD5F4Q"></a></p>
+    <img src="Assets/giphy.gif" />
+    <h1>Loading...</h1>
   </div>
   <div id="root"></div>
 </body>
