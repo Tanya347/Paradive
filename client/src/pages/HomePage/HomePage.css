@@ -5,13 +5,13 @@ html {
 
 .hero {
     position: relative;
-    height: 700px;
+    height: 800px;
 }
 
 .heroBackground img {
     /* background-attachment: fixed; */
     /* background-size: cover; */
-    height: 700px;
+    height: 800px;
     /* width: 100vw; */
     filter: brightness(60%);
 }
