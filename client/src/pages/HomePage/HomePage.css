@@ -12,8 +12,8 @@ html {
     /* background-attachment: fixed; */
     /* background-size: cover; */
     height: 700px;
-    width: 100vw;
-    filter: brightness(50%);
+    /* width: 100vw; */
+    filter: brightness(60%);
 }
 
 .heroContent {
@@ -92,6 +92,7 @@ html {
     }
 
     .heroContent p {
+        width: 70%;
         font-size: 1.2rem;
     }
 

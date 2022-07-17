@@ -18,7 +18,7 @@ function Footer() {
         />
         <p className="footerElement">
           We are a community promotes outdoor activities and allows people
-          explore more such activities through community engagement
+          to explore more such activities through engagement
         </p>
       </div>
       <div className="footerColumn others">

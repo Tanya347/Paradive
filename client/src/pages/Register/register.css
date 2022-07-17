@@ -20,7 +20,6 @@ html {
     width: 400px;
     background: white;
     border-radius: 10px;
-    margin: 70px;
 }
 
 .center h1 {
@@ -80,10 +79,8 @@ form .txt_field_img {
     border: none;
     background: transparent;
     border-radius: 25px;
-    font-size: 18px;
+    font-size: 16px;
     color: black;
-    font-weight: 700;
-    cursor: pointer;
     outline: none;
 }
 
@@ -130,7 +127,8 @@ form .txt_field_img {
 }
 
 @media screen and (max-width: 500px) {
-    .center {
-        width: 80%;
+    .registerCard .center {
+        width: 300px;
+        margin: 0;
     }
 }
