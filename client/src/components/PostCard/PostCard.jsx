@@ -11,12 +11,7 @@ function ActivityCard() {
   return (
     <div className="container">
       {loading ? (
-        // "loading"
-        <div class="load-3">
-          <div class="line"></div>
-          <div class="line"></div>
-          <div class="line"></div>
-        </div>
+        "loading"
       ) : (
         <>
           {posts.map((item, i) => (

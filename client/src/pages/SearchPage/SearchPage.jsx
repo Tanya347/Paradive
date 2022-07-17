@@ -39,12 +39,7 @@ function SearchPage() {
 
       <div className="searchedPosts">
         {loading ? (
-          // "loading"
-          <div class="load-3">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-          </div>
+          "loading"
         ) : (
           <>
             {search(data).map((item, i) => (

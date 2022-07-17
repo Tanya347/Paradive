@@ -34,7 +34,17 @@ function Login({ title, link }) {
     }
   };
 
-  console.log(credentials);
+  // const [loading, setLoading] = useState(true);
+  // const spinner = document.getElementById("spinner");
+  // if (spinner) {
+  //   spinner.style.display = "block";
+  //   setTimeout(() => {
+  //     spinner.style.display = "none";
+  //     setLoading(false);
+  //   }, 2000);
+  // }
+
+  // console.log(spinner)
 
   return (
     <div className="login">
@@ -62,7 +72,9 @@ function Login({ title, link }) {
               />
             </div>
             <div className="login_button">
-              <button className="button" onClick={handleClick}>Login</button>
+              <button className="button" onClick={handleClick}>
+                Login
+              </button>
             </div>
             <div className="signup_link">
               <p>
