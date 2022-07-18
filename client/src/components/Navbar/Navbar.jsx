@@ -45,8 +45,13 @@ const Navbar = () => {
                     <Link to="/all">
                         <li><p>Activities</p></li>
                     </Link>
-                    {user ? (
+                    {user ? (<>
+                        <Link to={`/user/${user._id}`}>
+                            <li><p>Profile</p></li>
+                        </Link>
                         <li onClick={handleClick} style={{ cursor: "pointer" }}><p>Logout</p></li>
+
+                    </>
                     )
                         :
                         (
