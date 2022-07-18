@@ -14,17 +14,17 @@ const UserPage = () => {
     const { data } = useFetch(`/users/${id}`)
     const [postData, setPostData] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [setError] = useState(false);
+    // const [error, setError] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            try {
+            // try {
                 // const res = await axios.get(`${API_URL}${url}`);
                 const res = await axios.get("/posts");
                 setPostData(res.data);
-            } catch (err) {
-                setError(err);
-            }
+            // } catch (err) {
+            //     setError(err);
+            // }
             setLoading(false);
         };
         fetchData();
