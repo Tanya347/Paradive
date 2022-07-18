@@ -4,7 +4,7 @@ html {
 }
 
 .loginCard {
-    background: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .5)), url("../../../public/Assets/login-bg.png");
+    background: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .5)), url("../../../public/Assets/login-bg.jpg");
 
     background-size: cover;
     background-repeat: no-repeat;

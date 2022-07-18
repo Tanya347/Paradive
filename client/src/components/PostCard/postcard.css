@@ -11,7 +11,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background: url("../../../public/Assets/postbg.png");
+  background: url("../../../public/Assets/postbg.jpg");
   background-size: cover;
   height: 100%;
 }
