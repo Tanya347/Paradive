@@ -14,7 +14,7 @@ const UserPage = () => {
     const { data } = useFetch(`/users/${id}`)
     const [postData, setPostData] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [setError] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
