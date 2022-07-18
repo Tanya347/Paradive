@@ -46,9 +46,9 @@ const Navbar = () => {
                         <li><p>Activities</p></li>
                     </Link>
                     {user ? (<>
-                        <Link to={`/user/${user._id}`}>
+                        {/* <Link to={`/user/${user._id}`}>
                             <li><p>Profile</p></li>
-                        </Link>
+                        </Link> */}
                         <li onClick={handleClick} style={{ cursor: "pointer" }}><p>Logout</p></li>
 
                     </>
