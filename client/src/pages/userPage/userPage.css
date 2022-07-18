@@ -4,12 +4,18 @@
     align-items: center;
 }
 
+.userPageContainer .navContainer {
+    background-color: #0b5b6de1;
+}
+
 .infoContainer {
     padding-top: 100px;
     padding-bottom: 50px;
-    background: linear-gradient(-45deg, #60c3d8, #126e82, #548492, #60c3d8);
-    animation: gradient 15s ease infinite;
+    /* background: linear-gradient(-45deg, #60c3d8, #126e82, #548492, #60c3d8); */
+    /* animation: gradient 15s ease infinite; */
+    background-color: #ebf8f7;
     display: flex;
+    border-bottom: 10px solid #60c3d8;
     background-size: 400% 400%;
     align-items: center;
     justify-content: center;
@@ -18,7 +24,7 @@
     height: fit-content;
     /* padding: 20px; */
     flex-wrap: wrap;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 
 @keyframes gradient {
@@ -56,12 +62,12 @@
 }
 
 .col p span {
-    color: white;
+    color: #126e82;
     font-weight: bolder;
 }
 
 .col p {
-    color: #A9D8DE;
+    color: black;
     font-weight: bold;
 }
 
@@ -69,9 +75,12 @@
     position: relative;
     display: flex;
     justify-content: center;
-    background: url("../../../public/Assets/postpage.jpg");
+    background: url("../../../public/Assets/canoeing.jpg");
     align-items: center;
     flex-wrap: wrap;
+    width: 100%;
+    /* repeat: no-repeat; */
+    /* background-size: cover; */
 }
 
 

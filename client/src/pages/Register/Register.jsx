@@ -37,8 +37,8 @@ function Register() {
         profilePicture: url,
       };
 
-      // await axios.post("https://paradive-server.herokuapp.com/api/auth/register", newUser);
-      await axios.post("/auth/register", newUser);
+      await axios.post("https://paradive-server.herokuapp.com/api/auth/register", newUser);
+      // await axios.post("/auth/register", newUser);
       navigate("/login");
     } catch (err) {
       console.log(err);
