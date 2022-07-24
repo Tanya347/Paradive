@@ -205,7 +205,7 @@ function CreatePost() {
                   <label htmlFor="date">Visited On</label>
                   <input
                     onChange={handleChange}
-                    type="text"
+                    type="date"
                     id="date"
                     placeholder="Enter the date"
                   />
