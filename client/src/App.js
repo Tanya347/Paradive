@@ -11,7 +11,7 @@ import { AuthContext } from "./context/authContext";
 // import { Navigate } from "react-router-dom"
 import Activity from "./pages/Activity/Activity";
 import AllActivity from "./pages/allActivity/AllActivity";
-import UserPage from "./pages/userPage/UserPage";
+// import UserPage from "./pages/userPage/UserPage";
 
 function App() {
   const { user } = useContext(AuthContext);
