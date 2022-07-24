@@ -15,37 +15,47 @@ function Register() {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
 
+  console.log(file)
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  console.log(file)
-  console.log(info)
-
   const handleClick = async (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append("file", file);
-    data.append("upload_preset", "upload");
 
-    try {
-      const uploadRes = await axios.post(
-        "https://api.cloudinary.com/v1_1/dmjd7myiw/image/upload",
-        data, { withcredentials: false }
-      );
+    if (file) {
+      const data = new FormData();
 
-      const { url } = uploadRes.data;
+      data.append("file", file);
+      data.append("upload_preset", "upload");
 
-      const newUser = {
-        ...info,
-        profilePicture: url,
-      };
 
-      // await axios.post("https://paradive-server.herokuapp.com/api/auth/register", newUser);
-      await axios.post("/auth/register", newUser);
-      navigate("/login");
-    } catch (err) {
-      console.log(err);
+      try {
+        const uploadRes = await axios.post(
+          "https://api.cloudinary.com/v1_1/dmjd7myiw/image/upload",
+          data, { withcredentials: false }
+        );
+
+        const { url } = uploadRes.data;
+
+        const newUser = {
+          ...info,
+          profilePicture: url,
+        };
+
+        // await axios.post("https://paradive-server.herokuapp.com/api/auth/register", newUser);
+        await axios.post("/auth/register", newUser);
+        navigate("/login");
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      try {
+        await axios.post("/auth/register", info);
+        navigate("/login");
+      } catch (err) {
+        console.log(err)
+      }
     }
   };
 
