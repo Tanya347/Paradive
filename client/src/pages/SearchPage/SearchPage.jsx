@@ -53,7 +53,7 @@ function SearchPage() {
                   <h6>
                     <span>Activity : </span> {item.type}
                   </h6>
-                  <p>{item.desc}</p>
+                  <p>{item.desc.slice(0, 60)}...</p>
                   <Link to={`/${item._id}`}>
                     <button>Read More</button>
                   </Link>

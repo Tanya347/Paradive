@@ -56,7 +56,7 @@ function App() {
           />
           <Route path="/explore" element={<SearchPage />} />
           <Route path="/all" element={<AllActivity />} />
-          <Route path="user/:id" element={<UserPage />} />
+          {/* <Route path="/user/:id" element={<UserPage />} /> */}
         </Routes>
       </BrowserRouter>
     )

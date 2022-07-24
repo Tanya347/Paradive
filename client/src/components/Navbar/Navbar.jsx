@@ -46,11 +46,12 @@ const Navbar = () => {
                         <li><p>Activities</p></li>
                     </Link>
                     {user ? (<>
-                        {/* <Link to={`/user/${user._id}`}>
-                            <li><p>Profile</p></li>
-                        </Link> */}
-                        <li onClick={handleClick} style={{ cursor: "pointer" }}><p>Logout</p></li>
 
+                        <li onClick={handleClick} style={{ cursor: "pointer" }}><p>Logout</p></li>
+                        <li><div className="profilePicture">
+                            <img src={user.profilePicture} alt="" />
+                        </div></li>
+                        <li id="usernamename"><p>{user.username}</p></li>
                     </>
                     )
                         :
