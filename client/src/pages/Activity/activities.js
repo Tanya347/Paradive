@@ -1,5 +1,11 @@
 const activities = [
     {
+        type: "select",
+        placeholder: "-Select an activity-",
+        src: "/Assets/activities/wakeboarding.avif",
+        desc: "below are the activities to select"
+    },
+    {
         type: "wakeboarding",
         placeholder: "Wake Boarding",
         src: "/Assets/activities/wakeboarding.avif",
