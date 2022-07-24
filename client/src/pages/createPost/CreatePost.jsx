@@ -180,6 +180,7 @@ function CreatePost() {
                   <div className="formInput">
                     <label>Activity Type</label>
                     <select id="type" className="type" onChange={handleChange}>
+                      <option value="select">-Select an activity-</option>
                       {activities.map((item) => (
                         <option value={item.type}>{item.placeholder}</option>
                       ))}
