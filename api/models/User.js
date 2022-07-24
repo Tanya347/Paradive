@@ -21,7 +21,8 @@ const UserSchema = new mongoose.Schema(
       min: 6,
     },
     profilePicture: {
-      type: String
+      type: String,
+      default: "",
     },
     isAdmin: {
       type: Boolean,
