@@ -47,8 +47,8 @@ function CreatePost() {
         rating: rating,
       };
 
-      // await axios.post("https://paradive-server.herokuapp.com/api/posts", newpost);
-      await axios.post("http://localhost:7700/api/posts", newpost);
+      await axios.post("https://paradive-server.herokuapp.com/api/posts", newpost);
+      // await axios.post("http://localhost:7700/api/posts", newpost);
       navigate("/explore");
     } catch (err) {
       console.log(err);
