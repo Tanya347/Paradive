@@ -19,11 +19,15 @@ function Register() {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
+  console.log(file)
+  console.log(info)
+
   const handleClick = async (e) => {
     e.preventDefault();
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "upload");
+
     try {
       const uploadRes = await axios.post(
         "https://api.cloudinary.com/v1_1/dmjd7myiw/image/upload",
@@ -44,6 +48,8 @@ function Register() {
       console.log(err);
     }
   };
+
+
 
   return (
     <div className="register">
