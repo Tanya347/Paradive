@@ -43,16 +43,16 @@ function Register() {
           profilePicture: url,
         };
 
-        await axios.post("https://paradive.onrender.com/api/auth/register", newUser);
-        // await axios.post("/auth/register", newUser);
+        process.env.REACT_APP_MODE === "development" ? (await axios.post("/auth/register", newUser)) : (await axios.post("https://paradive.onrender.com/api/auth/register", newUser))
+
         navigate("/login");
       } catch (err) {
         console.log(err);
       }
     } else {
       try {
-        await axios.post("https://paradive.onrender.com/api/auth/register", info);
-        // await axios.post("/auth/register", info);
+        process.env.REACT_APP_MODE === "development" ? (await axios.post("/auth/register", info)) : (await axios.post("https://paradive.onrender.com/api/auth/register", info))
+
         navigate("/login");
       } catch (err) {
         console.log(err)

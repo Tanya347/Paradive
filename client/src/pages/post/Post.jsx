@@ -32,8 +32,9 @@ function Post() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://paradive.onrender.com/api/posts/${data._id}`);
-      // await axios.delete(`http://localhost:7700/api/posts/${data._id}`);
+
+      process.env.REACT_APP_MODE === "development" ? (await axios.delete(`http://localhost:7700/api/posts/${data._id}`)) : (await axios.delete(`https://paradive.onrender.com/api/posts/${data._id}`))
+
       navigate('/explore')
     } catch (err) {
       console.log(err)
