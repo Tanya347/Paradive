@@ -43,7 +43,7 @@ function Register() {
           profilePicture: url,
         };
 
-        await axios.post("https://paradive-server.herokuapp.com/api/auth/register", newUser);
+        await axios.post("https://paradive.onrender.com/api/auth/register", newUser);
         // await axios.post("/auth/register", newUser);
         navigate("/login");
       } catch (err) {
@@ -51,7 +51,7 @@ function Register() {
       }
     } else {
       try {
-        await axios.post("https://paradive-server.herokuapp.com/api/auth/register", info);
+        await axios.post("https://paradive.onrender.com/api/auth/register", info);
         // await axios.post("/auth/register", info);
         navigate("/login");
       } catch (err) {

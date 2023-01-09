@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-const API_URL = "https://paradive-server.herokuapp.com/api"
+const API_URL = "https://paradive.onrender.com/api"
 
 const useFetch = (url) => {
     const [data, setData] = useState([]);

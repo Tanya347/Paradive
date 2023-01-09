@@ -25,7 +25,7 @@ function Login({ title, link }) {
     dispatch({ type: "LOGIN_START" });
     try {
       // const url = "http://localhost:7700/api/auth/login";
-      const url = "https://paradive-server.herokuapp.com/api/auth/login";
+      const url = "https://paradive.onrender.com/api/auth/login";
       const res = await axios.post(url, credentials);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       navigate(`${link}`);
