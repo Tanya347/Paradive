@@ -24,7 +24,8 @@ export const deleteUser = async (req, res, next) => {
 
 export const getUser = async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).populate('posts');
+    // console.log(user.posts)
     res.status(200).json(user);
   } catch (err) {
     next(err);
@@ -39,3 +40,5 @@ export const getUsers = async (req, res, next) => {
     next(err);
   }
 };
+
+

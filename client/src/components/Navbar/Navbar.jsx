@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../context/authContext"
 
+
 const Navbar = () => {
     const [navbar, setNavbar] = useState(false);
     const changeBackground = () => {
@@ -47,11 +48,13 @@ const Navbar = () => {
                     </Link>
                     {user ? (<>
 
-                        <li onClick={handleClick} style={{ cursor: "pointer" }}><p>Logout</p></li>
-                        <li><div className="profilePicture">
-                            <img src={user.profilePicture || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"} alt="" />
-                        </div></li>
-                        <li id="usernamename"><p>{user.username}</p></li>
+                        <Link to={`/user/${user._id}`}>
+                            <li onClick={handleClick} style={{ cursor: "pointer" }}><p>Logout</p></li>
+                            <li><div className="profilePicture">
+                                <img src={user.profilePicture || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"} alt="" />
+                            </div></li>
+                            <li id="usernamename"><p>{user.username}</p></li>
+                        </Link>
                     </>
                     )
                         :

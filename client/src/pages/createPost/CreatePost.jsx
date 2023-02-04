@@ -14,7 +14,6 @@ function CreatePost() {
   const [info, setInfo] = useState({});
   const [rating, setRating] = useState(0);
   const { user } = useContext(AuthContext);
-  console.log(user);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -54,9 +53,7 @@ function CreatePost() {
       console.log(err);
     }
   };
-  console.log(info);
-  console.log(files);
-  console.log(rating);
+
 
   return (
     <div className="createPostContainer">

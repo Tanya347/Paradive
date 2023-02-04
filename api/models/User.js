@@ -32,6 +32,12 @@ const UserSchema = new mongoose.Schema(
       type: String,
       max: 50,
     },
+    posts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+      }
+  ]
   },
   { timestamps: true }
 );
