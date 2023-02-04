@@ -5,13 +5,26 @@ import "./userPage.css"
 import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 import { Link } from 'react-router-dom'
+import { useState } from 'react';
+import Aos from 'aos'
+import 'aos/dist/aos.css'
+import { useEffect } from 'react';
 
 const UserPage = () => {
     const location = useLocation();
     const id = location.pathname.split("/")[2];
 
     const { data } = useFetch(`/users/${id}`)
-    
+    const [postData, setPostData] = useState([]);
+
+    useEffect(() => {
+        setPostData(data.posts)
+    },[data])
+
+    useEffect(() => {
+        Aos.init({duration: 1000});
+      },[])
+
     return (
         <div className='userPageContainer'>
 
@@ -30,18 +43,18 @@ const UserPage = () => {
                     </p>
                     <p>
                         <span> Email  :  </span>
-                        {data.username}
+                        {data.email}
                     </p>
                     <p>
                         <span> Bio  :  </span>
-                        {data.username}
+                        {data.desc}
                     </p>
                 </div>
             </div>
             <div className="searchedPosts">
                 
-                {data.posts.map((item) => (
-                    <div className="card" key={item._id}>
+                {postData? postData.map((item) => (
+                    <div className="card" key={item._id} data-aos="fade-up">
                         <div class="content">
                             <img id="post-image" src={item.photos[0]} alt="" />
                             <h4>{item.title}</h4>
@@ -51,13 +64,13 @@ const UserPage = () => {
                             <h6>
                                 <span>Activity : </span> {item.type}
                             </h6>
-                            <p>{item.desc}</p>
+                            <p>{item.desc.slice(0,70)}...</p>
                             <Link to={`/${item._id}`}>
                                 <button>Read More</button>
                             </Link>
                         </div>
                     </div>
-                ))}
+                )):"no content"}
             </div>
             <Footer />
         </div>

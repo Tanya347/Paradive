@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./post.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -13,6 +13,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+
 import useFetch from "../../Hooks/useFetch";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
@@ -24,10 +25,12 @@ function Post() {
   const { data } = useFetch(`/posts/${id}`);
   const { user } = useContext(AuthContext);
   const [slideNumber, setSlideNumber] = useState(0);
+
   let isUser
   if (user) {
     isUser = data.userId === user._id;
   }
+
   const navigate = useNavigate();
 
   const handleDelete = async (id) => {
@@ -41,18 +44,16 @@ function Post() {
     }
   };
 
-  let size;
+
 
   const handleMove = (direction) => {
     let newSlideNumber;
-    size = data.photos.length
-    console.log(size)
+    let size = data.photos.length
     if (direction === "l") {
       newSlideNumber = slideNumber === 0 ? size - 1 : slideNumber - 1;
     } else {
       newSlideNumber = slideNumber === size - 1 ? 0 : slideNumber + 1;
     }
-    console.log(newSlideNumber)
     setSlideNumber(newSlideNumber)
   }
 
@@ -76,7 +77,7 @@ function Post() {
 
             <img src={data.photos[slideNumber]} height="300px" alt="" />
 
-            <div className="arrows">
+            {data.photos.length > 1 ? <div className="arrows">
               <FontAwesomeIcon
                 icon={faCircleArrowLeft}
                 className="arrow"
@@ -87,7 +88,7 @@ function Post() {
                 className="arrow"
                 onClick={() => handleMove("r")}
               />
-            </div>
+            </div> : ""}
           </div>) : ("no Images")}
 
         </div>

@@ -5,8 +5,10 @@ import Card from "../../components/card/Card";
 import ActivityCard from "../../components/ActivityCard/ActivityCard";
 import PostCard from "../../components/PostCard/PostCard";
 import { actions, activities } from "./content";
+
 import "./HomePage.css";
 import { Link } from "react-router-dom"
+
 
 function HomePage() {
 
@@ -35,19 +37,19 @@ function HomePage() {
         <div className="featuredActivities">
           <div className="activities">
 
-            <ActivityCard
+            <ActivityCard 
               key={activities[0].id}
               src={activities[0].src}
               name={activities[0].name}
               link={activities[0].link}
             />
-            <ActivityCard
+            <ActivityCard 
               key={activities[1].id}
               src={activities[1].src}
               name={activities[1].name}
               link={activities[1].link}
             />
-            <ActivityCard
+            <ActivityCard 
               key={activities[2].id}
               src={activities[2].src}
               name={activities[2].name}

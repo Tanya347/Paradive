@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./searchPage.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useFetch from "../../Hooks/useFetch";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Aos from 'aos'
+import 'aos/dist/aos.css'
 
 function SearchPage() {
   const [query, setQuery] = useState("");
@@ -19,6 +21,10 @@ function SearchPage() {
       keys.some((key) => item[key].toLowerCase().includes(query))
     );
   };
+
+  useEffect(() => {
+    Aos.init({duration: 1000});
+  },[])
 
   return (
     <div className="searchContainer">
@@ -43,7 +49,7 @@ function SearchPage() {
         ) : (
           <>
             {search(data).map((item, i) => (
-              <div className="card" key={item._id}>
+              <div className="card" key={item._id} data-aos="fade-up">
                 <div class="content">
                   <img id="post-image" src={item.photos[0]} alt="" />
                   <h4>{item.title}</h4>

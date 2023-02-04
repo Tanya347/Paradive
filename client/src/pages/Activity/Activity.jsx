@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 import useFetch from '../../Hooks/useFetch'
 import { Link, useLocation } from "react-router-dom"
 import activities from './activities'
+import Aos from 'aos'
+import 'aos/dist/aos.css'
 import './activity.css'
+
+
 
 function Activity() {
 
@@ -30,6 +34,10 @@ function Activity() {
         )
     }
 
+    useEffect(() => {
+        Aos.init({duration: 1000});
+      },[])
+
     return (
 
         <div className='activityContainer'>
@@ -44,7 +52,7 @@ function Activity() {
                     <>
                         {
                             search(data).map((item, i) => (
-                                <div className="card" key={item._id}>
+                                <div className="card" key={item._id} data-aos="fade-up">
                                     <div class="content">
                                         <img id="post-image" src={item.photos[0]} alt="" />
                                         <h4>{item.title}</h4>

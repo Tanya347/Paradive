@@ -43,7 +43,7 @@ function Register() {
           profilePicture: url,
         };
 
-        process.env.REACT_APP_MODE === "development" ? (await axios.post("/auth/register", newUser)) : (await axios.post("https://paradive.onrender.com/api/auth/register", newUser))
+        process.env.REACT_APP_MODE === "development" ? (await axios.post("/auth/register", newUser, {withcredentials: false})) : (await axios.post("https://paradive.onrender.com/api/auth/register", newUser , {withcredentials: false}))
 
         navigate("/login");
       } catch (err) {
@@ -51,7 +51,7 @@ function Register() {
       }
     } else {
       try {
-        process.env.REACT_APP_MODE === "development" ? (await axios.post("/auth/register", info)) : (await axios.post("https://paradive.onrender.com/api/auth/register", info))
+        process.env.REACT_APP_MODE === "development" ? (await axios.post("/auth/register", info, {withcredentials: false})) : (await axios.post("https://paradive.onrender.com/api/auth/register", info, {withcredentials: false}))
 
         navigate("/login");
       } catch (err) {
