@@ -19,22 +19,25 @@ function HomePage() {
       <Navbar />
       <div className="landing">
         <div className="hero">
-          <div className="heroBackground">
+          {/* <div className="heroBackground">
             <img
               src={process.env.PUBLIC_URL + "/Assets/canoeing.jpg"}
               alt=""
             />
-          </div>
+          </div> */}
           <div className="heroContent">
             <img src={process.env.PUBLIC_URL + "/Assets/hero.png"} alt="" />
-            <p>Bored this summer? Want to go out? Don't know where to go? What to do?
+            <p>Explore summer, together.</p>
+            {/* <p>Bored this summer? Want to go out? Don't know where to go? What to do?
               Paradive has you covered. We are a community that allows everyone to share
               their experiences!
               You can view what others have been upto this summer and draw inspiration as well as share your own experiences...
-            </p>
+            </p> */}
           </div>
         </div>
         <div className="featuredActivities">
+          
+          <h2>Explore Activities</h2>
           <div className="activities">
 
             <ActivityCard 
@@ -62,11 +65,14 @@ function HomePage() {
         </div>
         <div className="featuredPosts">
           <div className="postBackground">
+          
 
             <PostCard />
           </div>
         </div>
         <div className="actionCards">
+          <h2 id="actionTitle">Actions</h2>
+
           <div className="cards">
             <Card
               src={actions[0].src}

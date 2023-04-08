@@ -17,6 +17,9 @@ function ActivityCard() {
 
   return (
     <div className="container">
+
+    <h2>Featured Posts</h2>
+      <div className="postcards">
       {loading ? (
         "loading"
       ) : (
@@ -39,52 +42,9 @@ function ActivityCard() {
               </div>
             </div>
           ))}
-          {/* <div className="card" key={data[0]._id}>
-            <div class="content">
-              <img id="post-image" src={data[0].img[0]} alt="" />
-              <h4>{data[0].title}</h4>
-              <h6>
-                <span>Posted By : </span> {data[0].username}
-              </h6>
-              <h6>
-                <span>Date : </span> {data[0].date}
-              </h6>
-              <p>{data[0].desc}</p>
-              <button>Read More</button>
-            </div>
-          </div >
-
-          <div className="card" key={data[1]._id}>
-            <div class="content">
-              <img id="post-image" src={data[1].img[0]} alt="" />
-              <h4>{data[1].title}</h4>
-              <h6>
-                <span>Posted By : </span> {data[1].username}
-              </h6>
-              <h6>
-                <span>Date : </span> {data[1].date}
-              </h6>
-              <p>{data[1].desc}</p>
-              <button>Read More</button>
-            </div>
-          </div >
-
-          <div className="card">
-            <div class="content">
-              <img id="post-image" src={data[2].img[0]} alt="" />
-              <h4>{data[2].title}</h4>
-              <h6>
-                <span>Posted By : </span> {data[2].username}
-              </h6>
-              <h6>
-                <span>Date : </span> {data[2].date}
-              </h6>
-              <p>{data[2].desc}</p>
-              <button>Read More</button>
-            </div>
-          </div > */}
         </>
       )}
+      </div>
     </div>
   );
 }

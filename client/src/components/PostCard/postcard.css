@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -8,12 +11,31 @@
 .container {
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   background: url("../../../public/Assets/postbg.jpg");
   background-size: cover;
   height: 100%;
+  padding-bottom: 30px;
+
+}
+
+.container .postcards {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.container h2 {
+  font-family: 'Kaushan Script', cursive;
+  color: white;
+  margin: 50px 0 30px 0; 
+  font-size: 3rem;
 }
 
 .container .line {
@@ -130,4 +152,14 @@
 .container .card .content button:hover {
   transform: translateY(-2px);
   background-color: rgb(233, 246, 254);
+}
+
+@media screen and (max-width: 400px) {
+    .container .card {
+      margin: 20px 0;
+    }
+
+    .container h2 {
+      font-size: 2rem;
+    }
 }

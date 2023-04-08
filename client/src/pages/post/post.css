@@ -8,15 +8,17 @@ html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
 }
 
 .postContainer {
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
-    width: 90%;
-    margin: 100px;
+    width: 70%;
+    margin: 50px;
     flex-wrap: wrap;
+
 }
 
 .postPageBG {
@@ -42,7 +44,9 @@ html {
 .upperContent h1 {
     color: #51c4d3;
     font-size: 2.5rem;
+    margin-bottom: 20px;
     font-weight: bold;
+    font-family: 'Kaushan Script', cursive;
 }
 
 .upperContent p {
@@ -57,6 +61,10 @@ html {
     align-items: center;
 }
 
+.images img {
+    height: 400px;
+}
+
 .images .arrows {
     display: flex;
     justify-content: center;
@@ -65,7 +73,7 @@ html {
 .images .arrow {
     margin: 20px;
     font-size: 40px;
-    color: lightgray;
+    color: #51C4D3;
     cursor: pointer;
 }
 
@@ -86,6 +94,7 @@ html {
     align-items: center;
     width: 50%;
     font-size: 1.25rem;
+    height: 500px;
 }
 
 .rightContainer .title {
@@ -124,6 +133,11 @@ html {
 }
 
 @media screen and (max-width: 600px) {
+    
+    .postPageBG {
+        height: 400px;
+    }
+    
     .upperContent h1 {
         color: #126e82;
         font-size: 2rem;
@@ -138,6 +152,7 @@ html {
     .postContainer {
         align-items: center;
         justify-content: center;
+        width: 90%;
     }
 
     .leftContainer {
@@ -149,6 +164,7 @@ html {
         width: 90%;
         margin-top: 30px;
         font-size: 1rem;
+        height: fit-content;
     }
 
 }

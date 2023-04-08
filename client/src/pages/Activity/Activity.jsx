@@ -42,9 +42,10 @@ function Activity() {
 
         <div className='activityContainer'>
             <Navbar />
+            <div className="header"></div>
             <div className="activityPageHero">
                 <h1>{activities[index].placeholder}</h1>
-                <img src={activities[index].src} alt="" height="200px" />
+                {/* <img src={activities[index].src} alt="" height="200px" /> */}
                 <p>{activities[index].desc}</p>
             </div>
             <div className="searchedPosts">

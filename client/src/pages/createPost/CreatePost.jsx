@@ -59,13 +59,12 @@ function CreatePost() {
     <div className="createPostContainer">
       <Navbar />
       <div className="cpContainer">
-
         <div className="formContainer">
 
           <div className="picsContainer">
 
             <div className="formInput">
-              <h1>Upload Images (Max 6)</h1>
+              <h2>Upload Images (Max 6)</h2>
               <label htmlFor="file">
                 <FontAwesomeIcon className="icon" icon={faPlusCircle} />
               </label>

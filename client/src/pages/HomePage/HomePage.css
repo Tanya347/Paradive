@@ -6,19 +6,19 @@ html {
 .hero {
     position: relative;
     height: 800px;
+    background: url("https://wallpapercave.com/dwp2x/wp4083806.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.heroBackground img {
-    /* background-attachment: fixed; */
-    /* background-size: cover; */
+/* .heroBackground img {
     height: 800px;
-    /* width: 100vw; */
     filter: brightness(60%);
-}
+} */
 
 .heroContent {
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
@@ -27,9 +27,14 @@ html {
     align-items: center;
 }
 
+.heroContent img {
+    height: 100px;
+}
+
 .heroContent p {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 2rem;
+    font-weight: bolder;
 }
 
 .featuredActivities {
@@ -39,6 +44,14 @@ html {
     align-items: center;
     justify-content: center;
     margin: 100px 0 50px 0;
+}
+
+.featuredActivities h2 {
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #007DA1;
+    font-family: 'Kaushan Script', cursive;
+    font-size: 3rem;
 }
 
 .activities {
@@ -58,6 +71,16 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+#actionTitle {
+    font-family: 'Kaushan Script', cursive;
+    color: #26AEC0;
+    font-size: 3rem;
+    margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .cards {
@@ -65,6 +88,9 @@ html {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    background-color: #EBF8F7;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 .viewMore {
@@ -102,5 +128,15 @@ html {
 
     .viewMore {
         margin-top: 40px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .featuredActivities h2 {
+      font-size: 2rem;
+    }
+
+    #actionTitle {
+        font-size: 2.5rem;
     }
 }

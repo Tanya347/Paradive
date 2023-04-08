@@ -1,7 +1,11 @@
+.header {
+    height: 60px;
+    background-color: #027989;
+}
+
 .activityPageHero {
     position: relative;
-    height: 450px;
-    background: url("../../../public/Assets/rocks.jpg");
+    height: fit-content;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -11,14 +15,18 @@
 }
 
 .activityPageHero h1 {
-    margin-top: 80px;
+    margin-top: 30px;
     color: #126e82;
+    font-family: 'Kaushan Script', cursive;
+    font-size: 2.5rem;
 }
 
 .activityPageHero p {
     font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: 600;
     width: 90%;
+    margin-bottom: 40px;
+    color: #0a4755;
 }
 
 @media screen and (max-width: 600px) {
@@ -30,10 +38,14 @@
         width: 80%;
     }
 
+    .header {
+        height: 70px;
+    }
 
     .activityPageHero h1 {
-        margin-top: 100px;
+        margin-top: 20px;
     }
+
 
     .activityPageHero p {
         font-size: 1rem;
