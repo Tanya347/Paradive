@@ -38,10 +38,6 @@
         width: 80%;
     }
 
-    .header {
-        height: 70px;
-    }
-
     .activityPageHero h1 {
         margin-top: 20px;
     }
@@ -49,5 +45,11 @@
 
     .activityPageHero p {
         font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .header {
+        height: 70px;
     }
 }

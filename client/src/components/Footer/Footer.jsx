@@ -12,7 +12,7 @@ function Footer() {
     <div className="footerContainer">
       <div className="footerColumn">
         <img
-          src={process.env.PUBLIC_URL + "/Assets/footerbrand.png"}
+          src="https://drive.google.com/uc?export=view&id=1Cswtm2KJ1_-7YIxbbnW0XKu1CB95wq79"
           className="footerElement"
           alt=""
         />
@@ -41,22 +41,22 @@ function Footer() {
         <div className="footerElement">
           <img
             className="icon"
-            src={process.env.PUBLIC_URL + "Assets/4.png"}
+            src="https://drive.google.com/uc?export=view&id=1Xc12SJ8PYRuQuEnBfArrdWbGeaq__B4X"
             alt=""
           />
           <img
             className="icon"
-            src={process.env.PUBLIC_URL + "Assets/5.png"}
+            src="https://drive.google.com/uc?export=view&id=158PSgCmKcVuKBIOLqNughFvPpYxesQlo"
             alt=""
           />
           <img
             className="icon"
-            src={process.env.PUBLIC_URL + "Assets/6.png"}
+            src="https://drive.google.com/uc?export=view&id=1UnATwRPHUDCJmm-21kltm8MBpAXl7rnk"
             alt=""
           />
           <img
             className="icon"
-            src={process.env.PUBLIC_URL + "Assets/7.png"}
+            src="https://drive.google.com/uc?export=view&id=10AtAKMb6HCEGlV4wRzPBgXv565r0nEfg"
             alt=""
           />
         </div>

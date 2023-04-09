@@ -75,13 +75,13 @@ html {
     margin-bottom: 50px;
 }
 
-#actionTitle {
+/* #actionTitle {
     font-family: 'Kaushan Script', cursive;
     color: #26AEC0;
     font-size: 3rem;
     margin-top: 20px;
     margin-bottom: 50px;
-}
+} */
 
 .cards {
     width: 80%;
@@ -136,7 +136,7 @@ html {
       font-size: 2rem;
     }
 
-    #actionTitle {
+    /* #actionTitle {
         font-size: 2.5rem;
-    }
+    } */
 }

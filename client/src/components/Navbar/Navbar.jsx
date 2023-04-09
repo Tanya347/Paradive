@@ -29,8 +29,8 @@ const Navbar = () => {
 
     return (
         <div className={navbar ? 'navContainer active' : 'navContainer'}>
-            <Link to="/">
-                <p className='navLogo'><img src={process.env.PUBLIC_URL + "/Assets/brand.png"} alt="" /></p>
+            <Link to="/"> 
+                <p className='navLogo'><img src="https://drive.google.com/uc?export=view&id=1kxu9t99Tsyyba3V8OhyyCgEPxz-CChZs" alt="" /></p>
             </Link>
 
             <input type="checkbox" id='menu-bar' />

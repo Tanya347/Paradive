@@ -71,7 +71,7 @@ function HomePage() {
           </div>
         </div>
         <div className="actionCards">
-          <h2 id="actionTitle">Actions</h2>
+          {/* <h2 id="actionTitle">Actions</h2> */}
 
           <div className="cards">
             <Card

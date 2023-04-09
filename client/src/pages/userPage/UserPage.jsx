@@ -52,7 +52,6 @@ const UserPage = () => {
                 </div>
             </div>
             <div className="searchedPosts">
-                
                 {postData? postData.map((item) => (
                     <div className="card" key={item._id} data-aos="fade-up">
                         <div class="content">

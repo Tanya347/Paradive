@@ -6,7 +6,7 @@ html {
 .allActivityContainer .search {
     position: relative;
     height: 300px;
-    background: url("../../../public/Assets/rocks.jpg");
+    background: url("https://drive.google.com/uc?export=view&id=1ZyAn72FpaGUiw7S6v4PACWg-1FCQIqKh");
     background-size: cover;
 }
 
@@ -60,7 +60,7 @@ html {
     position: relative;
     display: flex;
     justify-content: center;
-    background: url("../../../public/Assets/canoeing.jpg");
+    background: url("https://drive.google.com/uc?export=view&id=1UYBnPVPF0is2oUv6eB13ihw2ZbDbfJqE");
     align-items: center;
     flex-wrap: wrap;
 }
