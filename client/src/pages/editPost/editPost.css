@@ -1,75 +1,239 @@
-@import url('https://fonts.googleapis.com/css2?family=Smooch&display=swap');
-
 body,
 html {
     overflow-x: hidden;
 }
 
-.hero {
-    position: relative;
-    height: 800px;
-}
-
-.heroBackground img {
-    background-attachment: fixed;
+.editPostContainer {
+    background: url("https://drive.google.com/uc?export=view&id=1IX_0xbp_nrRnjap60WeqkB0PpFKupcBC");
     background-size: cover;
-    height: 800px;
-    width: 100%;
-    filter: brightness(60%);
+    background-repeat: repeat;
+    height: 100%;
 }
 
-.heroContent {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
+.cpContainer {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.heroContent h1 {
-    font-size: 4rem;
-    font-family: 'Smooch', cursive;
-}
-
-.heroContent p {
-    text-align: center;
-    font-size: 1.5rem;
-}
-
-.featuredActivities {
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 100px 0;
+    flex-direction: column;
+    color: white;
+    width: 100%;
+    padding: 50px;
 }
 
-.activities {
+.formContainer {
     width: 90%;
     display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-.featuredPosts {
-    margin-bottom: 30px;
-}
-
-.actionCards {
-    margin: 30px 0;
-    height: fit-content;
-    display: flex;
-    align-items: center;
     justify-content: center;
-}
-
-.cards {
-    width: 80%;
-    display: flex;
-    justify-content: space-evenly;
+    align-items: center;
+    padding: 100px 0;
     flex-wrap: wrap;
 }
+
+.inputContainer {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.inputContainer button {
+    width: 100px;
+}
+
+.picsContainer {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 0 50px;
+
+}
+
+.picsContainer .formInput {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.picsContainer .formInput label {
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.picsContainer .formInput label:hover {
+    transform: translateY(-2px);
+}
+
+.picsContainer .uploadedPictures {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.picsContainer h1 {
+    text-align: center;
+    padding: 0 0 20px 0;
+    font-size: 25px;
+    font-size: 1.2rem;
+}
+
+.columns {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 20px;
+    width: 50%;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#lastInput {
+    width: 95%;
+    padding-left: 0.8rem;
+
+}
+
+.column .input .formInput {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    gap: 10px;
+}
+
+.input label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.inputContainer button {
+    width: 50%;
+    height: 40px;
+    margin-top: 20px;
+    border: none;
+    background: #26AEC0;
+    border-radius: 25px;
+    font-size: 18px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+.input input {
+    font-size: 1rem;
+    height: 40px;
+    width: 100%;
+    font-size: 1rem;
+    outline: 0;
+    border: 0;
+    border-bottom: 1px solid white;
+    background: transparent;
+    color: white;
+}
+
+.column .input .type {
+    text-align: center;
+    height: 35px;
+    background: white;
+    border-radius: 5px;
+    color: #0c4957;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 800px) {
+    .inputContainer {
+        width: 80%;
+    }
+
+    .picsContainer {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .cpContainer {
+        padding: 0;
+    }
+
+    .formContainer {
+        width: 90%;
+    }
+
+    .inputContainer {
+        width: 100%;
+    }
+
+    .column {
+        width: 100%;
+        margin-top: 50px;
+
+    }
+
+    .picsContainer {
+        width: 90%;
+    }
+
+    .picsContainer .uploadedPictures {
+        width: 100%;
+    }
+
+    .picsContainer .uploadedPictures img {
+        height: 50px;
+    }
+}
+
+/* 
+
+
+
+.column input {
+    
+}
+
+
+.column .input .type {
+    width: 70%;
+    margin-top: 10px;
+    height: 35px;
+    background: white;
+    border-radius: 5px;
+    color: #0c4957;
+}
+
+.post_button {
+    width: 50%;
+    height: 50px;
+    border: none;
+    background: #26AEC0;
+    border-radius: 25px;
+    font-size: 18px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+.post_button .
+
+ */

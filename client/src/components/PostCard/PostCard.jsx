@@ -21,8 +21,9 @@ function ActivityCard() {
     <h2>Featured Posts</h2>
       <div className="postcards">
       {loading ? (
-    <img id="loading" src="https://drive.google.com/uc?export=view&id=1F5a3bey3bRFFVWkX5BM-V_jgi8ludD0A" alt="loading"/>
-        
+        <>
+        <img id="loading" src="https://drive.google.com/uc?export=view&id=1F5a3bey3bRFFVWkX5BM-V_jgi8ludD0A" alt="loading"/>
+        </>        
       ) : (
         <>
           {posts.map((item, i) => (

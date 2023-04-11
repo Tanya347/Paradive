@@ -12,6 +12,7 @@ import { AuthContext } from "./context/authContext";
 import Activity from "./pages/Activity/Activity";
 import AllActivity from "./pages/allActivity/AllActivity";
 import UserPage from "./pages/userPage/UserPage";
+import EditPost from "./pages/editPost/EditPost"
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -44,6 +45,8 @@ function App() {
           />
           <Route path="/register" element={<Register />} />
           <Route path="/:id" element={<Post />} />
+          <Route path="/edit/:id" element={<EditPost />} />
+
           {/* <Route path="/:id/edit" element={<EditPost />} /> */}
           <Route path="/activity/:id" element={<Activity />} />
           <Route
