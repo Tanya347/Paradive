@@ -50,6 +50,9 @@ const UserPage = () => {
                         {data.desc}
                     </p>
                 </div>
+                <div className="edit-button">
+                    <button>Edit Profile</button>
+                </div>
             </div>
             <div className="searchedPosts">
                 {postData? postData.map((item) => (

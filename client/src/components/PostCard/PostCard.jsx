@@ -26,7 +26,7 @@ function ActivityCard() {
         </>        
       ) : (
         <>
-          {posts.map((item, i) => (
+          {posts.map((item) => (
             <div className="card" key={item._id} data-aos="fade-up">
               <div class="content">
                 <img id="post-image" src={item.photos[0]} alt="" />
