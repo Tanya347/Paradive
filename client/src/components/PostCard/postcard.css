@@ -22,6 +22,11 @@
 
 }
 
+#loading {
+  width: 20px;
+  height: 20px;
+}
+
 .container .postcards {
   display: flex;
   flex-direction: row;

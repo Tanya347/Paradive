@@ -67,6 +67,11 @@ html {
     flex-wrap: wrap;
 }
 
+#loading {
+    width: 20px;
+    height: 20px;
+  }
+
 .line {
     display: inline-block;
     position: absolute;
