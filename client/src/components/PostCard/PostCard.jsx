@@ -22,8 +22,8 @@ function ActivityCard() {
       <div className="postcards">
       {loading ? (
         <>
-        <img id="loading" src="https://drive.google.com/uc?export=view&id=1F5a3bey3bRFFVWkX5BM-V_jgi8ludD0A" alt="loading"/>
-        </>        
+          <div className="p" style={{color: "white", "fontFamily": "'Kaushan Script', cursive"}}>Loading...</div>
+        </>     
       ) : (
         <>
           {posts.map((item) => (
