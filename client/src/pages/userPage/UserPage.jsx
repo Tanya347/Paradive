@@ -20,6 +20,7 @@ const UserPage = () => {
 
     const [open, setOpen] = useState(false);
 
+    console.log(data.posts)
     useEffect(() => {
         setPostData(data.posts)
     },[data])

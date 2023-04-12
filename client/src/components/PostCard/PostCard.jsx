@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useFetch from "../../Hooks/useFetch";
 import "./postcard.css";
 import { Link } from "react-router-dom";
@@ -8,13 +8,16 @@ import { useEffect } from "react";
 
 function ActivityCard() {
   const { data, loading } = useFetch("/posts");
+  const [posts, setPosts] = useState([]);
 
-  const posts = data.slice(0, 3);
-
+  useEffect(() => {
+    setPosts(data.slice(0, 3))
+  }, [data])
   useEffect(() => {
     Aos.init({duration: 1000});
   },[])
 
+  console.log(posts)
   return (
     <div className="container">
 
@@ -24,7 +27,7 @@ function ActivityCard() {
         "loading"   
       ) : (
         <>
-          {posts.map((item) => (
+          {posts && posts.map((item) => (
             <div className="card" key={item._id} data-aos="fade-up">
               <div class="content">
                 <img id="post-image" src={item.photos[0]} alt="" />
