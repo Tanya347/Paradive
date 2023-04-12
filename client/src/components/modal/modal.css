@@ -1,0 +1,84 @@
+.modal {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.mContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #15a7bba3;
+    padding: 20px;
+    height: fit-content;
+    position: relative;
+    width: 400px;
+    color: white;
+    font-size: 1.4em;
+}
+
+.mClose {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    padding: 15px;
+    color: white;
+    font-size: 1.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.mContainer form img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.mContainer form .icon {
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.mContainer form input {
+    color: white;
+    font-weight: bold;
+}
+
+.mContainer .editButton {
+    background-color: white;
+    border: none;
+    color: #15a8bb;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.mContainer .editButton:hover {
+    background-color: #e1f6f9;
+}
+
+form .txt_field {
+    border-bottom: 2px solid white;
+}
+
+@media screen and (max-width: 600px) {
+    .mContainer {
+        width: 90%;
+    }
+}

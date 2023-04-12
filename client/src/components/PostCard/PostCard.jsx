@@ -21,9 +21,7 @@ function ActivityCard() {
     <h2>Featured Posts</h2>
       <div className="postcards">
       {loading ? (
-        <>
-          <div className="p" style={{color: "white", "fontFamily": "'Kaushan Script', cursive"}}>Loading...</div>
-        </>     
+        "loading"   
       ) : (
         <>
           {posts.map((item) => (

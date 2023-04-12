@@ -87,13 +87,13 @@ html {
     font-size: 1.2rem;
 }
 
-.columns {
+.editPostContainer .columns {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
 }
 
-.column {
+.editPostContainer .column {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -113,7 +113,7 @@ html {
 
 }
 
-.column .input .formInput {
+.editPostContainer .column .input .formInput {
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -151,7 +151,7 @@ html {
     color: white;
 }
 
-.column .input .type {
+.editPostContainer .column .input .type {
     text-align: center;
     height: 35px;
     background: white;
@@ -184,7 +184,7 @@ html {
         width: 100%;
     }
 
-    .column {
+    .editPostContainer .column {
         width: 100%;
         margin-top: 50px;
 

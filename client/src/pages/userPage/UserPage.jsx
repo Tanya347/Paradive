@@ -9,6 +9,7 @@ import { useState } from 'react';
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { useEffect } from 'react';
+import Modal from '../../components/modal/Modal';
 
 const UserPage = () => {
     const location = useLocation();
@@ -16,6 +17,8 @@ const UserPage = () => {
 
     const { data } = useFetch(`/users/${id}`)
     const [postData, setPostData] = useState([]);
+
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         setPostData(data.posts)
@@ -30,30 +33,33 @@ const UserPage = () => {
 
             <Navbar />
             <div className="infoContainer">
-                <div className="col">
+                <div className="column">
+                <div className="col" id='profile'>
                     <div className="pic">
                         <img src={data.profilePicture || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"} alt="" />
 
                     </div>
                 </div>
-                <div className="col">
+                <div className="col" id='bio'>
+                    <h3><span>Username</span></h3>
                     <p>
-                        <span> Username  :  </span>
                         {data.username}
                     </p>
+                    <h3><span> Email</span></h3>
                     <p>
-                        <span> Email  :  </span>
                         {data.email}
                     </p>
+                    <h3><span> Bio</span></h3>
                     <p>
-                        <span> Bio  :  </span>
                         {data.desc}
                     </p>
                 </div>
+                </div>
                 <div className="edit-button">
-                    <button>Edit Profile</button>
+                    <button onClick={() => setOpen(true)}>Edit Profile</button>
                 </div>
             </div>
+            
             <div className="searchedPosts">
                 {postData? postData.map((item) => (
                     <div className="card" key={item._id} data-aos="fade-up">
@@ -75,6 +81,7 @@ const UserPage = () => {
                 )):"no content"}
             </div>
             <Footer />
+            {open && <Modal setOpen={setOpen} />}
         </div>
     )
 }
