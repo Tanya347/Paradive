@@ -27,8 +27,6 @@ const UserPage = () => {
         setPostData(filteredArray)
     }, [posts, data])
 
-    console.log(postData)
-
     useEffect(() => {
         Aos.init({duration: 1000});
       },[])

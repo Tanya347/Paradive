@@ -35,17 +35,6 @@ function Login({ title, link }) {
     }
   };
 
-  // const [loading, setLoading] = useState(true);
-  // const spinner = document.getElementById("spinner");
-  // if (spinner) {
-  //   spinner.style.display = "block";
-  //   setTimeout(() => {
-  //     spinner.style.display = "none";
-  //     setLoading(false);
-  //   }, 2000);
-  // }
-
-  // console.log(spinner)
 
   return (
     <div className="login">

@@ -18,7 +18,6 @@ function ActivityCard() {
     Aos.init({duration: 1000});
   },[])
 
-  console.log(posts)
   return (
     <div className="container">
 

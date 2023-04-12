@@ -15,7 +15,6 @@ function Register() {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
 
-  console.log(file)
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
