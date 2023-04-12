@@ -22,7 +22,7 @@ const UserPage = () => {
 
     useEffect(() => {
         setPostData(data.posts)
-    },[data])
+    },[data.posts])
 
     useEffect(() => {
         Aos.init({duration: 1000});
