@@ -36,7 +36,13 @@ const EditPost = () => {
         }
 
         try {
-            await axios.put(`http://localhost:7700/api/posts/${id}`, editpost, {withCredentials: false});
+            process.env.REACT_APP_MODE === "development" ? 
+                (await axios.put(`/posts/${data._id}`, editpost, {withcredentials: false})) 
+                : (
+                    await axios.put(`https://paradive.onrender.com/api/posts/${data._id}`, 
+                    editpost, 
+                    {withcredentials: false})
+                )
             navigate(`/${id}`);
         } catch(err) {
             console.log(err);
