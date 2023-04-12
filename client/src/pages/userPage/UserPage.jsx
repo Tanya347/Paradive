@@ -15,14 +15,20 @@ const UserPage = () => {
     const location = useLocation();
     const id = location.pathname.split("/")[2];
 
-    const { data } = useFetch(`/users/${id}`)
+    const { data } = useFetch(`/users/${id}`);
+    const posts = useFetch('/posts').data;
     const [postData, setPostData] = useState([]);
 
     const [open, setOpen] = useState(false);
-    console.log(postData)
+
     useEffect(() => {
         setPostData(data.posts)
-    },[data.posts])
+    }, [data])
+
+    useEffect(() => {
+        const filteredArray = posts.filter(item => postData.includes(item._id))
+        setPostData(filteredArray)
+    }, [posts])
 
     useEffect(() => {
         Aos.init({duration: 1000});
