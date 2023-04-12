@@ -125,7 +125,7 @@ function Post() {
               {/* <Link to="edit">
                 {isUser && <button>Edit</button>}
               </Link> */}
-              {user && isUser && <button className="del_button" onClick={handleDelete}>Delete</button>}
+              {user && isUser && <button className="del_button" style={{"marginRight":"5px"}} onClick={handleDelete}>Delete</button>}
               {user && isUser && <button className="del_button" onClick={() => navigate(`/edit/${data._id}`)}>Edit</button>}
 
             </div>

@@ -51,7 +51,7 @@ html {
     align-items: center;
     gap: 50px;
     padding: 0 50px;
-
+    text-align: center;
 }
 
 .picsContainer .formInput {

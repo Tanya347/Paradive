@@ -61,24 +61,28 @@ const UserPage = () => {
             </div>
             
             <div className="searchedPosts">
-                {postData? postData.map((item) => (
-                    <div className="card" key={item._id} data-aos="fade-up">
-                        <div class="content">
-                            <img id="post-image" src={item.photos[0]} alt="no content" />
-                            <h4>{item.title}</h4>
-                            <h6>
-                                <span>Location : </span> {item.location}
-                            </h6>
-                            <h6>
-                                <span>Activity : </span> {item.type}
-                            </h6>
-                            <p>{item.desc.slice(0,70)}...</p>
-                            <Link to={`/${item._id}`}>
-                                <button>Read More</button>
-                            </Link>
+                {postData? 
+                    <>
+                        {postData.map((item) => (
+                        <div className="card" key={item._id} data-aos="fade-up">
+                            <div class="content">
+                                <img id="post-image" src={item.photos[0]} alt="no content" />
+                                <h4>{item.title}</h4>
+                                <h6>
+                                    <span>Location : </span> {item.location}
+                                </h6>
+                                <h6>
+                                    <span>Activity : </span> {item.type}
+                                </h6>
+                                <p>{item.desc.slice(0,70)}...</p>
+                                <Link to={`/${item._id}`}>
+                                    <button>Read More</button>
+                                </Link>
+                            </div>
                         </div>
-                    </div>
-                )):
+                        ))}
+                    </>
+                :
                     <>
                         <div className="p" style={{color: "white", "fontFamily": "'Kaushan Script', cursive"}}>No Posts</div>
                     </>

@@ -46,7 +46,9 @@ function ActivityCard() {
           ))}
         </> 
       ) : (
-        "loading"
+        <>
+          <div className="p" style={{color: "white", "fontFamily": "'Kaushan Script', cursive"}}>Loading...</div>
+        </>
       )}
       </div>
     </div>
