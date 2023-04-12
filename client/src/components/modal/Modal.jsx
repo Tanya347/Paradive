@@ -137,18 +137,6 @@ const Modal = ({setOpen}) => {
                         </div>
                         <div className="txt_field">
                             <input
-                            type="password"
-                            placeholder="password"
-                            name="password"
-                            onChange={handleChange}
-                            id="password"
-                            value={info.password}
-                            //   value={data.password}
-                            required
-                            />
-                        </div>
-                        <div className="txt_field">
-                            <input
                             type="text"
                             placeholder="Write bio"
                             name="desc"

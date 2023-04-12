@@ -55,7 +55,7 @@ function Activity() {
                             search(data).map((item, i) => (
                                 <div className="card" key={item._id} data-aos="fade-up">
                                     <div class="content">
-                                        <img id="post-image" src={item.photos[0]} alt="" />
+                                        <img id="post-image" src={item.photos[0]} alt="no image" />
                                         <h4>{item.title}</h4>
                                         <h6>
                                             <span>Location : </span> {item.location}
