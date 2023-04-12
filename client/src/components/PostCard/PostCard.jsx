@@ -7,12 +7,13 @@ import 'aos/dist/aos.css'
 import { useEffect } from "react";
 
 function ActivityCard() {
-  const { data, loading } = useFetch("/posts");
+  const { data} = useFetch("/posts");
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     setPosts(data.slice(0, 3))
   }, [data])
+
   useEffect(() => {
     Aos.init({duration: 1000});
   },[])
@@ -23,9 +24,7 @@ function ActivityCard() {
 
     <h2>Featured Posts</h2>
       <div className="postcards">
-      {loading ? (
-        "loading"   
-      ) : (
+      {posts ? (
         <>
           {posts && posts.map((item) => (
             <div className="card" key={item._id} data-aos="fade-up">
@@ -45,7 +44,9 @@ function ActivityCard() {
               </div>
             </div>
           ))}
-        </>
+        </> 
+      ) : (
+        "loading"
       )}
       </div>
     </div>
