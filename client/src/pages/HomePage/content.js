@@ -2,21 +2,21 @@
 export const actions = [
     {
         id: 0,
-        src: "https://drive.google.com/uc?export=view&id=1OgIenMnjujQA4fCXUDMfxBKUVO-bSIY2",
+        src: "/Assets/login.png",
         para: "Excited? Join our Community!",
         button: "Register",
         link: "register"
     },
     {
         id: 1,
-        src: "https://drive.google.com/uc?export=view&id=1BERhDLjCrRKvqBcPCgy50kLKEJ1kFYLL",
+        src: "/Assets/post.png",
         para: "Show the world your excursions, create a post!",
         button: "Post",
         link: "new"
     },
     {
         id: 2,
-        src: "https://drive.google.com/uc?export=view&id=19W5dofvANqPzSBFKCqL-giitc9xLion5",
+        src: "/Assets/search.png",
         para: "Want to explore activites for this summer?",
         button: "Explore",
         link: "explore"
@@ -26,19 +26,19 @@ export const actions = [
 export const activities = [
     {
         id: 0,
-        src: "https://drive.google.com/uc?export=view&id=1dgz2K2hQnsvXht5yyalU-5iEgt_HgbwE",
+        src: "/Assets/activities/parasailing.avif",
         name: "Parasailing",
         link: "parasailing"
     },
     {
         id: 1,
-        src: "https://drive.google.com/uc?export=view&id=17Vyx4wu92f938dqTkQY4wssW2RajJ_VI",
+        src: "/Assets/activities/bananaboat.avif",
         name: "Banana Boat",
         link: "bananaboat"
     },
     {
         id: 2,
-        src: "https://drive.google.com/uc?export=view&id=1pWo2aDFbg1VLd7itxb0sGJN9kQmHAiSH",
+        src: "/Assets/activities/diving.avif",
         name: "Diving",
         link: "diving"
     }
