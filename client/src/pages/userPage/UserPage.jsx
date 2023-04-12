@@ -20,7 +20,6 @@ const UserPage = () => {
 
     const [open, setOpen] = useState(false);
 
-    console.log(data.posts)
     useEffect(() => {
         setPostData(data.posts)
     },[data])
@@ -79,7 +78,11 @@ const UserPage = () => {
                             </Link>
                         </div>
                     </div>
-                )):"no content"}
+                )):
+                    <>
+                        <div className="p" style={{color: "white", "fontFamily": "'Kaushan Script', cursive"}}>No Posts</div>
+                    </>
+                }
             </div>
             <Footer />
             {open && <Modal setOpen={setOpen} />}

@@ -45,7 +45,9 @@ function SearchPage() {
 
       <div className="searchedPosts">
         {loading ? (
-          "loading"
+          <>
+            <div className="p" style={{color: "white", "fontFamily": "'Kaushan Script', cursive"}}>Loading...</div>
+          </>
         ) : (
           <>
             {search(data).map((item, i) => (
