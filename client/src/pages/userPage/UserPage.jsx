@@ -28,7 +28,7 @@ const UserPage = () => {
     useEffect(() => {
         const filteredArray = posts.filter(item => postData.includes(item._id))
         setPostData(filteredArray)
-    }, [posts])
+    }, [posts], [postData])
 
     useEffect(() => {
         Aos.init({duration: 1000});
