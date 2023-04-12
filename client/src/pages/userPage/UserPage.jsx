@@ -74,7 +74,7 @@ const UserPage = () => {
                                 <h6>
                                     <span>Activity : </span> {item.type}
                                 </h6>
-                                <p>{item.desc.slice(0,70)}...</p>
+                                {item.desc && <p>{item.desc.slice(0,70)}...</p>}
                                 <Link to={`/${item._id}`}>
                                     <button>Read More</button>
                                 </Link>
