@@ -82,7 +82,7 @@ function CreatePost() {
                   src={
                     files[0]
                       ? URL.createObjectURL(files[0])
-                      : "Assets/transparent.png"
+                      : "/Assets/transparent.png"
                   }
                   alt=""
                   height="80px"
@@ -93,7 +93,7 @@ function CreatePost() {
                   src={
                     files[1]
                       ? URL.createObjectURL(files[1])
-                      : "Assets/transparent.png"
+                      : "/Assets/transparent.png"
                   }
                   alt=""
                   height="80px"
@@ -104,7 +104,7 @@ function CreatePost() {
                   src={
                     files[2]
                       ? URL.createObjectURL(files[2])
-                      : "Assets/transparent.png"
+                      : "/Assets/transparent.png"
                   }
                   alt=""
                   height="80px"
@@ -115,7 +115,7 @@ function CreatePost() {
                   src={
                     files[3]
                       ? URL.createObjectURL(files[3])
-                      : "Assets/transparent.png"
+                      : "/Assets/transparent.png"
                   }
                   alt=""
                   height="80px"
@@ -126,7 +126,7 @@ function CreatePost() {
                   src={
                     files[4]
                       ? URL.createObjectURL(files[4])
-                      : "Assets/transparent.png"
+                      : "/Assets/transparent.png"
                   }
                   alt=""
                   height="80px"
@@ -137,7 +137,7 @@ function CreatePost() {
                   src={
                     files[5]
                       ? URL.createObjectURL(files[5])
-                      : "Assets/transparent.png"
+                      : "/Assets/transparent.png"
                   }
                   alt=""
                   height="80px"

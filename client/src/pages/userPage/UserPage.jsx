@@ -21,14 +21,13 @@ const UserPage = () => {
 
     const [open, setOpen] = useState(false);
 
+    // populate not working in deployed version so have to do this instead
     useEffect(() => {
-        setPostData(data.posts)
-    }, [data])
-
-    useEffect(() => {
-        const filteredArray = posts.filter(item => postData.includes(item._id))
+        const filteredArray = posts.filter(item => item.userId === data._id)
         setPostData(filteredArray)
-    }, [postData], [posts])
+    }, [posts, data])
+
+    console.log(postData)
 
     useEffect(() => {
         Aos.init({duration: 1000});

@@ -41,22 +41,22 @@ function Footer() {
         <div className="footerElement">
           <img
             className="icon"
-            src={process.env.PUBLIC_URL + "Assets/4.png"}
+            src={process.env.PUBLIC_URL + "/Assets/4.png"}
             alt=""
           />
           <img
             className="icon"
-            src={process.env.PUBLIC_URL + "Assets/5.png"}
+            src={process.env.PUBLIC_URL + "/Assets/5.png"}
             alt=""
           />
           <img
             className="icon"
-            src={process.env.PUBLIC_URL + "Assets/6.png"}
+            src={process.env.PUBLIC_URL + "/Assets/6.png"}
             alt=""
           />
           <img
             className="icon"
-            src={process.env.PUBLIC_URL + "Assets/7.png"}
+            src={process.env.PUBLIC_URL + "/Assets/7.png"}
             alt=""
           />
         </div>
