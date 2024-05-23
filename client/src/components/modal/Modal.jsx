@@ -42,7 +42,7 @@ const Modal = ({setOpen}) => {
                 process.env.REACT_APP_MODE === "development" ? 
                 (await axios.put(`/users/${user._id}`, newuser, {withcredentials: false})) 
                 : (
-                    await axios.put(`https://paradive.onrender.com/api/users/${user._id}`, 
+                    await axios.put(`${process.env.REACT_APP_API_URL}/users/${user._id}`, 
                     newuser , 
                     {withcredentials: false})
                 )

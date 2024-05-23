@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-const API_URL = "https://paradive.onrender.com/api"
 
 const useFetch = (url) => {
     const [data, setData] = useState([]);
@@ -12,7 +11,7 @@ const useFetch = (url) => {
             setLoading(true);
             try {
 
-                const res = process.env.REACT_APP_MODE === "development"? (await axios.get(url)) : (await axios.get(`${API_URL}${url}`))
+                const res = await axios.get(`${process.env.REACT_APP_API_URL}${url}`)
                 
                 setData(res.data);
             } catch (err) {
@@ -26,7 +25,7 @@ const useFetch = (url) => {
     const reFetch = async () => {
         setLoading(true);
         try {
-            const res = process.env.REACT_APP_MODE === "development"? (await axios.get(url)) : (await axios.get(`${API_URL}${url}`))
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/${url}`)
 
             setData(res.data);
         } catch (err) {

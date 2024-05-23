@@ -25,9 +25,8 @@ function Login({ title, link }) {
     dispatch({ type: "LOGIN_START" });
     try {
 
-      const url = process.env.REACT_APP_MODE === "development"? ("http://localhost:7700/api/auth/login") : ("https://paradive.onrender.com/api/auth/login")
 
-      const res = await axios.post(url, credentials);
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, credentials);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       navigate(`${link}`);
     } catch (err) {

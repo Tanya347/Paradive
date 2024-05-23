@@ -39,7 +39,7 @@ const EditPost = () => {
             process.env.REACT_APP_MODE === "development" ? 
                 (await axios.put(`/posts/${data._id}`, editpost, {withcredentials: false})) 
                 : (
-                    await axios.put(`https://paradive.onrender.com/api/posts/${data._id}`, 
+                    await axios.put(`${process.env.REACT_APP_API_URL}/posts/${data._id}`, 
                     editpost, 
                     {withcredentials: false})
                 )

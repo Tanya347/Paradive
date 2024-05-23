@@ -46,7 +46,7 @@ function CreatePost() {
         rating: rating,
       };
 
-      process.env.REACT_APP_MODE === "development" ? (await axios.post("http://localhost:7700/api/posts", newpost)) : (await axios.post("https://paradive.onrender.com/api/posts", newpost))
+      await axios.post(`${process.env.REACT_APP_API_URL}/posts`, newpost)
 
       navigate("/explore");
     } catch (err) {
