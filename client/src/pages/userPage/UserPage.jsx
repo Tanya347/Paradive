@@ -66,7 +66,7 @@ const UserPage = () => {
             <div className="searchedPosts">
                 {postData? 
                     <>
-                        {postData.map((item) => (
+                        {postData?.map((item) => (
                         <div className="card" key={item._id} data-aos="fade-up">
                             <div class="content">
                                 {item.photos && <img id="post-image" src={item.photos[0]} alt="no content" />}

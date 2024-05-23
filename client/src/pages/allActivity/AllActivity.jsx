@@ -43,7 +43,7 @@ function AllActivity() {
 
             <div className="searchedPosts">
                 {
-                    search(activities).map((item, i) => (
+                    search(activities)?.map((item, i) => (
                         <div className="activityCardContainer" data-aos="flip-left">
 
                             <div className="image-container">

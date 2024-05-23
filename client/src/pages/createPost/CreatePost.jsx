@@ -24,7 +24,7 @@ function CreatePost() {
     e.preventDefault();
     try {
       const list = await Promise.all(
-        Object.values(files).map(async (file) => {
+        Object.values(files)?.map(async (file) => {
           const data = new FormData();
           data.append("file", file);
           data.append("upload_preset", "upload");
@@ -177,7 +177,7 @@ function CreatePost() {
                     <label>Activity Type</label>
                     <select id="type" className="type" onChange={handleChange}>
                       <option value="select">-Select an activity-</option>
-                      {activities.map((item) => (
+                      {activities?.map((item) => (
                         <option value={item.type}>{item.placeholder}</option>
                       ))}
                     </select>

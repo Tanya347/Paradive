@@ -117,7 +117,7 @@ const EditPost = () => {
                                         onChange={handleChange}
                                         >
                                         <option value="select">-Select an activity-</option>
-                                        {activities.map((item) => (
+                                        {activities?.map((item) => (
                                             <option value={item.type}>{item.placeholder}</option>
                                         ))}
                                         </select>
