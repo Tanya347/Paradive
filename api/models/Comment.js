@@ -2,11 +2,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema
 
 const CommentSchema = new Schema ({
-    title: {
-        type: String,
-        required: true
-    },
-    desc: {
+    comment: {
         type: String,
         required: true
     },

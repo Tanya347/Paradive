@@ -39,6 +39,12 @@ const PostSchema = new mongoose.Schema(
     rating: {
       type: Number,
     },
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment',
+      }
+    ]
   },
   { timestamps: true }
 );

@@ -46,7 +46,6 @@ function Post() {
           const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${data?.location}.json?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`);
           const placesData = await response.json();
 
-          console.log(placesData)
           if (placesData.features.length > 0) {
             const firstPlace = placesData.features[0];
             const { center } = firstPlace;
@@ -98,6 +97,7 @@ function Post() {
     }
     setSlideNumber(newSlideNumber)
   }
+
 
   return (
     <div className="postPage">
@@ -180,25 +180,26 @@ function Post() {
             <div className="comments-header">
               <div className="title">
                 <span>Comments  :  </span>
-                10
+                {data?.comments?.length}
               </div>
               <div className="post_button">
                 New Comment
               </div>
             </div>
             <div className="comments">
-              <div className="comment-box">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              </div>
-              <div className="comment-box">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              </div>
-              <div className="comment-box">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              </div>
-              <div className="comment-box">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              </div>
+            {data?.comments?.length > 0 ? (
+                <>
+                  {data?.comments?.map((c, ind) => (
+                    <div className="comment-box" key={ind}>
+                      {c.comment.slice(0.,100)}...
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <h2>No Comments at the Moment</h2>
+                </>
+              )}
             </div>
           </div>
         </div>
