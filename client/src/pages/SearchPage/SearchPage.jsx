@@ -46,7 +46,7 @@ function SearchPage() {
       <div className="searchedPosts">
         {loading ? (
           <>
-            <div className="p" style={{color: "white", "fontFamily": "'Kaushan Script', cursive"}}>Loading...</div>
+            <div className="p" style={{color: "white", "fontFamily": "'Kaushan Script', cursive", "margin": "30px 0"}}>Loading...</div>
           </>
         ) : (
           <>

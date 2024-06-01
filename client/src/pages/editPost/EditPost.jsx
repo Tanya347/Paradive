@@ -3,6 +3,9 @@ import Navbar from '../../components/Navbar/Navbar'
 import './editPost.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import useFetch from '../../Hooks/useFetch';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import Footer from '../../components/Footer/Footer';
 import activities from "../Activity/activities"
 import axios from 'axios';
@@ -21,7 +24,9 @@ const EditPost = () => {
 
     useEffect (() => {
         setInfo(data)
-    }, [data])
+        if(data.rating)
+            setRating(data.rating)
+    }, [data, data.rating])
     
     const handleChange = (e) => {
         setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -49,7 +54,9 @@ const EditPost = () => {
         }
     }
 
-
+    const handleStarClick = (selectedRating) => {
+        setRating(selectedRating);
+    };
 
     return (
         <div className="editPostContainer">
@@ -59,25 +66,14 @@ const EditPost = () => {
                     
                     <div className="picsContainer">
                         <h2>Images Cannot be Changed</h2>
-                        {info.photos && <div className="uploadedPictures">
-                            {info.photos[0] && <div className="upload_pic">
-                                <img src={info.photos[0]} alt="" height="80px"/>
-                            </div>}
-                            {info.photos[1] && <div className="upload_pic">
-                                <img src={info.photos[0]} alt="" height="80px"/>
-                            </div>}
-                            {info.photos[2] && <div className="upload_pic">
-                                <img src={info.photos[0]} alt="" height="80px"/>
-                            </div>}
-                            {info.photos[3] && <div className="upload_pic">
-                                <img src={info.photos[0]} alt="" height="80px"/>
-                            </div>}
-                            {info.photos[4] && <div className="upload_pic">
-                                <img src={info.photos[0]} alt="" height="80px"/>
-                            </div>}
-                            {info.photos[5] && <div className="upload_pic">
-                                <img src={info.photos[0]} alt="" height="80px"/>
-                            </div>}
+                        {info?.photos && <div className="uploadedPictures">
+                            {
+                                info?.photos?.map((ph, ind) => (
+                                    <div className="upload_pic">
+                                        <img src={ph} alt="" height="80px"/>
+                                    </div>
+                                ))
+                            }
                         </div>}
                     </div>
 
@@ -152,68 +148,17 @@ const EditPost = () => {
 
                             <div className="input">
                             <label htmlFor="rate">Re-rate your Experience</label>
-
-                                <fieldset class="starability-basic">
-                                    <input
-                                        type="radio"
-                                        id="no-rate"
-                                        class="input-no-rate"
-                                        name="rating"
-                                        value={info.rating}
-                                        checked
-                                        aria-label="No rating."
-                                        />
-                                    <input
-                                        type="radio"
-                                        id="first-rate1"
-                                        name="rating"
-                                        value="1"
-                                        onClick={() => setRating(1)}
-                                        />
-                                    <label htmlFor="first-rate1" title="Terrible">
-                                        1 star
-                                    </label>
-                                    <input
-                                        type="radio"
-                                        id="first-rate2"
-                                        name="rating"
-                                        value="2"
-                                        onClick={() => setRating(2)}
-                                        />
-                                    <label htmlFor="first-rate2" title="Not good">
-                                        2 stars
-                                    </label>
-                                    <input
-                                        type="radio"
-                                        id="first-rate3"
-                                        name="rating"
-                                        value="3"
-                                        onClick={() => setRating(3)}
-                                        />
-                                    <label htmlFor="first-rate3" title="Average">
-                                        3 stars
-                                    </label>
-                                        <input
-                                        type="radio"
-                                        id="first-rate4"
-                                        name="rating"
-                                        value="4"
-                                        onClick={() => setRating(4)}
-                                        />
-                                    <label htmlFor="first-rate4" title="Very good">
-                                        4 stars
-                                    </label>
-                                    <input
-                                        type="radio"
-                                        id="first-rate5"
-                                        name="rating"
-                                        value="5"
-                                        onClick={() => setRating(5)}
-                                        />
-                                    <label htmlFor="first-rate5" title="Amazing">
-                                        5 stars
-                                    </label>
-                                </fieldset>
+                                <div className="star-rating-slider">
+                                    {[1, 2, 3, 4, 5].map((star) => (
+                                    <FontAwesomeIcon
+                                        key={star}
+                                        icon={star <= rating ? solidStar : regularStar}
+                                        className={"star-icon"}
+                                        onClick={() => handleStarClick(star)}
+                                    />
+                                    ))}
+                                </div>
+                                
                             </div>
                             </div>
                         </div>

@@ -3,6 +3,8 @@ import "./createPost.css";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { AuthContext } from "../../context/authContext";
@@ -10,10 +12,15 @@ import { useNavigate } from "react-router-dom";
 import activities from "../Activity/activities"
 
 function CreatePost() {
-  const [files, setFiles] = useState("");
+  const [files, setFiles] = useState([]);
   const [info, setInfo] = useState({});
   const [rating, setRating] = useState(0);
   const { user } = useContext(AuthContext);
+
+  const handleStarClick = (selectedRating) => {
+    setRating(selectedRating);
+  };
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -77,72 +84,15 @@ function CreatePost() {
               />
             </div>
             <div className="uploadedPictures">
-              <div className="upload_pic">
-                <img
-                  src={
-                    files[0]
-                      ? URL.createObjectURL(files[0])
-                      : "/Assets/transparent.png"
-                  }
-                  alt=""
-                  height="80px"
-                />
-              </div>
-              <div className="upload_pic">
-                <img
-                  src={
-                    files[1]
-                      ? URL.createObjectURL(files[1])
-                      : "/Assets/transparent.png"
-                  }
-                  alt=""
-                  height="80px"
-                />
-              </div>
-              <div className="upload_pic">
-                <img
-                  src={
-                    files[2]
-                      ? URL.createObjectURL(files[2])
-                      : "/Assets/transparent.png"
-                  }
-                  alt=""
-                  height="80px"
-                />
-              </div>
-              <div className="upload_pic">
-                <img
-                  src={
-                    files[3]
-                      ? URL.createObjectURL(files[3])
-                      : "/Assets/transparent.png"
-                  }
-                  alt=""
-                  height="80px"
-                />
-              </div>
-              <div className="upload_pic">
-                <img
-                  src={
-                    files[4]
-                      ? URL.createObjectURL(files[4])
-                      : "/Assets/transparent.png"
-                  }
-                  alt=""
-                  height="80px"
-                />
-              </div>
-              <div className="upload_pic">
-                <img
-                  src={
-                    files[5]
-                      ? URL.createObjectURL(files[5])
-                      : "/Assets/transparent.png"
-                  }
-                  alt=""
-                  height="80px"
-                />
-              </div>
+              {files?.map((file, index) => (
+                  <div className="upload_pic" key={index}>
+                    <img
+                      src={URL.createObjectURL(file)}
+                      alt=""
+                      height="80px"
+                    />
+                  </div>
+                ))}
             </div>
 
           </div>
@@ -209,82 +159,33 @@ function CreatePost() {
                 </div>
 
                 <div className="input">
-                  <label htmlFor="rate">Rate your Experience</label>
-
-                  <fieldset class="starability-basic">
-                    <input
-                      type="radio"
-                      id="no-rate"
-                      class="input-no-rate"
-                      name="rating"
-                      value="0"
-                      checked
-                      aria-label="No rating."
-                    />
-                    <input
-                      type="radio"
-                      id="first-rate1"
-                      name="rating"
-                      value="1"
-                      onClick={() => setRating(1)}
-                    />
-                    <label htmlFor="first-rate1" title="Terrible">
-                      1 star
-                    </label>
-                    <input
-                      type="radio"
-                      id="first-rate2"
-                      name="rating"
-                      value="2"
-                      onClick={() => setRating(2)}
-                    />
-                    <label htmlFor="first-rate2" title="Not good">
-                      2 stars
-                    </label>
-                    <input
-                      type="radio"
-                      id="first-rate3"
-                      name="rating"
-                      value="3"
-                      onClick={() => setRating(3)}
-                    />
-                    <label htmlFor="first-rate3" title="Average">
-                      3 stars
-                    </label>
-                    <input
-                      type="radio"
-                      id="first-rate4"
-                      name="rating"
-                      value="4"
-                      onClick={() => setRating(4)}
-                    />
-                    <label htmlFor="first-rate4" title="Very good">
-                      4 stars
-                    </label>
-                    <input
-                      type="radio"
-                      id="first-rate5"
-                      name="rating"
-                      value="5"
-                      onClick={() => setRating(5)}
-                    />
-                    <label htmlFor="first-rate5" title="Amazing">
-                      5 stars
-                    </label>
-                  </fieldset>
+                  <label htmlFor="star-icon">Rating</label>
+                  <div className="star-rating-slider">
+                    
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <FontAwesomeIcon
+                        key={star}
+                        icon={star <= rating ? solidStar : regularStar}
+                        className={"star-icon"}
+                        onClick={() => handleStarClick(star)}
+                      />
+                    ))}
+                  </div>
                 </div>
 
               </div>
+
+              
             </div>
             <div className="input" id="lastInput">
-              <label htmlFor="desc">Description</label>
-              <input
-                onChange={handleChange}
-                type="text"
-                id="desc"
-                placeholder="A brief description"
-              />
-            </div>
+                  <label htmlFor="desc">Description</label>
+                  <input
+                    onChange={handleChange}
+                    type="text"
+                    id="desc"
+                    placeholder="A brief description"
+                  />
+                </div>
 
             <button className="button" onClick={handleClick} type="submit">
               Post

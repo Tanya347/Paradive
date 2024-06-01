@@ -64,7 +64,7 @@ const UserPage = () => {
             </div>
             
             <div className="searchedPosts">
-                {postData? 
+                {postData.length > 0? 
                     <>
                         {postData?.map((item) => (
                         <div className="card" key={item._id} data-aos="fade-up">
@@ -87,7 +87,7 @@ const UserPage = () => {
                     </>
                 :
                     <>
-                        <div className="p" style={{color: "white", "fontFamily": "'Kaushan Script', cursive"}}>No Posts</div>
+                        <div className="p" style={{"color": "white", "fontFamily": "'Kaushan Script', cursive", "margin": "20px 0"}}>No Posts</div>
                     </>
                 }
             </div>

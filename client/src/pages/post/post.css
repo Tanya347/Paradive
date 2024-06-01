@@ -11,48 +11,52 @@ html {
 
 }
 
-.postContainer {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-evenly;
-    width: 70%;
-    margin: 50px;
-    flex-wrap: wrap;
-
+.postPage .navContainer {
+    background-color: #0b5b6de1;
 }
 
-.postPageBG {
-    position: relative;
-    height: 300px;
-    background: url("../../../public/Assets/postpage.jpg");
-    background-size: cover;
-    width: 100%;
-}
-
-.postPageBG .upperContent {
-    width: 90%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.postPage .post-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin-top: 80px;
+    flex-wrap: wrap;
+    gap: 50px;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.postPage .post-container .left-post-container {
+    width: 45%;
+}
+
+
+.postPage .post-container .description-container {
+    width: 100%;
+    font-size: 1.1rem;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #51C4D3;
     text-align: center;
 }
 
-.upperContent h1 {
-    color: #51c4d3;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    font-weight: bold;
-    font-family: 'Kaushan Script', cursive;
+.postPage .post-container .description-container h1 {
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #0b5b6de1;
 }
 
-.upperContent p {
-    margin-top: 10px;
-    font-size: 1.2rem;
-    color: white;
+
+.map-container .mapboxgl-map {
+    width: 600px;
+}
+
+.right-post-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 45%;
+    justify-content: center;
 }
 
 .images {
@@ -63,6 +67,8 @@ html {
 
 .images img {
     height: 400px;
+    width: 600px;
+    object-fit: cover;
 }
 
 .images .arrows {
@@ -77,50 +83,42 @@ html {
     cursor: pointer;
 }
 
-.leftContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    overflow: hidden;
-}
-
-
-.rightContainer {
+.information-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    width: 50%;
-    font-size: 1.25rem;
-    height: 500px;
+    width: 100%;
+    padding: 20px 0;
+    border-bottom: 3px solid #51C4D3;
+    font-size: 1.1rem;
 }
 
-.rightContainer .title {
+.post-container .title {
     background-color: #dbecef;
     border-radius: 10px;
-    padding: 10px 5px;
+    padding: 10px 20px;
     text-align: center;
-    margin: 20px 0;
+    width: fit-content;
+    margin: 10px 0;
 }
 
-.rightContainer span {
+.post-container span {
     color: #126e82;
     font-weight: bolder;
 }
 
-.rightContainer p {
-    margin: 15px 0;
+.post-container p {
+    margin: 5px 0;
 }
 
-.rightContainer .icon {
+.post-container .icon {
     color: #51c4d3;
     padding-right: 10px;
 }
 
-.del_button {
-    width: 40%;
+.post_button {
+    width: fit-content;
+    padding: 10px 25px;
     height: 40px;
     border: none;
     background: #51c4d3;
@@ -132,6 +130,93 @@ html {
     outline: none;
 }
 
+.post-container .post-button-container {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.comments-container {
+    padding-top: 20px;
+}
+
+.comments-container .comments-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.information-container .info-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.comments {
+    background-color: #EEEEEE;
+    overflow-y: scroll;
+    height: 200px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.comment-box {
+    background: #3AA6B9;
+    color: white;
+    font-size: 1.1rem;
+    padding: 20px;
+    width: 90%;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.comment-box:hover {
+    transform: translate(-2px);
+}
+
+@media screen and (max-width: 600px) {
+    .postPage .post-container .left-post-container {
+        width: 80%;
+    }
+
+    .right-post-container {
+        width: 90%;
+    }
+
+    .information-container .info-header {
+        padding-bottom: 20px;
+    }
+
+    .comments-container .comments-header {
+        justify-content: center;
+    }
+
+    .images img {
+        height: 200px;
+        width: 300px;
+        object-fit: cover;
+    }
+
+    .comments {
+        height: 400px;
+    }
+
+    .information-container .info-header {
+        justify-content: center;
+    }
+    
+    .post-button-container {
+        justify-content: center;
+    }
+}
+
+/* 
 @media screen and (max-width: 600px) {
     
     .postPageBG {
@@ -167,4 +252,4 @@ html {
         height: fit-content;
     }
 
-}
+} */

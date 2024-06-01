@@ -91,14 +91,14 @@ html {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    gap: 20px;
 }
 
 .editPostContainer .column {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 0 20px;
-    width: 50%;
+    width: 45%;
 }
 
 .input {
@@ -108,8 +108,8 @@ html {
 }
 
 #lastInput {
-    width: 95%;
-    padding-left: 0.8rem;
+    width: 100%;
+    margin: 20px 0;
 
 }
 
@@ -201,39 +201,9 @@ html {
     .picsContainer .uploadedPictures img {
         height: 50px;
     }
+
+    .editPostContainer .columns {
+        gap: 0;
+    }
 }
 
-/* 
-
-
-
-.column input {
-    
-}
-
-
-.column .input .type {
-    width: 70%;
-    margin-top: 10px;
-    height: 35px;
-    background: white;
-    border-radius: 5px;
-    color: #0c4957;
-}
-
-.post_button {
-    width: 50%;
-    height: 50px;
-    border: none;
-    background: #26AEC0;
-    border-radius: 25px;
-    font-size: 18px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    outline: none;
-}
-
-.post_button .
-
- */
