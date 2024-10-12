@@ -19,7 +19,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import useFetch from "../../Hooks/useFetch";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
-
+import AddComment from "../../components/AddComment/AddComment";
 
 function Post() {
   const location = useLocation();
@@ -27,6 +27,7 @@ function Post() {
   const { data } = useFetch(`/posts/${id}`);
   const { user } = useContext(AuthContext);
   const [slideNumber, setSlideNumber] = useState(0);
+  const [open, setOpen] = useState(false);
 
   const [viewState, setViewState] = useState({
     latitude: 37.8,
@@ -182,7 +183,7 @@ function Post() {
                 <span>Comments  :  </span>
                 {data?.comments?.length}
               </div>
-              <div className="post_button">
+              <div className="post_button" onClick={() => setOpen(true)}>
                 New Comment
               </div>
             </div>
@@ -206,6 +207,7 @@ function Post() {
       </div>
  
       <Footer />
+      {open && <AddComment setOpen={setOpen} postId={id}/>}
     </div>
   );
 }

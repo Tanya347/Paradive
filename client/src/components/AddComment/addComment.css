@@ -1,0 +1,117 @@
+.commentModal {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 100;
+}
+
+.commentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #15a8bbbd;
+    padding: 20px;
+    height: fit-content;
+    position: relative;
+    width: 60%;
+    color: white;
+    font-size: 1.4em;
+}
+
+.mCommentClose {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    padding: 20px;
+    color: white;
+    font-size: 1.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.titleContainer .userContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.titleContainer .userContainer img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.titleContainer .userContainer .username{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.commentInputContainer {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+
+.commentInput {
+    flex-grow: 1;
+}
+
+.commentInput input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid white;
+    outline: none;
+    background: transparent;
+    color: white;
+    padding: 5px;
+    font-size: 1.25rem;
+}
+
+.commentInput input::placeholder {
+    color: white;
+}
+
+.addCommentButton {
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+@media screen and (max-width: 600px) {
+    .commentContainer {
+        width: 80%;
+    }
+
+    .titleContainer .userContainer .username{
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+
+    .commentInput input {
+        font-size: 1.1rem;
+    }
+
+}
