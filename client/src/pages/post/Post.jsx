@@ -8,7 +8,7 @@ import {
   faPersonSwimming,
   faMapLocationDot,
   faCircleArrowLeft,
-  faCircleArrowRight
+  faCircleArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,6 +20,7 @@ import useFetch from "../../Hooks/useFetch";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import AddComment from "../../components/AddComment/AddComment";
+import Comments from "../../components/comments/Comments";
 
 function Post() {
   const location = useLocation();
@@ -75,7 +76,7 @@ function Post() {
   }
 
 
-  const handleDelete = async (id) => {
+  const handleDelete = async () => {
     try {
 
       await axios.delete(`${process.env.REACT_APP_API_URL}/posts/${data._id}`)
@@ -187,21 +188,7 @@ function Post() {
                 New Comment
               </div>
             </div>
-            <div className="comments">
-            {data?.comments?.length > 0 ? (
-                <>
-                  {data?.comments?.map((c, ind) => (
-                    <div className="comment-box" key={ind}>
-                      {c.comment.slice(0.,100)}...
-                    </div>
-                  ))}
-                </>
-              ) : (
-                <>
-                  <h2>No Comments at the Moment</h2>
-                </>
-              )}
-            </div>
+              <Comments comments={data?.comments} />
           </div>
         </div>
       </div>

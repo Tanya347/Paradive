@@ -40,7 +40,13 @@ export const deletePost = async (req, res, next) => {
 
 export const getPost = async (req, res, next) => {
   try {
-    const post = await Post.findById(req.params.id).populate('comments');
+    const post = await Post.findById(req.params.id) .populate({
+      path: 'comments',
+      populate: {
+          path: 'author',  
+          select: 'profilePicture _id username'  
+      }
+  });
     res.status(200).json(post);
   } catch (err) {
     next(err);

@@ -116,6 +116,24 @@ html {
     padding-right: 10px;
 }
 
+.information-container .info-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.comments-container {
+    padding-top: 20px;
+}
+
+.comments-container .comments-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
 .post_button {
     width: fit-content;
     padding: 10px 25px;
@@ -136,49 +154,6 @@ html {
     margin: 10px 0;
 }
 
-.comments-container {
-    padding-top: 20px;
-}
-
-.comments-container .comments-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.information-container .info-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.comments {
-    background-color: #EEEEEE;
-    overflow-y: scroll;
-    height: 200px;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 0;
-}
-
-.comment-box {
-    background: #3AA6B9;
-    color: white;
-    font-size: 1.1rem;
-    padding: 20px;
-    width: 90%;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-.comment-box:hover {
-    transform: translate(-2px);
-}
 
 @media screen and (max-width: 600px) {
     .postPage .post-container .left-post-container {
@@ -193,18 +168,10 @@ html {
         padding-bottom: 20px;
     }
 
-    .comments-container .comments-header {
-        justify-content: center;
-    }
-
     .images img {
         height: 200px;
         width: 300px;
         object-fit: cover;
-    }
-
-    .comments {
-        height: 400px;
     }
 
     .information-container .info-header {
@@ -215,41 +182,3 @@ html {
         justify-content: center;
     }
 }
-
-/* 
-@media screen and (max-width: 600px) {
-    
-    .postPageBG {
-        height: 400px;
-    }
-    
-    .upperContent h1 {
-        color: #126e82;
-        font-size: 2rem;
-        font-weight: bold;
-    }
-
-    .upperContent p {
-        margin-top: 10px;
-        font-size: 1rem;
-    }
-
-    .postContainer {
-        align-items: center;
-        justify-content: center;
-        width: 90%;
-    }
-
-    .leftContainer {
-        width: 90%;
-        align-items: center;
-    }
-
-    .rightContainer {
-        width: 90%;
-        margin-top: 30px;
-        font-size: 1rem;
-        height: fit-content;
-    }
-
-} */
