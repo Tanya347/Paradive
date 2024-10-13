@@ -53,7 +53,7 @@ function CreatePost() {
         rating: rating,
       };
 
-      await axios.post(`${process.env.REACT_APP_API_URL}/posts`, newpost)
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/posts`, newpost)
 
       navigate("/explore");
     } catch (err) {
@@ -79,7 +79,7 @@ function CreatePost() {
                 type="file"
                 id="file"
                 multiple
-                onChange={(e) => setFiles(e.target.files)}
+                onChange={(e) => setFiles(Array.from(e.target.files))}
                 style={{ display: "none" }}
               />
             </div>

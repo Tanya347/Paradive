@@ -20,6 +20,17 @@ html {
     padding: 50px;
 }
 
+.upload_pic {
+    position: relative;
+}
+
+.upload_pic input {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    cursor: pointer;
+}
+
 .formContainer {
     width: 90%;
     display: flex;
