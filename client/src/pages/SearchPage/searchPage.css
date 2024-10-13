@@ -3,6 +3,22 @@ html {
     overflow-x: hidden;
 }
 
+
+.scroll-to-top {
+    position: fixed;
+    left: 90%;
+    top: 90%;
+    z-index: 10;
+    transform: translate(-505, -50%);
+}
+
+.scroll-to-top .icon {
+    font-size: 3em;
+    color: #cff1f7;
+    cursor: pointer;
+    z-index: 100;
+}
+
 .search {
     position: relative;
     height: 300px;

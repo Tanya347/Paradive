@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./searchPage.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faArrowAltCircleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useFetch from "../../Hooks/useFetch";
 import { useState } from "react";
@@ -13,6 +13,7 @@ import 'aos/dist/aos.css'
 function SearchPage() {
   const [query, setQuery] = useState("");
   const { data, loading } = useFetch("/posts");
+  const [showScrollButton, setShowScrollButton] = useState(false);
 
   const keys = ["type", "title", "location"];
 
@@ -24,7 +25,28 @@ function SearchPage() {
 
   useEffect(() => {
     Aos.init({duration: 1000});
+
+    const handleScroll = () => {
+      if (window.pageYOffset > 300) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   },[])
+
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
 
   return (
     <div className="searchContainer">
@@ -72,6 +94,9 @@ function SearchPage() {
         )}
       </div>
       <Footer />
+      {showScrollButton && <div className="scroll-to-top">
+        <FontAwesomeIcon onClick={scrollToTop} className="icon" icon={faArrowAltCircleUp} />
+      </div>}
     </div>
   );
 }
