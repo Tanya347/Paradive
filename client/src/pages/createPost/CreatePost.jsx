@@ -6,10 +6,11 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import activities from "../Activity/activities"
+import { createPost } from "../../apis/usePost";
+import { handleChange } from '../../commons';
 
 function CreatePost() {
   const [files, setFiles] = useState([]);
@@ -23,44 +24,25 @@ function CreatePost() {
 
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
-
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      const list = await Promise.all(
-        Object.values(files)?.map(async (file) => {
-          const data = new FormData();
-          data.append("file", file);
-          data.append("upload_preset", "upload");
-          const uploadRes = await axios.post(
-            "https://api.cloudinary.com/v1_1/dmjd7myiw/image/upload",
-            data, { withcredentials: false }
-          );
-
-          const { url } = uploadRes.data;
-          return url;
-        })
-      );
-
-      const newpost = {
+      const postData = {
         ...info,
         userId: user._id,
         username: user.username,
-        photos: list,
         rating: rating,
       };
 
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/posts`, newpost)
+      const newPost = await createPost(postData, files);
 
-      navigate("/explore");
+      const postId = newPost._id;
+
+      navigate(`/${postId}`);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
-
 
   return (
     <div className="createPostContainer">
@@ -105,7 +87,7 @@ function CreatePost() {
                 <div className="input">
                   <label htmlFor="title">Title</label>
                   <input
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e, setInfo)}
                     type="text"
                     id="title"
                     placeholder="Enter Title"
@@ -115,7 +97,7 @@ function CreatePost() {
                 <div className="input">
                   <label htmlFor="location">Location</label>
                   <input
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e, setInfo)}
                     type="text"
                     id="location"
                     placeholder="Enter location"
@@ -125,7 +107,7 @@ function CreatePost() {
                 <div className="input">
                   <div className="formInput">
                     <label>Activity Type</label>
-                    <select id="type" className="type" onChange={handleChange}>
+                    <select id="type" className="type" onChange={(e) => handleChange(e, setInfo)}>
                       <option value="select">-Select an activity-</option>
                       {activities?.map((item) => (
                         <option value={item.type}>{item.placeholder}</option>
@@ -141,7 +123,7 @@ function CreatePost() {
                 <div className="input">
                   <label htmlFor="price">Price Range</label>
                   <input
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e, setInfo)}
                     type="text"
                     id="priceRange"
                     placeholder="Enter price range"
@@ -151,7 +133,7 @@ function CreatePost() {
                 <div className="input">
                   <label htmlFor="date">Visited On</label>
                   <input
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e, setInfo)}
                     type="date"
                     id="date"
                     placeholder="Enter the date"
@@ -180,7 +162,7 @@ function CreatePost() {
             <div className="input" id="lastInput">
                   <label htmlFor="desc">Description</label>
                   <input
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e, setInfo)}
                     type="text"
                     id="desc"
                     placeholder="A brief description"

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import './editPost.css'
 import { useLocation, useNavigate } from 'react-router-dom'
-import useFetch from '../../Hooks/useFetch';
+import useFetch from '../../apis/useFetch';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
@@ -10,7 +10,7 @@ import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import Footer from '../../components/Footer/Footer';
 import activities from "../Activity/activities"
 import axios from 'axios';
-
+import { handleChange } from '../../commons';
 
 const EditPost = () => {
 
@@ -30,10 +30,6 @@ const EditPost = () => {
         if(data.rating)
             setRating(data.rating)
     }, [data, data.rating])
-    
-    const handleChange = (e) => {
-        setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-    }
 
     const handleClick = async(e) => {
         e.preventDefault();
@@ -148,7 +144,7 @@ const EditPost = () => {
                                 <div className="input">
                                     <label htmlFor="title">Title</label>
                                     <input
-                                        onChange={handleChange}
+                                        onChange={(e) => handleChange(e, setInfo)}
                                         type="text"
                                         id="title"
                                         value={info.title}
@@ -159,7 +155,7 @@ const EditPost = () => {
                                 <div className="input">
                                     <label htmlFor="location">Location</label>
                                     <input
-                                        onChange={handleChange}
+                                        onChange={(e) => handleChange(e, setInfo)}
                                         type="text"
                                         id="location"
                                         value={info.location}
@@ -174,7 +170,7 @@ const EditPost = () => {
                                             id="type" 
                                             className="type" 
                                             value={info.type}
-                                        onChange={handleChange}
+                                        onChange={(e) => handleChange(e, setInfo)}
                                         >
                                         <option value="select">-Select an activity-</option>
                                         {activities?.map((item) => (
@@ -190,7 +186,7 @@ const EditPost = () => {
                                 <div className="input">
                                     <label htmlFor="price">Price Range</label>
                                     <input
-                                        onChange={handleChange}
+                                        onChange={(e) => handleChange(e, setInfo)}
                                         type="text"
                                         id="priceRange"
                                         value={info.priceRange}
@@ -201,7 +197,7 @@ const EditPost = () => {
                                 <div className="input">
                                     <label htmlFor="date">Visited On</label>
                                     <input
-                                        onChange={handleChange}
+                                        onChange={(e) => handleChange(e, setInfo)}
                                         type="date"
                                         value={info.date}
                                         id="date"
@@ -230,7 +226,7 @@ const EditPost = () => {
                         <div className="input" id="lastInput">
                             <label htmlFor="desc">Description</label>
                             <input
-                                onChange={handleChange}
+                                onChange={(e) => handleChange(e, setInfo)}
                                 type="text"
                                 id="desc"
                                 value={info.desc}

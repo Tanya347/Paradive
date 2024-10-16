@@ -16,7 +16,7 @@ import axios from "axios";
 import Map, {Marker} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import useFetch from "../../Hooks/useFetch";
+import useFetch from "../../apis/useFetch";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import AddComment from "../../components/AddComment/AddComment";

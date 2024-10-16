@@ -6,6 +6,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
+import { handleChange } from "../../commons";
 
 function Login({ title, link }) {
   const [credentials, setCredentials] = useState({
@@ -16,16 +17,10 @@ function Login({ title, link }) {
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
-
   const handleClick = async (e) => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-
-
       const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, credentials);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       navigate(`${link}`);
@@ -47,7 +42,7 @@ function Login({ title, link }) {
                 type="text"
                 placeholder="username"
                 id="username"
-                onChange={handleChange}
+                onChange={(e) => handleChange(e, setCredentials)}
                 className="lInput"
               />
             </div>
@@ -56,7 +51,7 @@ function Login({ title, link }) {
                 type="password"
                 placeholder="password"
                 id="password"
-                onChange={handleChange}
+                onChange={(e) => handleChange(e, setCredentials)}
                 className="lInput"
               />
             </div>
@@ -73,11 +68,11 @@ function Login({ title, link }) {
           </form>
           {/* <form>
                         <div className="txt_field">
-                            <input type="text" name="username" value={credentials.username} required onChange={handleChange} />
+                            <input type="text" name="username" value={credentials.username} required onChange={(e) => handleChange(e, setInfo)} />
                             <label>Username</label>
                         </div>
                         <div className="txt_field">
-                            <input type="password" name="password" value={credentials.password} required onChange={handleChange} />
+                            <input type="password" name="password" value={credentials.password} required onChange={(e) => handleChange(e, setInfo)} />
                             <label>Password</label>
                         </div>
                         <div className="pass">Forgot Password?</div>

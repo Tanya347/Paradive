@@ -3,8 +3,9 @@ import "./modal.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState, useContext } from "react";
-import axios from "axios";
+import { handleUpdateUser } from '../../apis/usePost';
 import { AuthContext } from '../../context/authContext';
+import { handleChange } from '../../commons';
 
 const Modal = ({setOpen}) => {
 
@@ -16,65 +17,9 @@ const Modal = ({setOpen}) => {
         setInfo(user);
     }, [user])
 
-    const handleChange = (e) => {
-        setInfo((prev) => ({...prev, [e.target.id]: e.target.value}));
-    }
-
     const handleClick = async(e) => {
         e.preventDefault();
-
-        if(file) {
-            const data = new FormData();
-            data.append("file", file);
-            data.append("upload_preset", "upload")
-
-            try {
-                const uploadRes = await axios.post(
-                  "https://api.cloudinary.com/v1_1/dmjd7myiw/image/upload",
-                  data, { withcredentials: false }
-                );
-                
-                const {url} = uploadRes.data;
-                const newuser = {
-                    ...info, profilePicture: url
-                }
-
-                process.env.REACT_APP_MODE === "development" ? 
-                (await axios.put(`/users/${user._id}`, newuser, {withcredentials: false})) 
-                : (
-                    await axios.put(`${process.env.REACT_APP_API_URL}/users/${user._id}`, 
-                    newuser , 
-                    {withcredentials: false})
-                )
-                setOpen(false);
-                window.location.reload();
-
-                dispatch({ type: "LOGIN_SUCCESS", payload: newuser });
-
-            }
-            catch(err) {
-                console.log(err);
-            }
-        }
-
-        else {
-            try {
-                process.env.REACT_APP_MODE === "development" ? 
-                (await axios.put(`/users/${user._id}`, info, {withcredentials: false})) 
-                : (
-                    await axios.put(`https://paradive.onrender.com/api/users/${user._id}`, 
-                    info, 
-                    {withcredentials: false})
-                    )
-                setOpen(false);
-                window.location.reload();
-                dispatch({ type: "LOGIN_SUCCESS", payload: info });
-
-            }
-            catch (err) {
-                console.log(err)
-            }
-        }
+        await handleUpdateUser(user, info, file, dispatch, setOpen);
     }
 
   return (
@@ -118,7 +63,7 @@ const Modal = ({setOpen}) => {
                             type="text"
                             placeholder="username"
                             name="username"
-                            onChange={handleChange}
+                            onChange={(e) => handleChange(e, setInfo)}
                             id="username"
                             value={info.username}
                             required
@@ -129,7 +74,7 @@ const Modal = ({setOpen}) => {
                             type="email"
                             placeholder="email"
                             name="email"
-                            onChange={handleChange}
+                            onChange={(e) => handleChange(e, setInfo)}
                             id="email"
                             value={info.email}
                             required
@@ -141,7 +86,7 @@ const Modal = ({setOpen}) => {
                             placeholder="Write bio"
                             name="desc"
                             value={info.desc}
-                            onChange={handleChange}
+                            onChange={(e) => handleChange(e, setInfo)}
                             id="desc"
                             //   value={data.desc}
                             />

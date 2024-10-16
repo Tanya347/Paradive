@@ -7,6 +7,7 @@ import "./register.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { handleChange } from '../../commons';
 import axios from "axios";
 
 function Register() {
@@ -14,10 +15,6 @@ function Register() {
 
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
-
-  const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -101,7 +98,7 @@ function Register() {
                   type="text"
                   placeholder="username"
                   name="username"
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e, setInfo)}
                   id="username"
                   required
                 />
@@ -111,7 +108,7 @@ function Register() {
                   type="email"
                   placeholder="email"
                   name="email"
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e, setInfo)}
                   id="email"
                   required
                 />
@@ -121,7 +118,7 @@ function Register() {
                   type="password"
                   placeholder="password"
                   name="password"
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e, setInfo)}
                   id="password"
                   //   value={data.password}
                   required
@@ -132,7 +129,7 @@ function Register() {
                   type="text"
                   placeholder="Write bio"
                   name="desc"
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e, setInfo)}
                   id="desc"
                 //   value={data.desc}
                 />

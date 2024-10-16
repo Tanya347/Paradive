@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from "react-router-dom"
-import useFetch from '../../Hooks/useFetch';
+import useFetch from '../../apis/useFetch';
 import "./userPage.css"
 import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"

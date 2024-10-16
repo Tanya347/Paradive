@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { faMagnifyingGlass, faArrowAltCircleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useFetch from "../../Hooks/useFetch";
+import useFetch from "../../apis/useFetch";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Aos from 'aos'

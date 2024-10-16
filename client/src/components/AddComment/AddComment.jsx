@@ -2,33 +2,31 @@ import React, {useState, useContext} from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from '../../context/authContext';
-import axios from "axios";
+import { handleChange } from '../../commons';
 import './addComment.css'
+import { addComment } from '../../apis/usePost';
 
 const AddComment = ({setOpen, postId}) => {
     const {user} = useContext(AuthContext);
     const [info, setInfo] = useState({});
 
-    const handleChange = (e) => {
-        setInfo((prev) => ({...prev, [e.target.id]: e.target.value}));
-    }
-
-    const handleClick = async(e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
-
+    
+        const newComment = {
+          ...info,
+          parentPost: postId,
+          author: user._id
+        };
+    
         try {
-            const newComment = {
-                ...info,
-                parentPost: postId,
-                author: user._id
-            }
-            await axios.post(`${process.env.REACT_APP_API_URL}/comments`, newComment)
-            setOpen(false);
-            window.location.reload()
+          await addComment(newComment); // Use the service function to handle the comment creation
+          setOpen(false);
+          window.location.reload();
         } catch (err) {
-            console.log(err);
+          console.log(err);
         }
-    }
+    };
 
   return (
     <div className='commentModal'>
@@ -51,7 +49,7 @@ const AddComment = ({setOpen, postId}) => {
                         name="comment" 
                         id="comment" 
                         placeholder='Write a comment...'
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e, setInfo)}
                     />
                 </div>
                 <FontAwesomeIcon

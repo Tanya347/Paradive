@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react'
 import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
-import useFetch from '../../Hooks/useFetch'
+import useFetch from '../../apis/useFetch'
 import { Link, useLocation } from "react-router-dom"
 import activities from './activities'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import './activity.css'
-
-
 
 function Activity() {
 

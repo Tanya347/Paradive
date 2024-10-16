@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useFetch from "../../Hooks/useFetch";
+import useFetch from "../../apis/useFetch";
 import "./postcard.css";
 import { Link } from "react-router-dom";
 import Aos from 'aos'
