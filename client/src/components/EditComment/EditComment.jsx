@@ -3,7 +3,7 @@ import "../AddComment/addComment.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from '../../context/authContext';
-import axios from "axios";
+import { updateComment } from '../../apis/useEdit';
 
 const EditComment = ({setOpen, commentId, comment}) => {
     const {user} = useContext(AuthContext);
@@ -17,17 +17,16 @@ const EditComment = ({setOpen, commentId, comment}) => {
         setComm(e.target.value);
     }
 
-    const handleClick = async(e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
-
         try {
-            await axios.put(`${process.env.REACT_APP_API_URL}/comments/${commentId}`, { comment: comm })
+            await updateComment(commentId, comm); // Call the service function
             setOpen(false);
-            window.location.reload()
+            window.location.reload();
         } catch (err) {
             console.log(err);
         }
-    }
+    };
 
   return (
     <div className='commentModal'>

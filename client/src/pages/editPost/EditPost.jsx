@@ -9,8 +9,8 @@ import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import Footer from '../../components/Footer/Footer';
 import activities from "../Activity/activities"
-import axios from 'axios';
 import { handleChange } from '../../commons';
+import { editPost } from '../../apis/useEdit';
 
 const EditPost = () => {
 
@@ -33,46 +33,11 @@ const EditPost = () => {
 
     const handleClick = async(e) => {
         e.preventDefault();
-
-        // Step 1: Handle photo deletions
-        const photosToDelete = Array.from(selectedPhotos);
-        const updatedPhotos = info.photos.filter((photo) => !photosToDelete.includes(photo));
-        var uploadedPhotos = [];
-        // Step 2: Handle new photo uploads
-        if(newFiles.length > 0) {
-            uploadedPhotos = await Promise.all(
-                newFiles.map(async (file) => {
-                    const data = new FormData();
-                    data.append("file", file);
-                    data.append("upload_preset", "upload");
-                    const uploadRes = await axios.post(
-                        "https://api.cloudinary.com/v1_1/dmjd7myiw/image/upload",
-                        data
-                    );
-                    return uploadRes.data.url; // Assuming response contains the URL
-                })
-            );
-        }
-
-        const finalPhotos = [...updatedPhotos, ...uploadedPhotos];
-
-        const editpost = {
-            ...info,
-            photos: finalPhotos,
-            rating: rating
-        }
-
         try {
-            process.env.REACT_APP_MODE === "development" ? 
-                (await axios.put(`/posts/${data._id}`, editpost, {withcredentials: false})) 
-                : (
-                    await axios.put(`${process.env.REACT_APP_API_URL}/posts/${data._id}`, 
-                    editpost, 
-                    {withcredentials: false})
-                )
-            navigate(`/${id}`);
-        } catch(err) {
-            console.log(err);
+        await editPost(id, info, selectedPhotos, newFiles, rating); // Call the service function
+        navigate(`/${id}`); // Navigate to the updated post
+        } catch (err) {
+        console.log(err);
         }
     }
 

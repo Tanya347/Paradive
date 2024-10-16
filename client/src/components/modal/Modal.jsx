@@ -3,7 +3,7 @@ import "./modal.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState, useContext } from "react";
-import { handleUpdateUser } from '../../apis/usePost';
+import { handleUpdateUser } from '../../apis/useEdit';
 import { AuthContext } from '../../context/authContext';
 import { handleChange } from '../../commons';
 

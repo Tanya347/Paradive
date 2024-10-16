@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import Modal from '../../components/modal/Modal';
 
 const UserPage = () => {
+    const [open, setOpen] = useState(false);
     const location = useLocation();
     const id = location.pathname.split("/")[2];
 
@@ -19,7 +20,6 @@ const UserPage = () => {
     const posts = useFetch('/posts').data;
     const [postData, setPostData] = useState([]);
 
-    const [open, setOpen] = useState(false);
 
     // populate not working in deployed version so have to do this instead
     useEffect(() => {
