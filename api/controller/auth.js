@@ -1,58 +1,141 @@
 import User from "../models/User.js";
-import bcrypt from "bcryptjs";
-import { createError } from "../utils/error.js";
+import {promisify} from 'util';
 import jwt from "jsonwebtoken";
-
-export const register = async (req, res, next) => {
-  try {
-
-    //check for already exist
-    const em = await User.findOne({ email: req.body.email });
-    if (em)
-      return res.status(409).send({ message: "User with given email already exists" })
+import { AppError } from "../utils/customError.js";
+import { catchAsync } from "../utils/catchAsync.js";
 
 
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(req.body.password, salt);
+const signToken = id => {
+  return jwt.sign({id}, process.env.JWT, {
+    expiresIn: process.env.JWT_EXPIRES_IN
+  })
+}
 
-    const newUser = new User({
-      ...req.body,
-      password: hash,
-    });
+const createSendToken = (user, statusCode, res) => {
 
-    await newUser.save();
-    res.status(200).send("User has been created.");
-  } catch (err) {
-    next(err);
+  const token = signToken(user._id);
+
+  const cookieOptions = {
+    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN*24*60*60*1000),
+    httpOnly: true
   }
-};
+
+  if(process.env.NODE_ENV === 'production')
+    cookieOptions.secure = true
+
+  res.cookie('jwt', token, cookieOptions);
+
+  user.password = undefined;
+
+  res.status(statusCode).json({
+    status: 'success',
+    token,
+    data: {
+      user
+    }
+  })
+}
+
+export const register = catchAsync(async (req, res, next) => {
+  const newUser = await User.create({ 
+    email: req.body.email,
+    username: req.body.username,
+    password: req.body.password,
+    passwordConfirm: req.body.passwordConfirm,
+    profilePicture: req.body.profilePicture,
+    desc: req.body.desc,
+    role: req.body.role
+  });
+
+  createSendToken(newUser, 201, res);
+});
 
 
-export const login = async (req, res, next) => {
-  try {
-    const user = await User.findOne({ username: req.body.username });
-    if (!user) return next(createError(404, "User not found!"));
+export const login = catchAsync(async (req, res, next) => {
 
-    const isPasswordCorrect = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
-    if (!isPasswordCorrect)
-      return next(createError(400, "Wrong password or username!"));
+  const {email, password} = req.body;
 
-    const token = jwt.sign(
-      { id: user._id, isAdmin: user.isAdmin },
-      process.env.JWT
-    );
-
-    const { password, isAdmin, ...otherDetails } = user._doc;
-    res
-      .cookie("access_token", token, {
-        httpOnly: true,
-      })
-      .status(200)
-      .json({ details: { ...otherDetails }, isAdmin });
-  } catch (err) {
-    next(err);
+  if(!email || !password) {
+    return next(new AppError('Please provide email and password!', 400));
   }
-};
+
+  const user = await User.findOne({ email}).select('+password');
+
+  if (!user || !(await user.correctPassword(password, user.password))) {
+    return next(new AppError("Incorrect email or password!", 401));
+  } 
+
+  createSendToken(user, 200, res);
+
+});
+
+export const protect = catchAsync(async (req, res, next) => {
+  let token;
+
+  if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    token = req.headers.authorization.split(' ')[1];
+  } else if(req.cookies.jwt) {
+    token = req.cookies.jwt;
+  }
+
+  if(!token) {
+    return next(new AppError('You are not logged in! Please log in to get access.', 401));
+  }
+
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT);
+  const freshUser = await User.findById(decoded.id);
+
+  if(!freshUser) {
+    return next(new AppError('The user belonging to this token does no longer exist.', 401));
+  }
+
+  if(freshUser.changedPasswordAfter(decoded.iat)) {
+    return next(new AppError('User recently changed password! Please login again.', 401));
+  }
+
+  req.user = freshUser;
+  next();
+})
+
+export const isLogged = catchAsync(async (req, res, next) => {
+  
+  if(req.cookies.jwt) {
+    const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT);
+    const freshUser = await User.findById(decoded.id);
+  
+    if(!freshUser || freshUser.changedPasswordAfter(decoded.iat)) {
+      return next();
+    }
+  
+    req.locals.user = freshUser;
+    return next();
+  }
+  next();
+})
+
+export const restrictTo = (...roles) => {
+  return catchAsync(async (req, res, next) => {
+    if(!roles.includes(req.user.role)) {
+      return next(new AppError('You do not have permission to perform this action', 403));
+    }
+    next();
+  })
+}
+
+export const isOwner = (model) => catchAsync(async (req, res, next) => {
+
+  const resource = await model.findById(req.params.id);
+  
+  if(!resource) {
+    return next(new AppError('Resource not found!', 404));
+  }
+
+  if((resource.author && resource.author.toString() !== req.user.id) && (resource._id && resource._id.toString() !== req.user.id)) {
+    return next(new AppError('You do not have permission to perform this action!', 403));
+  }
+
+  next();
+});
+
+
+

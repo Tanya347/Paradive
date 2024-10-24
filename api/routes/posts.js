@@ -6,14 +6,14 @@ import {
   getPosts,
   updatePost,
 } from "../controller/posts.js";
+import { isOwner, protect } from "../controller/auth.js";
 import Post from "../models/Post.js";
-import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
-router.post("/", createPost);
-router.put("/:id", updatePost);
-router.delete("/:id", deletePost);
+router.post("/", protect, createPost);
+router.put("/:id", protect, isOwner(Post), updatePost);
+router.delete("/:id", protect, isOwner(Post), deletePost);
 router.get("/:id", getPost);
 router.get("/", getPosts);
 

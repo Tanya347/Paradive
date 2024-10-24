@@ -1,44 +1,61 @@
 import User from "../models/User.js";
+import { catchAsync } from "../utils/catchAsync.js";
+import { AppError } from "../utils/customError.js";
 
-export const updateUser = async (req, res, next) => {
-  try {
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
-    );
-    res.status(200).json(updatedUser);
-  } catch (err) {
-    next(err);
-  }
-};
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach((el) => {
+    if(allowedFields.includes(el)) newObj[el] = obj[el];
+  })
+  return newObj;
+}
 
-export const deleteUser = async (req, res, next) => {
-  try {
-    await User.findByIdAndDelete(req.params.id);
-    res.status(200).json("User has been deleted.");
-  } catch (err) {
-    next(err);
-  }
-};
+export const updateUser = catchAsync(async (req, res, next) => {
 
-export const getUser = async (req, res, next) => {
-  try {
-    const user = await User.findById(req.params.id).populate('posts');
-    // console.log(user.posts)
-    res.status(200).json(user);
-  } catch (err) {
-    next(err);
+  // create error if user posts password data
+  if (req.body.password || req.body.confirmPassword) {
+    return next(new AppError('This route is not for password updates. Please use /updatePassword.', 400));
   }
-};
 
-export const getUsers = async (req, res, next) => {
-  try {
-    const users = await User.find();
-    res.status(200).json(users);
-  } catch (err) {
-    next(err);
-  }
-};
+  const filteredBody = filterObj(req.body, 'username', 'email', 'desc', 'profilePicture');
+
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id,
+    { $set: filteredBody},
+    { new: true, runValidators: true }
+  );
+  res.status(200).json({
+    status: "success",
+    data: {
+      user: updatedUser
+    },
+    message: "Updated your profile successfully!"
+  });
+});
+
+export const deleteUser = catchAsync(async (req, res, next) => {
+  await User.findByIdAndUpdate(req.user.id, {active: false});
+  res.status(200).json({
+    status: "success", 
+    data: null,
+    message: "User profile has been deleted"
+  });
+});
+
+export const getUser = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id).populate('posts');
+  res.status(200).json({
+    status: "success",
+    data: user
+  });
+});
+
+export const getUsers = catchAsync(async (req, res, next) => {
+  const users = await User.find();
+  res.status(200).json({
+    status: "success",
+    data: users
+  });
+});
 
 

@@ -1,56 +1,53 @@
 import Post from "../models/Post.js";
 import Comment from "../models/Comment.js"
+import { catchAsync } from "../utils/catchAsync.js";
 
-export const createComment = async (req, res, next) => {
-    const { comment, parentPost, author } = req.body;
+export const createComment = catchAsync(async (req, res, next) => {
+    const parentPost = req.params.post;
+    const userId = req.user.id;
+    // Create a new comment
+    const newComment = new Comment({
+      ...req.body,
+      parentPost,
+      userId
+    });
   
-    try {
-      // Create a new comment
-      const newComment = new Comment({
-        comment,
-        parentPost,
-        author
-      });
+    // Save the comment to the database
+    const savedComment = await newComment.save();
   
-      // Save the comment to the database
-      const savedComment = await newComment.save();
+    // Find the parent post and add the comment's ID to the comments array
+    await Post.findByIdAndUpdate(parentPost, {
+      $push: { comments: savedComment._id }
+    });
   
-      // Find the parent post and add the comment's ID to the comments array
-      await Post.findByIdAndUpdate(parentPost, {
-        $push: { comments: savedComment._id }
-      });
-  
-      res.status(201).json(savedComment);
-    } catch (err) {
-      next(err);
-    }
-  };
+    res.status(201).json({
+      status: "success",
+      message: "Comment added successfully!"
+    });
+  });
 
-export const updateComment = async (req, res, next) => {
-  try {
-    const comment = await Comment.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body},
-      { new: true }
-    );
-    res.status(200).json(comment);
-  } catch (error) {
-      next(error);
+export const updateComment = catchAsync(async (req, res, next) => {
+  const comment = await Comment.findByIdAndUpdate(
+    req.params.id,
+    { $set: req.body},
+    { new: true }
+  );
+  res.status(200).json({
+    status: "success",
+    message: "Comment updated successfully!"
+  });
+});
+
+export const deleteComment = catchAsync(async (req, res, next) => {
+  const deletedComment = await Comment.findByIdAndDelete(req.params.id);
+
+  if (!deletedComment) {
+    return res.status(404).json({ message: "Comment not found" });
   }
-};
 
-export const deleteComment = async (req, res, next) => {
-  try {
-
-    const deletedComment = await Comment.findByIdAndDelete(req.params.id);
-
-    if (!deletedComment) {
-        return res.status(404).json({ message: "Comment not found" });
-    }
-
-    res.status(200).json({ message: "Comment deleted successfully" });
-  } catch (error) {
-      next(error);
-  }
-};
+  res.status(200).json({ 
+    status: "success",
+    message: "Comment deleted successfully" 
+  });
+});
 
