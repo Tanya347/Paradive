@@ -126,6 +126,17 @@ function Register() {
               </div>
               <div className="txt_field">
                 <input
+                  type="password"
+                  placeholder="confirm your password"
+                  name="passwordConfirm"
+                  onChange={(e) => handleChange(e, setInfo)}
+                  id="passwordConfirm"
+                  //   value={data.password}
+                  required
+                />
+              </div>
+              <div className="txt_field">
+                <input
                   type="text"
                   placeholder="Write bio"
                   name="desc"

@@ -2,11 +2,11 @@ import React, {useState, useContext, useEffect} from 'react'
 import "../AddComment/addComment.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { AuthContext } from '../../context/authContext';
+import { useAuth } from '../../context/authContext';
 import { updateComment } from '../../apis/useEdit';
 
 const EditComment = ({setOpen, commentId, comment}) => {
-    const {user} = useContext(AuthContext);
+    const {user} = useAuth();
     const [comm, setComm] = useState("");
 
     useEffect(() => {

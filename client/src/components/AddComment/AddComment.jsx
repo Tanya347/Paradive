@@ -1,13 +1,13 @@
 import React, {useState, useContext} from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { AuthContext } from '../../context/authContext';
+import { useAuth } from '../../context/authContext';
 import { handleChange } from '../../commons';
 import './addComment.css'
 import { addComment } from '../../apis/usePost';
 
 const AddComment = ({setOpen, postId}) => {
-    const {user} = useContext(AuthContext);
+    const {user} = useAuth();
     const [info, setInfo] = useState({});
 
     const handleClick = async (e) => {

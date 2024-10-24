@@ -67,7 +67,7 @@ function HomePage() {
           <div className="postBackground">
           
 
-            <PostCard />
+            {/* <PostCard /> */}
           </div>
         </div>
         <div className="actionCards">

@@ -3,29 +3,34 @@ import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import "./login.css";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { AuthContext } from "../../context/authContext";
 import { handleChange } from "../../commons";
+import { useAuth } from "../../context/authContext";
 
 function Login({ title, link }) {
   const [credentials, setCredentials] = useState({
-    username: undefined,
+    email: undefined,
     password: undefined,
   });
 
-  const { dispatch } = useContext(AuthContext);
+  const {setUser} = useAuth();
   const navigate = useNavigate();
 
   const handleClick = async (e) => {
     e.preventDefault();
-    dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, credentials);
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-      navigate(`${link}`);
+      const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, credentials, { withCredentials: true });
+      console.log(data)
+      if(data.status === "success") {
+        setUser(data.user);
+        navigate(`${link}`);
+      }
+      else {
+        console.error("Login failed:", data.message);
+      }
     } catch (err) {
-      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+      console.log(err)
     }
   };
 
@@ -40,8 +45,8 @@ function Login({ title, link }) {
             <div className="txt_field">
               <input
                 type="text"
-                placeholder="username"
-                id="username"
+                placeholder="please enter your email"
+                id="email"
                 onChange={(e) => handleChange(e, setCredentials)}
                 className="lInput"
               />
@@ -66,21 +71,6 @@ function Login({ title, link }) {
               </p>
             </div>
           </form>
-          {/* <form>
-                        <div className="txt_field">
-                            <input type="text" name="username" value={credentials.username} required onChange={(e) => handleChange(e, setInfo)} />
-                            <label>Username</label>
-                        </div>
-                        <div className="txt_field">
-                            <input type="password" name="password" value={credentials.password} required onChange={(e) => handleChange(e, setInfo)} />
-                            <label>Password</label>
-                        </div>
-                        <div className="pass">Forgot Password?</div>
-                        <button onClick={handleClick}>Login</button>
-                        <div className="signup_link">
-                            Don't have an account? <a href="#">SignUp</a>
-                        </div>
-                    </form> */}
         </div>
       </div>
       <Footer />

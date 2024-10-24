@@ -1,10 +1,10 @@
 import './navbar.css'
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useNavigate } from "react-router-dom"
-import { AuthContext } from "../../context/authContext"
-
+import { useAuth } from "../../context/authContext"
+import axios from 'axios';
 
 const Navbar = () => {
     const [navbar, setNavbar] = useState(false);
@@ -18,11 +18,12 @@ const Navbar = () => {
 
     const navigate = useNavigate()
 
-    const { user, dispatch } = useContext(AuthContext)
+    const {user, logout} = useAuth();
+    console.log(user)
     const handleClick = async (e) => {
         e.preventDefault();
-        dispatch({ type: "LOGOUT" });
-        navigate("/")
+        await logout(); // Ensure you send the request with credentials
+        window.location.reload();
     }
 
     window.addEventListener('scroll', changeBackground)

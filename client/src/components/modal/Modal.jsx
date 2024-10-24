@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState, useContext } from "react";
 import { handleUpdateUser } from '../../apis/useEdit';
-import { AuthContext } from '../../context/authContext';
+import { useAuth } from '../../context/authContext';
 import { handleChange } from '../../commons';
 
 const Modal = ({setOpen}) => {
 
-    const {user, dispatch} = useContext(AuthContext);
+    const {user, dispatch} = useAuth();
     const [info, setInfo] = useState({});
     const [file, setFile] = useState("");
 

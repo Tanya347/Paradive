@@ -5,7 +5,7 @@ import {
     faTrash,
   } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { AuthContext } from '../../context/authContext';
+import { useAuth } from '../../context/authContext';
 import "./comments.css"
 import EditComment from '../EditComment/EditComment';
 
@@ -14,7 +14,7 @@ const Comments = ({comments}) => {
     const [commentId, setCommentId] = useState("");
     const [comment, setComment] = useState("");
     const [isExpanded, setIsExpanded] = useState(false);
-    const { user } = useContext(AuthContext);
+    const { user } = useAuth();
 
     const handleCommentDelete = async (id) => {
         try {

@@ -18,7 +18,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 import useFetch from "../../apis/useFetch";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../context/authContext";
+import { useAuth } from "../../context/authContext";
 import AddComment from "../../components/AddComment/AddComment";
 import Comments from "../../components/comments/Comments";
 
@@ -26,7 +26,7 @@ function Post() {
   const location = useLocation();
   const id = location.pathname.split("/")[1];
   const { data } = useFetch(`/posts/${id}`);
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
 

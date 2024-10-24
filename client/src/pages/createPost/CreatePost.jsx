@@ -6,7 +6,7 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AuthContext } from "../../context/authContext";
+import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import activities from "../Activity/activities"
 import { createPost } from "../../apis/usePost";
@@ -16,7 +16,7 @@ function CreatePost() {
   const [files, setFiles] = useState([]);
   const [info, setInfo] = useState({});
   const [rating, setRating] = useState(0);
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   const handleStarClick = (selectedRating) => {
     setRating(selectedRating);
