@@ -13,7 +13,7 @@ const useFetch = (url) => {
 
                 const res = await axios.get(`${process.env.REACT_APP_API_URL}${url}`)
                 
-                setData(res.data);
+                setData(res.data.data);
             } catch (err) {
                 setError(err);
             }

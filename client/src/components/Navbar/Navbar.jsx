@@ -2,9 +2,8 @@ import './navbar.css'
 import { useState } from 'react';
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useAuth } from "../../context/authContext"
-import axios from 'axios';
 
 const Navbar = () => {
     const [navbar, setNavbar] = useState(false);
@@ -16,14 +15,12 @@ const Navbar = () => {
         }
     };
 
-    const navigate = useNavigate()
-
     const {user, logout} = useAuth();
-    console.log(user)
+    
     const handleClick = async (e) => {
         e.preventDefault();
-        await logout(); // Ensure you send the request with credentials
-        window.location.reload();
+        await logout();
+        // window.location.reload();
     }
 
     window.addEventListener('scroll', changeBackground)
@@ -49,8 +46,8 @@ const Navbar = () => {
                     </Link>
                     {user ? (<>
 
+                        <li onClick={handleClick} style={{ cursor: "pointer" }}><p>Logout</p></li>
                         <Link to={`/user/${user._id}`}>
-                            <li onClick={handleClick} style={{ cursor: "pointer" }}><p>Logout</p></li>
                             <li><div className="profilePicture">
                                 <img src={user.profilePicture || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"} alt="" />
                             </div></li>

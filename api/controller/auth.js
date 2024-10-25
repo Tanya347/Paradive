@@ -17,7 +17,9 @@ const createSendToken = (user, statusCode, res) => {
 
   const cookieOptions = {
     expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN*24*60*60*1000),
-    httpOnly: true
+    httpOnly: true,
+    sameSite: 'None',
+    secure: true
   }
 
   if(process.env.NODE_ENV === 'production')
@@ -30,9 +32,7 @@ const createSendToken = (user, statusCode, res) => {
   res.status(statusCode).json({
     status: 'success',
     token,
-    data: {
-      user
-    }
+    user
   })
 }
 
@@ -89,27 +89,11 @@ export const protect = catchAsync(async (req, res, next) => {
     return next(new AppError('The user belonging to this token does no longer exist.', 401));
   }
 
-  if(freshUser.changedPasswordAfter(decoded.iat)) {
-    return next(new AppError('User recently changed password! Please login again.', 401));
-  }
+  // if(freshUser.changedPasswordAfter(decoded.iat)) {
+  //   return next(new AppError('User recently changed password! Please login again.', 401));
+  // }
 
   req.user = freshUser;
-  next();
-})
-
-export const isLogged = catchAsync(async (req, res, next) => {
-  
-  if(req.cookies.jwt) {
-    const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT);
-    const freshUser = await User.findById(decoded.id);
-  
-    if(!freshUser || freshUser.changedPasswordAfter(decoded.iat)) {
-      return next();
-    }
-  
-    req.locals.user = freshUser;
-    return next();
-  }
   next();
 })
 
@@ -136,6 +120,14 @@ export const isOwner = (model) => catchAsync(async (req, res, next) => {
 
   next();
 });
+
+export const logout = catchAsync(async (req, res, next) => {
+  res.cookie('jwt', '', { expires: new Date(0), httpOnly: true });
+  res.status(200).json({
+    status: 'success', 
+    message: "Successfully logged out"
+  })
+})
 
 
 

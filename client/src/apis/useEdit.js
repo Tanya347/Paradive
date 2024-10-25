@@ -23,10 +23,10 @@ const uploadImage = async (file) => {
   const updateUser = async (userId, newUserData) => {
     try {
       if (process.env.REACT_APP_MODE === "development") {
-        await axios.put(`/users/${userId}`, newUserData, { withcredentials: false });
+        await axios.put(`/users/${userId}`, newUserData, { withCredentials: true });
       } else {
         await axios.put(`${process.env.REACT_APP_API_URL}/users/${userId}`, newUserData, {
-          withcredentials: false,
+          withCredentials: true,
         });
       }
     } catch (err) {
@@ -36,7 +36,7 @@ const uploadImage = async (file) => {
   };
   
   // Function that handles the entire process of updating user profile
-  export const handleUpdateUser = async (user, info, file, dispatch, setOpen) => {
+  export const handleUpdateUser = async (user, info, file, setOpen) => {
     try {
       let newUser = { ...info };
   
@@ -49,8 +49,6 @@ const uploadImage = async (file) => {
       // Update user information (whether or not there is an image)
       await updateUser(user._id, newUser);
   
-      // Update local state and close the modal
-      dispatch({ type: "LOGIN_SUCCESS", payload: newUser });
       setOpen(false);
       window.location.reload(); // Optional, to refresh the user info on the page
     } catch (err) {
@@ -98,7 +96,7 @@ export const editPost = async (id, info, selectedPhotos, newFiles, rating) => {
         ? `/posts/${id}`
         : `${process.env.REACT_APP_API_URL}/posts/${id}`;
 
-    await axios.put(apiUrl, editpost, { withCredentials: false });
+    await axios.put(apiUrl, editpost, { withCredentials: true });
   } catch (err) {
     console.log(err);
     throw err; // Re-throw error to handle it in the component if needed
@@ -108,7 +106,7 @@ export const editPost = async (id, info, selectedPhotos, newFiles, rating) => {
 // Function to update a comment
 export const updateComment = async (commentId, comment) => {
     try {
-      const response = await axios.put(`${process.env.REACT_APP_API_URL}/comments/${commentId}`, { comment });
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/comments/${commentId}`, { comment }, {withCredentials: true});
       return response;
     } catch (err) {
       console.log(err);

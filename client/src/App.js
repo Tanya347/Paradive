@@ -43,7 +43,11 @@ function App() {
           />
           <Route path="/register" element={<Register />} />
           <Route path="/:id" element={<Post />} />
-          <Route path="/edit/:id" element={<EditPost />} />
+          <Route path="/edit/:id" element={
+            <ProtectedRoute>
+              <EditPost />
+            </ProtectedRoute>
+          }/>
 
           {/* <Route path="/:id/edit" element={<EditPost />} /> */}
           <Route path="/activity/:id" element={<Activity />} />

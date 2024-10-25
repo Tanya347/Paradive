@@ -5,7 +5,7 @@ import { catchAsync } from "../utils/catchAsync.js";
 export const createPost = catchAsync(async (req, res, next) => {
   const newPost = new Post({
     ...req.body,
-    userId: req.user._id,
+    author: req.user._id,
   });
 
   const user = await User.findById(req.user._id);

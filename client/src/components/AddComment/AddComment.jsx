@@ -13,14 +13,8 @@ const AddComment = ({setOpen, postId}) => {
     const handleClick = async (e) => {
         e.preventDefault();
     
-        const newComment = {
-          ...info,
-          parentPost: postId,
-          author: user._id
-        };
-    
         try {
-          await addComment(newComment); // Use the service function to handle the comment creation
+          await addComment(info, postId); // Use the service function to handle the comment creation
           setOpen(false);
           window.location.reload();
         } catch (err) {

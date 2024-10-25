@@ -9,7 +9,7 @@ import { handleChange } from '../../commons';
 
 const Modal = ({setOpen}) => {
 
-    const {user, dispatch} = useAuth();
+    const {user} = useAuth();
     const [info, setInfo] = useState({});
     const [file, setFile] = useState("");
 
@@ -19,7 +19,7 @@ const Modal = ({setOpen}) => {
 
     const handleClick = async(e) => {
         e.preventDefault();
-        await handleUpdateUser(user, info, file, dispatch, setOpen);
+        await handleUpdateUser(user, info, file, setOpen);
     }
 
   return (

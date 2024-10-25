@@ -19,7 +19,7 @@ const Comments = ({comments}) => {
     const handleCommentDelete = async (id) => {
         try {
     
-          await axios.delete(`${process.env.REACT_APP_API_URL}/comments/${id}`)
+          await axios.delete(`${process.env.REACT_APP_API_URL}/comments/${id}`, {withCredentials: true})
     
           window.location.reload();
         } catch (err) {
@@ -44,8 +44,8 @@ const Comments = ({comments}) => {
                     >
                       <div className="comment-header">
                         <div className="comment-author">
-                          <img src={c.author.profilePicture} alt="" />
-                          <h4><span>@{c.author.username}</span> says</h4>
+                          {c?.author?.profilePicture && <img src={c?.author?.profilePicture} alt="" />}
+                          <h4><span>@{c?.author?.username}</span> says</h4>
                         </div>
                         {user && user._id === c.author._id && <div className="comment-action-buttons">
                           <FontAwesomeIcon onClick={() => handleEdit(c)}className="icon" icon={faEdit} />

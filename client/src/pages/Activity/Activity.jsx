@@ -43,7 +43,6 @@ function Activity() {
             <div className="header"></div>
             <div className="activityPageHero">
                 <h1>{activities[index].placeholder}</h1>
-                {/* <img src={activities[index].src} alt="" height="200px" /> */}
                 <p>{activities[index].desc}</p>
             </div>
             <div className="searchedPosts">

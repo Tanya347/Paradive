@@ -17,7 +17,7 @@ import Map, {Marker} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import useFetch from "../../apis/useFetch";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../../context/authContext";
 import AddComment from "../../components/AddComment/AddComment";
 import Comments from "../../components/comments/Comments";
@@ -67,19 +67,16 @@ function Post() {
 
   const navigate = useNavigate();
 
-  
-
-
   let isUser
   if (user) {
-    isUser = data.userId === user._id;
+    isUser = data.author === user._id;
   }
 
 
   const handleDelete = async () => {
     try {
 
-      await axios.delete(`${process.env.REACT_APP_API_URL}/posts/${data._id}`)
+      await axios.delete(`${process.env.REACT_APP_API_URL}/posts/${data._id}`, {withCredentials: true})
 
       navigate('/explore')
     } catch (err) {

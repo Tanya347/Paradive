@@ -23,7 +23,7 @@ const UserPage = () => {
 
     // populate not working in deployed version so have to do this instead
     useEffect(() => {
-        const filteredArray = posts.filter(item => item.userId === data._id)
+        const filteredArray = posts.filter(item => item.author === data._id)
         setPostData(filteredArray)
     }, [posts, data])
 

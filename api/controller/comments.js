@@ -4,12 +4,12 @@ import { catchAsync } from "../utils/catchAsync.js";
 
 export const createComment = catchAsync(async (req, res, next) => {
     const parentPost = req.params.post;
-    const userId = req.user.id;
+    const author = req.user.id;
     // Create a new comment
     const newComment = new Comment({
       ...req.body,
       parentPost,
-      userId
+      author
     });
   
     // Save the comment to the database

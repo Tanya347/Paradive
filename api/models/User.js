@@ -123,12 +123,12 @@ UserSchema.methods.correctPassword = async function(candidatePassword, userPassw
 }
 
 
-UserSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
-  if(this.passwordChangedAt) {
-    const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
-    return JWTTimestamp < changedTimestamp;
-  }
-  return false;
-}
+// UserSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
+//   if(this.passwordChangedAt) {
+//     const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+//     return JWTTimestamp < changedTimestamp;
+//   }
+//   return false;
+// }
 
 export default mongoose.model("User", UserSchema);

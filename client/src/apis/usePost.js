@@ -24,18 +24,18 @@ export const createPost = async (postData, files) => {
     };
 
     // Make a POST request to create a new post
-    const res = await axios.post(`${process.env.REACT_APP_API_URL}/posts`, newPost);
-    return res.data;
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/posts`, newPost, {withCredentials: true});
+    return res.data.data;
   } catch (err) {
     console.error("Failed to create post:", err);
     throw err;
   }
 };
 
-export const addComment = async (commentData) => {
+export const addComment = async (commentData, postId) => {
   try {
     // Call the API to create a new comment
-    const res = await axios.post(`${process.env.REACT_APP_API_URL}/comments`, commentData);
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/comments/${postId}`, commentData, {withCredentials: true});
     return res.data; // Return the response data if needed
   } catch (err) {
     console.error("Failed to add comment:", err);

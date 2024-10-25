@@ -14,16 +14,15 @@ function Login({ title, link }) {
     password: undefined,
   });
 
-  const {setUser} = useAuth();
+  const {login, error} = useAuth();
   const navigate = useNavigate();
 
   const handleClick = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, credentials, { withCredentials: true });
-      console.log(data)
       if(data.status === "success") {
-        setUser(data.user);
+        login(data.user);
         navigate(`${link}`);
       }
       else {
