@@ -6,12 +6,14 @@ import { useState, useContext } from "react";
 import { handleUpdateUser } from '../../apis/useEdit';
 import { useAuth } from '../../context/authContext';
 import { handleChange } from '../../commons';
+import { ClipLoader } from 'react-spinners';
 
 const Modal = ({setOpen}) => {
 
     const {user} = useAuth();
     const [info, setInfo] = useState({});
     const [file, setFile] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setInfo(user);
@@ -19,7 +21,9 @@ const Modal = ({setOpen}) => {
 
     const handleClick = async(e) => {
         e.preventDefault();
+        setLoading(true);
         await handleUpdateUser(user, info, file, setOpen);
+        setLoading(false);
     }
 
   return (
@@ -92,7 +96,11 @@ const Modal = ({setOpen}) => {
                             />
                         </div>
                     </div>
-                    
+                    {loading && <div className="post-loader" style={{fontSize: "1.1rem", marginBottom: "20px"}}>
+                        <ClipLoader color="white" size={30} />
+                        updating profile...
+                        </div>
+                    }
                     <button className='editButton' onClick={handleClick}>Edit</button>
                 </form>
             </div>

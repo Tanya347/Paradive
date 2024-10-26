@@ -11,11 +11,13 @@ import { useNavigate } from "react-router-dom";
 import activities from "../Activity/activities"
 import { createPost } from "../../apis/usePost";
 import { handleChange } from '../../commons';
+import { ClipLoader } from "react-spinners";
 
 function CreatePost() {
   const [files, setFiles] = useState([]);
   const [info, setInfo] = useState({});
   const [rating, setRating] = useState(0);
+  const [loading, setLoading] = useState(false);
   const { user } = useAuth();
 
   const handleStarClick = (selectedRating) => {
@@ -26,6 +28,7 @@ function CreatePost() {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    setLoading(true); // Show loading indicator
     try {
       const postData = {
         ...info,
@@ -40,6 +43,8 @@ function CreatePost() {
       navigate(`/${postId}`);
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false); // Hide loading indicator
     }
   };
 
@@ -167,7 +172,11 @@ function CreatePost() {
                     placeholder="A brief description"
                   />
                 </div>
-
+            
+            { loading && <div className="post-loader">
+                <ClipLoader color="white" size={30} />
+                creating post...
+              </div>}
             <button className="button" onClick={handleClick} type="submit">
               Post
             </button>

@@ -88,7 +88,9 @@ const UserSchema = new mongoose.Schema(
       },
       select: false
     },
-    passwordChangedAt: Date,
+    // passwordChangedAt: Date,
+    // passwordResetToken: String,
+    // passwordResetExpires: Date
   },
   { timestamps: true }
 );
@@ -121,6 +123,11 @@ UserSchema.pre(/^find/, function(next) {
 UserSchema.methods.correctPassword = async function(candidatePassword, userPassword) {
   return await bcrypt.compare(candidatePassword, userPassword);
 }
+
+// UserSchema.methods.createPasswordResetToken = function() {
+//   const resetToken = crypto.getRandomValues(32).toString('hex');
+//   this.passwordResetToken = crypto.
+// }
 
 
 // UserSchema.methods.changedPasswordAfter = function(JWTTimestamp) {

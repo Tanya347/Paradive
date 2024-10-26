@@ -10,15 +10,18 @@ import { useNavigate } from "react-router-dom";
 import { handleChange } from '../../commons';
 import axios from "axios";
 import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 function Register() {
   const navigate = useNavigate();
 
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleClick = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     if (file) {
       const data = new FormData();
@@ -44,7 +47,7 @@ function Register() {
         if(res.data.status === 'success') {
           toast.success("Registered Successfully!");
         }
-        // navigate("/login");
+        navigate("/login");
       } catch (err) {
         const errorMessage = err.response?.data?.message || "Failed to register. Please try again.";
         toast.error(errorMessage);
@@ -60,6 +63,7 @@ function Register() {
         console.log(err)
       }
     }
+    setLoading(false);
   };
 
 
@@ -152,6 +156,11 @@ function Register() {
                 />
               </div>
             </div>
+              {loading && <div className="post-loader" style={{color: "black", marginBottom: "20px"}}>
+                <ClipLoader color="black" size={30} />
+                  creating your account...
+                </div>
+              }
             <div className="login_button">
               <button className="button" onClick={handleClick}>
                 Register

@@ -8,12 +8,15 @@ import { useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 
 function ActivityCard() {
+  const spinner = document.getElementById("spinner");
   const { data, loading } = useFetch("/posts");
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     setPosts(data.slice(0, 3))
-  }, [data])
+    if(!loading)
+      spinner.style.display = "none";
+  }, [data, spinner.style, loading])
 
   useEffect(() => {
     Aos.init({duration: 1000});
@@ -22,35 +25,39 @@ function ActivityCard() {
   return (
     <div className="container">
 
-    <h2>Featured Posts</h2>
-      <div className="postcards">
-      {loading ? (
-        <>
-          <ClipLoader color="white" size={40} />
-        </> 
-      ) : (
-        <>
-          {posts && posts?.map((item) => (
-            <div className="card" key={item._id} data-aos="fade-up">
-              <div class="content">
-                <img id="post-image" src={item.photos[0]} alt="" />
-                <h4>{item.title}</h4>
-                <h6>
-                  <span>Posted By : </span> {item.username}
-                </h6>
-                <h6>
-                  <span>Date : </span> {item.date}
-                </h6>
-                <p>{item.desc.slice(0, 60)}...</p>
-                <Link to={`/${item._id}`}>
-                  <button>Read More</button>
-                </Link>
-              </div>
+      {
+        !loading && <>
+            <h2>Featured Posts</h2>
+            <div className="postcards">
+              {loading ? (
+                <>
+                  <ClipLoader color="white" size={40} />
+                </> 
+              ) : (
+                <>
+                  {posts && posts?.map((item) => (
+                    <div className="card" key={item._id} data-aos="fade-up">
+                      <div class="content">
+                        <img id="post-image" src={item.photos[0]} alt="" />
+                        <h4>{item.title}</h4>
+                        <h6>
+                          <span>Posted By : </span> {item.username}
+                        </h6>
+                        <h6>
+                          <span>Date : </span> {item.date}
+                        </h6>
+                        <p>{item.desc.slice(0, 60)}...</p>
+                        <Link to={`/${item._id}`}>
+                          <button>Read More</button>
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
-          ))}
         </>
-      )}
-      </div>
+      }
     </div>
   );
 }

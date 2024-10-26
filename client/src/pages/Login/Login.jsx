@@ -8,18 +8,21 @@ import { useNavigate, Link } from "react-router-dom";
 import { handleChange } from "../../commons";
 import { useAuth } from "../../context/authContext";
 import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 function Login({ title, link }) {
   const [credentials, setCredentials] = useState({
     email: undefined,
     password: undefined,
   });
+  const [loading, setLoading] = useState(false);
 
   const {login} = useAuth();
   const navigate = useNavigate();
 
   const handleClick = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, credentials, { withCredentials: true });
       if(data.status === "success") {
@@ -32,6 +35,8 @@ function Login({ title, link }) {
       toast.error(errorMessage);
       console.error(err);
       throw err;
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -61,6 +66,11 @@ function Login({ title, link }) {
                 className="lInput"
               />
             </div>
+            {loading && <div className="post-loader" style={{color: "black", marginBottom: "20px"}}>
+                <ClipLoader color="black" size={30} />
+                  logging in...
+                </div>
+              }
             <div className="login_button">
               <button className="button" onClick={handleClick}>
                 Login

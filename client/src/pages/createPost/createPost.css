@@ -173,6 +173,13 @@ html {
     color: white;
 }
 
+.post-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
 @media screen and (max-width: 800px) {
     .inputContainer {
         width: 80%;

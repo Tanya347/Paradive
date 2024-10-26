@@ -17,9 +17,9 @@ const EditPost = () => {
 
     const location = useLocation();
     const id = location.pathname.split("/")[2];
-
     const navigate = useNavigate();
-
+    const spinner = document.getElementById("spinner");
+    const [postLoader, setPostLoader] = useState(false);
     const { data, loading} = useFetch(`/posts/${id}`);
     const [info, setInfo] = useState({});
     const [rating, setRating] = useState(0);
@@ -30,15 +30,20 @@ const EditPost = () => {
         setInfo(data)
         if(data.rating)
             setRating(data.rating)
-    }, [data, data.rating])
+        if(!loading)
+            spinner.style.display = "none";
+    }, [data, data.rating, loading, spinner.style])
 
     const handleClick = async(e) => {
         e.preventDefault();
+        setPostLoader(true);
         try {
-        await editPost(id, info, selectedPhotos, newFiles, rating); // Call the service function
-        navigate(`/${id}`); // Navigate to the updated post
+            await editPost(id, info, selectedPhotos, newFiles, rating); // Call the service function
+            navigate(`/${id}`); // Navigate to the updated post
         } catch (err) {
-        console.log(err);
+            console.log(err);
+        } finally {
+            setPostLoader(false);
         }
     }
 
@@ -47,183 +52,193 @@ const EditPost = () => {
     };
 
     return (
-        <div className="editPostContainer">
-            <Navbar />
-            <div className="cpContainer">
-                <div className="formContainer">
-                    
-                    <div className="picsContainer">
-                        <h2>Select Images you want to delete</h2>
-                        {
-                            loading ? (
-                                <>
-                                    <ClipLoader color="white" size={40} />
-                                </>
-                            ) : (
-                                <>
-                                    {info?.photos && <div className="uploadedPictures">
-                                        {
-                                            info?.photos?.map((ph, ind) => (
-                                                <div className="upload_pic" key={ind}>
-                                                    <input 
-                                                        type="checkbox"
-                                                        id={`photo-${ind}`}
-                                                        onChange={(e) => {
-                                                            if (e.target.checked) {
-                                                                selectedPhotos.add(ph);
-                                                            } else {
-                                                                selectedPhotos.delete(ph);
-                                                            }
-                                                            setSelectedPhotos(new Set(selectedPhotos)); // Update the state
-                                                        }}
-                                                    />
-                                                    <img src={ph} alt="" height="80px"/>
-                                                </div>
-                                            ))
-                                        }
-                                    </div>}
-                                </>
-                            )
-                        }
-                    </div>
-                    <div className="picsContainer">
-                        <div className="formInput">
-                            <h2>Upload New Images (Max 6)</h2>
-                            <label htmlFor="file">
-                                <FontAwesomeIcon className="icon" icon={faPlusCircle} />
-                            </label>
-                            <input
-                                type="file"
-                                id="file"
-                                multiple
-                                onChange={(e) => setNewFiles(Array.from(e.target.files))}
-                                style={{ display: "none" }}
-                            />
-                        </div>
-                        <div className="uploadedPictures">
-                        {newFiles?.map((file, index) => (
-                            <div className="upload_pic" key={index}>
-                                <img
-                                src={URL.createObjectURL(file)}
-                                alt=""
-                                height="80px"
-                                />
-                            </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="inputContainer">
-                        <div className="columns">
-                            <div className="column">
-
-                                <div className="input">
-                                    <label htmlFor="title">Title</label>
-                                    <input
-                                        onChange={(e) => handleChange(e, setInfo)}
-                                        type="text"
-                                        id="title"
-                                        value={info.title}
-                                        placeholder="Enter Title"
-                                    />
+        <>
+            {
+                !loading && <>
+                    <div className="editPostContainer">
+                        <Navbar />
+                        <div className="cpContainer">
+                            <div className="formContainer">
+                                
+                                <div className="picsContainer">
+                                    <h2>Select Images you want to delete</h2>
+                                    {
+                                        loading ? (
+                                            <>
+                                                <ClipLoader color="white" size={40} />
+                                            </>
+                                        ) : (
+                                            <>
+                                                {info?.photos && <div className="uploadedPictures">
+                                                    {
+                                                        info?.photos?.map((ph, ind) => (
+                                                            <div className="upload_pic" key={ind}>
+                                                                <input 
+                                                                    type="checkbox"
+                                                                    id={`photo-${ind}`}
+                                                                    onChange={(e) => {
+                                                                        if (e.target.checked) {
+                                                                            selectedPhotos.add(ph);
+                                                                        } else {
+                                                                            selectedPhotos.delete(ph);
+                                                                        }
+                                                                        setSelectedPhotos(new Set(selectedPhotos)); // Update the state
+                                                                    }}
+                                                                />
+                                                                <img src={ph} alt="" height="80px"/>
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </div>}
+                                            </>
+                                        )
+                                    }
                                 </div>
-
-                                <div className="input">
-                                    <label htmlFor="location">Location</label>
-                                    <input
-                                        onChange={(e) => handleChange(e, setInfo)}
-                                        type="text"
-                                        id="location"
-                                        value={info.location}
-                                        placeholder="Enter location"
-                                    />
-                                </div>
-
-                                <div className="input">
+                                <div className="picsContainer">
                                     <div className="formInput">
-                                        <label>Activity Type</label>
-                                        <select 
-                                            id="type" 
-                                            className="type" 
-                                            value={info.type}
-                                        onChange={(e) => handleChange(e, setInfo)}
-                                        >
-                                        <option value="select">-Select an activity-</option>
-                                        {activities?.map((item) => (
-                                            <option value={item.type}>{item.placeholder}</option>
+                                        <h2>Upload New Images (Max 6)</h2>
+                                        <label htmlFor="file">
+                                            <FontAwesomeIcon className="icon" icon={faPlusCircle} />
+                                        </label>
+                                        <input
+                                            type="file"
+                                            id="file"
+                                            multiple
+                                            onChange={(e) => setNewFiles(Array.from(e.target.files))}
+                                            style={{ display: "none" }}
+                                        />
+                                    </div>
+                                    <div className="uploadedPictures">
+                                    {newFiles?.map((file, index) => (
+                                        <div className="upload_pic" key={index}>
+                                            <img
+                                            src={URL.createObjectURL(file)}
+                                            alt=""
+                                            height="80px"
+                                            />
+                                        </div>
                                         ))}
-                                        </select>
                                     </div>
                                 </div>
 
-                            </div>
+                                <div className="inputContainer">
+                                    <div className="columns">
+                                        <div className="column">
 
-                            <div className="column">
-                                <div className="input">
-                                    <label htmlFor="price">Price Range</label>
-                                    <input
-                                        onChange={(e) => handleChange(e, setInfo)}
-                                        type="text"
-                                        id="priceRange"
-                                        value={info.priceRange}
-                                        placeholder="Enter price range"
-                                    />
+                                            <div className="input">
+                                                <label htmlFor="title">Title</label>
+                                                <input
+                                                    onChange={(e) => handleChange(e, setInfo)}
+                                                    type="text"
+                                                    id="title"
+                                                    value={info.title}
+                                                    placeholder="Enter Title"
+                                                />
+                                            </div>
+
+                                            <div className="input">
+                                                <label htmlFor="location">Location</label>
+                                                <input
+                                                    onChange={(e) => handleChange(e, setInfo)}
+                                                    type="text"
+                                                    id="location"
+                                                    value={info.location}
+                                                    placeholder="Enter location"
+                                                />
+                                            </div>
+
+                                            <div className="input">
+                                                <div className="formInput">
+                                                    <label>Activity Type</label>
+                                                    <select 
+                                                        id="type" 
+                                                        className="type" 
+                                                        value={info.type}
+                                                    onChange={(e) => handleChange(e, setInfo)}
+                                                    >
+                                                    <option value="select">-Select an activity-</option>
+                                                    {activities?.map((item) => (
+                                                        <option value={item.type}>{item.placeholder}</option>
+                                                    ))}
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div className="column">
+                                            <div className="input">
+                                                <label htmlFor="price">Price Range</label>
+                                                <input
+                                                    onChange={(e) => handleChange(e, setInfo)}
+                                                    type="text"
+                                                    id="priceRange"
+                                                    value={info.priceRange}
+                                                    placeholder="Enter price range"
+                                                />
+                                            </div>
+
+                                            <div className="input">
+                                                <label htmlFor="date">Visited On</label>
+                                                <input
+                                                    onChange={(e) => handleChange(e, setInfo)}
+                                                    type="date"
+                                                    value={info.date}
+                                                    id="date"
+                                                    placeholder="Enter the date"
+                                                />
+                                            </div>
+
+
+                                        <div className="input">
+                                        <label htmlFor="rate">Re-rate your Experience</label>
+                                            <div className="star-rating-slider">
+                                                {[1, 2, 3, 4, 5].map((star) => (
+                                                <FontAwesomeIcon
+                                                    key={star}
+                                                    icon={star <= rating ? solidStar : regularStar}
+                                                    className={"star-icon"}
+                                                    onClick={() => handleStarClick(star)}
+                                                />
+                                                ))}
+                                            </div>
+                                            
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="input" id="lastInput">
+                                        <label htmlFor="desc">Description</label>
+                                        <input
+                                            onChange={(e) => handleChange(e, setInfo)}
+                                            type="text"
+                                            id="desc"
+                                            value={info.desc}
+                                            placeholder="A brief description"
+                                        />
+                                    </div>
+                                    
+                                    { postLoader && <div className="post-loader">
+                                        <ClipLoader color="white" size={30} />
+                                        updating post...
+                                    </div>}
+
+                                    <button 
+                                        className="button" 
+                                        onClick={handleClick} 
+                                        type="submit"
+                                    >
+                                        Edit
+                                    </button>
+
                                 </div>
-
-                                <div className="input">
-                                    <label htmlFor="date">Visited On</label>
-                                    <input
-                                        onChange={(e) => handleChange(e, setInfo)}
-                                        type="date"
-                                        value={info.date}
-                                        id="date"
-                                        placeholder="Enter the date"
-                                    />
-                                </div>
-
-
-                            <div className="input">
-                            <label htmlFor="rate">Re-rate your Experience</label>
-                                <div className="star-rating-slider">
-                                    {[1, 2, 3, 4, 5].map((star) => (
-                                    <FontAwesomeIcon
-                                        key={star}
-                                        icon={star <= rating ? solidStar : regularStar}
-                                        className={"star-icon"}
-                                        onClick={() => handleStarClick(star)}
-                                    />
-                                    ))}
-                                </div>
-                                
-                            </div>
                             </div>
                         </div>
-
-                        <div className="input" id="lastInput">
-                            <label htmlFor="desc">Description</label>
-                            <input
-                                onChange={(e) => handleChange(e, setInfo)}
-                                type="text"
-                                id="desc"
-                                value={info.desc}
-                                placeholder="A brief description"
-                            />
-                        </div>
-
-
-                        <button 
-                            className="button" 
-                            onClick={handleClick} 
-                            type="submit"
-                        >
-                            Edit
-                        </button>
-
+                        <Footer />
                     </div>
-                </div>
-            </div>
-            <Footer />
-        </div>
+                </>
+            }
+        </>
     )
 }
 
