@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleChange } from '../../commons';
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function Register() {
   const navigate = useNavigate();
@@ -39,11 +40,16 @@ function Register() {
           profilePicture: url,
         };
 
-        await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, newUser, {withcredentials: false})
-
-        navigate("/login");
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, newUser, {withcredentials: false})
+        if(res.data.status === 'success') {
+          toast.success("Registered Successfully!");
+        }
+        // navigate("/login");
       } catch (err) {
-        console.log(err);
+        const errorMessage = err.response?.data?.message || "Failed to register. Please try again.";
+        toast.error(errorMessage);
+        console.error(err);
+        throw err;
       }
     } else {
       try {

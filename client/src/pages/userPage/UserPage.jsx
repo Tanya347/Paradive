@@ -10,22 +10,24 @@ import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { useEffect } from 'react';
 import Modal from '../../components/modal/Modal';
+import { useAuth } from '../../context/authContext';
+import { ClipLoader } from 'react-spinners';
 
 const UserPage = () => {
     const [open, setOpen] = useState(false);
     const location = useLocation();
+    const {user} = useAuth();
     const id = location.pathname.split("/")[2];
-
-    const { data } = useFetch(`/users/${id}`);
-    const posts = useFetch('/posts').data;
+    // const { data } = useFetch(`/users/${id}`);
+    const {data, loading} = useFetch('/posts');
     const [postData, setPostData] = useState([]);
 
 
     // populate not working in deployed version so have to do this instead
     useEffect(() => {
-        const filteredArray = posts.filter(item => item.author === data._id)
+        const filteredArray = data.filter(item => item.author === user._id)
         setPostData(filteredArray)
-    }, [posts, data])
+    }, [data])
 
     useEffect(() => {
         Aos.init({duration: 1000});
@@ -39,22 +41,22 @@ const UserPage = () => {
                 <div className="column">
                 <div className="col" id='profile'>
                     <div className="pic">
-                        <img src={data.profilePicture || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"} alt="" />
+                        <img src={user.profilePicture || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"} alt="" />
 
                     </div>
                 </div>
                 <div className="col" id='bio'>
                     <h3><span>Username</span></h3>
                     <p>
-                        {data.username}
+                        {user.username}
                     </p>
                     <h3><span> Email</span></h3>
                     <p>
-                        {data.email}
+                        {user.email}
                     </p>
                     <h3><span> Bio</span></h3>
                     <p>
-                        {data.desc}
+                        {user.desc}
                     </p>
                 </div>
                 </div>
@@ -64,32 +66,42 @@ const UserPage = () => {
             </div>
             
             <div className="searchedPosts">
-                {postData.length > 0? 
+               {
+                loading ? (
                     <>
-                        {postData?.map((item) => (
-                        <div className="card" key={item._id} data-aos="fade-up">
-                            <div class="content">
-                                {item.photos && <img id="post-image" src={item.photos[0]} alt="no content" />}
-                                <h4>{item.title}</h4>
-                                <h6>
-                                    <span>Location : </span> {item.location}
-                                </h6>
-                                <h6>
-                                    <span>Activity : </span> {item.type}
-                                </h6>
-                                {item.desc && <p>{item.desc.slice(0,70)}...</p>}
-                                <Link to={`/${item._id}`}>
-                                    <button>Read More</button>
-                                </Link>
-                            </div>
-                        </div>
-                        ))}
+                        <ClipLoader color="white" size={40} />
                     </>
-                :
+                ) : (
                     <>
-                        <div className="p" style={{"color": "white", "fontFamily": "'Kaushan Script', cursive", "margin": "20px 0"}}>No Posts</div>
+                         {postData.length > 0? 
+                            <>
+                                {postData?.map((item) => (
+                                <div className="card" key={item._id} data-aos="fade-up">
+                                    <div class="content">
+                                        {item.photos && <img id="post-image" src={item.photos[0]} alt="no content" />}
+                                        <h4>{item.title}</h4>
+                                        <h6>
+                                            <span>Location : </span> {item.location}
+                                        </h6>
+                                        <h6>
+                                            <span>Activity : </span> {item.type}
+                                        </h6>
+                                        {item.desc && <p>{item.desc.slice(0,70)}...</p>}
+                                        <Link to={`/${item._id}`}>
+                                            <button>Read More</button>
+                                        </Link>
+                                    </div>
+                                </div>
+                                ))}
+                            </>
+                        :
+                            <>
+                                <div className="p" style={{"color": "white", "fontFamily": "'Kaushan Script', cursive", "margin": "20px 0"}}>No Posts</div>
+                            </>
+                        }
                     </>
-                }
+                )
+               }
             </div>
             <Footer />
             {open && <Modal setOpen={setOpen} />}

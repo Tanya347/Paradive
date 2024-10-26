@@ -21,6 +21,7 @@ import { useState } from "react";
 import { useAuth } from "../../context/authContext";
 import AddComment from "../../components/AddComment/AddComment";
 import Comments from "../../components/comments/Comments";
+import { toast } from "react-toastify";
 
 function Post() {
   const location = useLocation();
@@ -76,8 +77,10 @@ function Post() {
   const handleDelete = async () => {
     try {
 
-      await axios.delete(`${process.env.REACT_APP_API_URL}/posts/${data._id}`, {withCredentials: true})
-
+      const res = await axios.delete(`${process.env.REACT_APP_API_URL}/posts/${data._id}`, {withCredentials: true})
+      if(res.data.status === 'success') {
+        toast.success("Post Deleted Successfully!");
+      }
       navigate('/explore')
     } catch (err) {
       console.log(err)

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const createPost = async (postData, files) => {
   try {
@@ -25,9 +26,15 @@ export const createPost = async (postData, files) => {
 
     // Make a POST request to create a new post
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/posts`, newPost, {withCredentials: true});
+
+    if(res.data.status === 'success') {
+      toast.success("Post Created Successfully!");
+    }
     return res.data.data;
   } catch (err) {
-    console.error("Failed to create post:", err);
+    const errorMessage = err.response?.data?.message || "Failed to create post. Please try again.";
+    toast.error(errorMessage);
+    console.error(err);
     throw err;
   }
 };
@@ -36,9 +43,14 @@ export const addComment = async (commentData, postId) => {
   try {
     // Call the API to create a new comment
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/comments/${postId}`, commentData, {withCredentials: true});
-    return res.data; // Return the response data if needed
+    if(res.data.status === 'success') {
+      toast.success("Comment Added Successfully!")
+    }
+    
   } catch (err) {
-    console.error("Failed to add comment:", err);
-    throw err; // Re-throw the error to handle it in the component
+    const errorMessage = err.response?.data?.message || "Failed to add comment. Please try again.";
+    toast.error(errorMessage);
+    console.error(err);
+    throw err;
   }
 };

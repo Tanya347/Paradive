@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { useEffect } from "react";
+import { ClipLoader } from "react-spinners";
 
 function ActivityCard() {
-  const { data} = useFetch("/posts");
+  const { data, loading } = useFetch("/posts");
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -23,7 +24,11 @@ function ActivityCard() {
 
     <h2>Featured Posts</h2>
       <div className="postcards">
-      {posts ? (
+      {loading ? (
+        <>
+          <ClipLoader color="white" size={40} />
+        </> 
+      ) : (
         <>
           {posts && posts?.map((item) => (
             <div className="card" key={item._id} data-aos="fade-up">
@@ -43,10 +48,6 @@ function ActivityCard() {
               </div>
             </div>
           ))}
-        </> 
-      ) : (
-        <>
-          <div className="p" style={{color: "white", "fontFamily": "'Kaushan Script', cursive"}}>Loading...</div>
         </>
       )}
       </div>

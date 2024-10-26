@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 
@@ -74,15 +75,21 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post(
+      const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/auth/logout`,
         {},
         { withCredentials: true }
       );
+      if(res.data.status === 'success') {
+        toast.success("Logged Out Successfully!");
+      }
       removeCookie("jwt");
       dispatch({ type: actionTypes.LOGOUT });
       localStorage.removeItem("user");
-    } catch (error) {
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || "Failed to create post. Please try again.";
+      toast.error(errorMessage);
+      console.error(err);
       dispatch({ type: actionTypes.SET_ERROR, payload: "Logout error" });
     }
   };

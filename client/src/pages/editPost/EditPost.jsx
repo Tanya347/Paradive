@@ -11,6 +11,7 @@ import Footer from '../../components/Footer/Footer';
 import activities from "../Activity/activities"
 import { handleChange } from '../../commons';
 import { editPost } from '../../apis/useEdit';
+import { ClipLoader } from 'react-spinners';
 
 const EditPost = () => {
 
@@ -19,7 +20,7 @@ const EditPost = () => {
 
     const navigate = useNavigate();
 
-    const {data} = useFetch(`/posts/${id}`);
+    const { data, loading} = useFetch(`/posts/${id}`);
     const [info, setInfo] = useState({});
     const [rating, setRating] = useState(0);
     const [selectedPhotos, setSelectedPhotos] = useState(new Set()); // Track selected photos for deletion
@@ -53,27 +54,37 @@ const EditPost = () => {
                     
                     <div className="picsContainer">
                         <h2>Select Images you want to delete</h2>
-                        {info?.photos && <div className="uploadedPictures">
-                            {
-                                info?.photos?.map((ph, ind) => (
-                                    <div className="upload_pic" key={ind}>
-                                        <input 
-                                            type="checkbox"
-                                            id={`photo-${ind}`}
-                                            onChange={(e) => {
-                                                if (e.target.checked) {
-                                                    selectedPhotos.add(ph);
-                                                } else {
-                                                    selectedPhotos.delete(ph);
-                                                }
-                                                setSelectedPhotos(new Set(selectedPhotos)); // Update the state
-                                            }}
-                                        />
-                                        <img src={ph} alt="" height="80px"/>
-                                    </div>
-                                ))
-                            }
-                        </div>}
+                        {
+                            loading ? (
+                                <>
+                                    <ClipLoader color="white" size={40} />
+                                </>
+                            ) : (
+                                <>
+                                    {info?.photos && <div className="uploadedPictures">
+                                        {
+                                            info?.photos?.map((ph, ind) => (
+                                                <div className="upload_pic" key={ind}>
+                                                    <input 
+                                                        type="checkbox"
+                                                        id={`photo-${ind}`}
+                                                        onChange={(e) => {
+                                                            if (e.target.checked) {
+                                                                selectedPhotos.add(ph);
+                                                            } else {
+                                                                selectedPhotos.delete(ph);
+                                                            }
+                                                            setSelectedPhotos(new Set(selectedPhotos)); // Update the state
+                                                        }}
+                                                    />
+                                                    <img src={ph} alt="" height="80px"/>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>}
+                                </>
+                            )
+                        }
                     </div>
                     <div className="picsContainer">
                         <div className="formInput">

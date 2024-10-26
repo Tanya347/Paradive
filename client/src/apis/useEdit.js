@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 // Function to handle file upload to Cloudinary
 const uploadImage = async (file) => {
@@ -14,6 +15,7 @@ const uploadImage = async (file) => {
       );
       return uploadRes.data.url; // Return the URL of the uploaded image
     } catch (err) {
+      toast.error("Failed to upload image, please try again!");
       console.error("Failed to upload image:", err);
       throw err;
     }
@@ -25,12 +27,17 @@ const uploadImage = async (file) => {
       if (process.env.REACT_APP_MODE === "development") {
         await axios.put(`/users/${userId}`, newUserData, { withCredentials: true });
       } else {
-        await axios.put(`${process.env.REACT_APP_API_URL}/users/${userId}`, newUserData, {
+        const res = await axios.put(`${process.env.REACT_APP_API_URL}/users/${userId}`, newUserData, {
           withCredentials: true,
         });
+        if(res.data.status === 'success') {
+          toast.success("User Profile Updated Successfully!");
+        }
       }
     } catch (err) {
-      console.error("Failed to update user:", err);
+      const errorMessage = err.response?.data?.message || "Failed to update profile. Please try again.";
+      toast.error(errorMessage);
+      console.error(err);
       throw err;
     }
   };
@@ -96,10 +103,15 @@ export const editPost = async (id, info, selectedPhotos, newFiles, rating) => {
         ? `/posts/${id}`
         : `${process.env.REACT_APP_API_URL}/posts/${id}`;
 
-    await axios.put(apiUrl, editpost, { withCredentials: true });
+    const res = await axios.put(apiUrl, editpost, { withCredentials: true });
+    if(res.data.status === 'success') {
+      toast.success("Post Created Successfully!");
+    }
   } catch (err) {
-    console.log(err);
-    throw err; // Re-throw error to handle it in the component if needed
+    const errorMessage = err.response?.data?.message || "Failed to update post. Please try again.";
+    toast.error(errorMessage);
+    console.error(err);
+    throw err;
   }
 };
 
@@ -107,9 +119,14 @@ export const editPost = async (id, info, selectedPhotos, newFiles, rating) => {
 export const updateComment = async (commentId, comment) => {
     try {
       const response = await axios.put(`${process.env.REACT_APP_API_URL}/comments/${commentId}`, { comment }, {withCredentials: true});
+      if(response.data.status === 'success') {
+        toast.success("Comment Updated Successfully!");
+      }
       return response;
     } catch (err) {
-      console.log(err);
-      throw err; // Re-throw the error so it can be handled in the component
+      const errorMessage = err.response?.data?.message || "Failed to update comment. Please try again.";
+      toast.error(errorMessage);
+      console.error(err);
+      throw err;
     }
   };

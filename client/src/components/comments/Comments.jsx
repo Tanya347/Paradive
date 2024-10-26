@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, { useState} from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faEdit,
@@ -8,6 +8,7 @@ import axios from "axios";
 import { useAuth } from '../../context/authContext';
 import "./comments.css"
 import EditComment from '../EditComment/EditComment';
+import { toast } from 'react-toastify';
 
 const Comments = ({comments}) => {
     const [open, setOpen] = useState(false);
@@ -19,11 +20,16 @@ const Comments = ({comments}) => {
     const handleCommentDelete = async (id) => {
         try {
     
-          await axios.delete(`${process.env.REACT_APP_API_URL}/comments/${id}`, {withCredentials: true})
-    
+          const res = await axios.delete(`${process.env.REACT_APP_API_URL}/comments/${id}`, {withCredentials: true})
+          if(res.data.status === 'success') {
+            toast.success("Comment Deleted successfully!");
+          }
           window.location.reload();
         } catch (err) {
-          console.log(err)
+          const errorMessage = err.response?.data?.message || "Failed to delete comment. Please try again.";
+          toast.error(errorMessage);
+          console.error(err);
+          throw err;
         }
       };
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "./createPost.css";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
@@ -37,7 +37,6 @@ function CreatePost() {
       const newPost = await createPost(postData, files);
 
       const postId = newPost._id;
-
       navigate(`/${postId}`);
     } catch (err) {
       console.error(err);

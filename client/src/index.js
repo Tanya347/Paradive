@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { AuthProvider } from './context/authContext';
+import 'react-toastify/dist/ReactToastify.css'; 
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthProvider>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+      <React.StrictMode>
+          <App />
+      </React.StrictMode>
   </AuthProvider>
 );

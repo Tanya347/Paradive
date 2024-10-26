@@ -76,6 +76,7 @@ html {
 
 .searchedPosts {
     position: relative;
+    padding: 20px 0;
     display: flex;
     justify-content: center;
     background: url("../../../public/Assets/canoeing.jpg");

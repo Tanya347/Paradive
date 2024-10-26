@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { handleChange } from "../../commons";
 import { useAuth } from "../../context/authContext";
+import { toast } from "react-toastify";
 
 function Login({ title, link }) {
   const [credentials, setCredentials] = useState({
@@ -14,7 +15,7 @@ function Login({ title, link }) {
     password: undefined,
   });
 
-  const {login, error} = useAuth();
+  const {login} = useAuth();
   const navigate = useNavigate();
 
   const handleClick = async (e) => {
@@ -23,13 +24,14 @@ function Login({ title, link }) {
       const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, credentials, { withCredentials: true });
       if(data.status === "success") {
         login(data.user);
+        toast.success("You have logged in successfully!");
         navigate(`${link}`);
       }
-      else {
-        console.error("Login failed:", data.message);
-      }
     } catch (err) {
-      console.log(err)
+      const errorMessage = err.response?.data?.message || "Failed to log in. Please try again.";
+      toast.error(errorMessage);
+      console.error(err);
+      throw err;
     }
   };
 

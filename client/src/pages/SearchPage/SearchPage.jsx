@@ -8,6 +8,7 @@ import useFetch from "../../apis/useFetch";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Aos from 'aos'
+import { ClipLoader } from 'react-spinners'
 import 'aos/dist/aos.css'
 
 function SearchPage() {
@@ -68,7 +69,7 @@ function SearchPage() {
       <div className="searchedPosts">
         {loading ? (
           <>
-            <div className="p" style={{color: "white", "fontFamily": "'Kaushan Script', cursive", "margin": "30px 0"}}>Loading...</div>
+            <ClipLoader color="white" size={40} />
           </>
         ) : (
           <>
