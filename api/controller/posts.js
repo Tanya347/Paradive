@@ -20,7 +20,6 @@ export const createPost = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     data: newPost,
-    message: "Post has been created successfully",
   });
 });
 

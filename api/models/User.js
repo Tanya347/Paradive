@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema(
         validator: function(v) {
           return v === "" || validator.isURL(v);
         },
-        message: `Image link is not a valid URL`
+        message: 'Profile picture not uploaded. Please try again.'
       }
     },
     desc: {

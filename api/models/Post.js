@@ -56,6 +56,7 @@ const PostSchema = new mongoose.Schema(
     },
     photos: {
       type: [String],
+      required: [true, 'Photos need to be uploaded for a post'],
       validate: {
         validator: function(v) {
           return v.every(url => validator.isURL(url));  // Ensure every photo URL is valid
