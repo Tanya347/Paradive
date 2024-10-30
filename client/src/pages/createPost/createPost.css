@@ -39,8 +39,29 @@ html {
 
 }
 
-.inputContainer button {
+.inputContainer .button {
     width: 100px;
+}
+
+.selected-tags {
+    display: flex;
+    flex-wrap: wrap;
+    width: inherit;
+    gap: 10px;
+}
+
+.tag {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.cross-button {
+    width: 20px;
+    height: 20px;
+    outline: none;
+    border: none;
+    cursor: pointer;
 }
 
 .picsContainer {
@@ -126,7 +147,7 @@ html {
     font-weight: bold;
 }
 
-.inputContainer button {
+.inputContainer .button {
     width: 50%;
     height: 40px;
     margin-top: 20px;

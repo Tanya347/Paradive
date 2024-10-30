@@ -50,7 +50,7 @@ html {
 
 }
 
-.inputContainer button {
+.inputContainer .button {
     width: 100px;
 }
 
@@ -136,7 +136,7 @@ html {
     font-weight: bold;
 }
 
-.inputContainer button {
+.inputContainer .button {
     width: 50%;
     height: 40px;
     margin-top: 20px;
@@ -159,6 +159,10 @@ html {
     border: 0;
     border-bottom: 1px solid white;
     background: transparent;
+    color: white;
+}
+
+.input input::placeholder {
     color: white;
 }
 

@@ -8,7 +8,6 @@ import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
-import activities from "../Activity/activities"
 import { createPost } from "../../apis/usePost";
 import { handleChange } from '../../commons';
 import { ClipLoader } from "react-spinners";
@@ -18,13 +17,39 @@ function CreatePost() {
   const [info, setInfo] = useState({});
   const [rating, setRating] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [tags, setTags] = useState([]);
   const { user } = useAuth();
+  const spinner = document.getElementById("spinner");
+  spinner.style.display = "none";
 
   const handleStarClick = (selectedRating) => {
     setRating(selectedRating);
   };
 
   const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleKeyDown = (e) => {
+    if ((e.key === 'Enter' || e.key === ' ') && inputValue.trim() && tags.length < 5) {
+      addTag(inputValue.trim());
+      e.preventDefault(); 
+    }
+  };
+
+  const addTag = (tag) => {
+    if (!tags.includes(tag)) {
+      setTags([...tags, tag]);
+    }
+    setInputValue('');
+  };
+
+  const removeTag = (tagToRemove) => {
+    setTags(tags.filter((tag) => tag !== tagToRemove));
+  };
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -35,6 +60,7 @@ function CreatePost() {
         userId: user._id,
         username: user.username,
         rating: rating,
+        tags: tags
       };
 
       const newPost = await createPost(postData, files);
@@ -109,15 +135,25 @@ function CreatePost() {
                 </div>
 
                 <div className="input">
-                  <div className="formInput">
-                    <label>Activity Type</label>
-                    <select id="type" className="type" onChange={(e) => handleChange(e, setInfo)}>
-                      <option value="select">-Select an activity-</option>
-                      {activities?.map((item) => (
-                        <option value={item.type}>{item.placeholder}</option>
+                  <label htmlFor="tags">Activities</label>
+                  <div style={{ position: "relative", width: "300px"}}>
+                    <div className="selected-tags">
+                      {tags?.map((tag, ind) => (
+                        <span key={ind} className="tag">
+                          {tag} <button className="cross-button" onClick={() =>removeTag(tag)}>x</button>
+                        </span>
                       ))}
-                    </select>
+                    </div>
                   </div>
+                  <input 
+                    type="text" 
+                    id="tags"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Type tag and press Enter"
+                  />
+                  {tags.length >= 5 && <p>Maximum of 5 tags allowed.</p>}
                 </div>
 
               </div>

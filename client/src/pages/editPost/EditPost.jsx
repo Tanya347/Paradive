@@ -8,7 +8,6 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import Footer from '../../components/Footer/Footer';
-import activities from "../Activity/activities"
 import { handleChange } from '../../commons';
 import { editPost } from '../../apis/useEdit';
 import { ClipLoader } from 'react-spinners';
@@ -25,20 +24,50 @@ const EditPost = () => {
     const [rating, setRating] = useState(0);
     const [selectedPhotos, setSelectedPhotos] = useState(new Set()); // Track selected photos for deletion
     const [newFiles, setNewFiles] = useState([]); // Track new files to upload
+    const [inputValue, setInputValue] = useState('');
+    const [tags, setTags] = useState([]);
+
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value);
+      };
+    
+      const handleKeyDown = (e) => {
+        if ((e.key === 'Enter' || e.key === ' ') && inputValue.trim() && tags.length < 5) {
+          addTag(inputValue.trim());
+          e.preventDefault(); 
+        }
+      };
+    
+      const addTag = (tag) => {
+        if (!tags.includes(tag)) {
+          setTags([...tags, tag]);
+        }
+        setInputValue('');
+      };
+    
+      const removeTag = (tagToRemove) => {
+        setTags(tags.filter((tag) => tag !== tagToRemove));
+      };
 
     useEffect (() => {
         setInfo(data)
+        if(data.tags)
+            setTags(data.tags)
         if(data.rating)
             setRating(data.rating)
+        
+    }, [data, data.rating, data.tags])
+
+    useEffect (() => {
         if(!loading)
             spinner.style.display = "none";
-    }, [data, data.rating, loading, spinner.style])
+    }, [loading, spinner.style])
 
     const handleClick = async(e) => {
         e.preventDefault();
         setPostLoader(true);
         try {
-            await editPost(id, info, selectedPhotos, newFiles, rating); // Call the service function
+            await editPost(id, info, selectedPhotos, newFiles, rating, tags); // Call the service function
             navigate(`/${id}`); // Navigate to the updated post
         } catch (err) {
             console.log(err);
@@ -148,19 +177,24 @@ const EditPost = () => {
                                             </div>
 
                                             <div className="input">
-                                                <div className="formInput">
-                                                    <label>Activity Type</label>
-                                                    <select 
-                                                        id="type" 
-                                                        className="type" 
-                                                        value={info.type}
-                                                    onChange={(e) => handleChange(e, setInfo)}
-                                                    >
-                                                    <option value="select">-Select an activity-</option>
-                                                    {activities?.map((item) => (
-                                                        <option value={item.type}>{item.placeholder}</option>
+                                                <label>Activities</label>
+                                                <div style={{ position: "relative", width: "300px"}}>
+                                                    <div className="selected-tags">
+                                                    {tags?.map((tag, ind) => (
+                                                        <span key={ind} className="tag">
+                                                        {tag} <button className="cross-button" onClick={() =>removeTag(tag)}>x</button>
+                                                        </span>
                                                     ))}
-                                                    </select>
+                                                    </div>
+                                                    <input 
+                                                        type="text" 
+                                                        id="tags"
+                                                        value={inputValue}
+                                                        onChange={handleInputChange}
+                                                        onKeyDown={handleKeyDown}
+                                                        placeholder="Type tag and press Enter"
+                                                    />
+                                                    {tags.length >= 5 && <p>Maximum of 5 tags allowed.</p>}
                                                 </div>
                                             </div>
 

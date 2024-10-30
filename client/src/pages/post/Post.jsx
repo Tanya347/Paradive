@@ -145,15 +145,13 @@ function Post() {
             <div className="description-container">
               <h1>{data.title}</h1>
               <p>{data.desc}</p>
+              <div className="tags-container">
+                {data?.tags?.map((tag, ind) => (
+                  <div className="title" key={ind}>{tag}</div>
+                ))}
+              </div>
             </div>
             <div className="information-container">
-                <div className="info-header">
-                  <div className="title">
-                    <span>Activity Type  :  </span>
-                    {data?.type}
-                  </div>
-                  <p class="starability-result" data-rating={data.rating}></p>
-                </div>
                 <p>
                   <FontAwesomeIcon className="icon" icon={faCoins} />
                   <span> Price Range  :  </span>
@@ -175,10 +173,13 @@ function Post() {
                   {data?.location}
                 </p>
   
-                {user && isUser && <div className="post-button-container">
-                  <button className="post_button" style={{"marginRight":"5px"}} onClick={handleDelete}>Delete</button>
-                  <button className="post_button" onClick={() => navigate(`/edit/${data._id}`)}>Edit</button>
-                </div>}
+                <div className="bottom-container">
+                  {user && isUser && <div className="post-button-container">
+                    <button className="post_button" style={{"marginRight":"5px"}} onClick={handleDelete}>Delete</button>
+                    <button className="post_button" onClick={() => navigate(`/edit/${data._id}`)}>Edit</button>
+                  </div>}
+                  <p class="starability-result" data-rating={data.rating}></p>
+                </div>
   
             </div>
             <div className="comments-container">

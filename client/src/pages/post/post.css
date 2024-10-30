@@ -100,11 +100,16 @@ html {
     text-align: center;
     width: fit-content;
     margin: 10px 0;
-}
-
-.post-container span {
     color: #126e82;
     font-weight: bolder;
+}
+
+.bottom-container {
+    width: inherit;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .post-container p {
@@ -116,10 +121,11 @@ html {
     padding-right: 10px;
 }
 
-.information-container .info-header {
+.tags-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 10px;
     flex-wrap: wrap;
 }
 

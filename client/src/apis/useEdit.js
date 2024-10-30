@@ -64,7 +64,7 @@ const uploadImage = async (file) => {
   };
 
 // Function to handle the post editing logic
-export const editPost = async (id, info, selectedPhotos, newFiles, rating) => {
+export const editPost = async (id, info, selectedPhotos, newFiles, rating, tags) => {
   // Step 1: Handle photo deletions
   const photosToDelete = Array.from(selectedPhotos);
   const updatedPhotos = info.photos.filter((photo) => !photosToDelete.includes(photo));
@@ -94,6 +94,7 @@ export const editPost = async (id, info, selectedPhotos, newFiles, rating) => {
     ...info,
     photos: finalPhotos,
     rating: rating,
+    tags: tags
   };
 
   // Step 5: Make the API call to update the post

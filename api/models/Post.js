@@ -50,9 +50,14 @@ const PostSchema = new mongoose.Schema(
         message: 'Description should not exceed 500 characters'
       }
     },
-    type: {
-      type: String,
-      minLength: [3, 'Type should at least have 3 characters']
+    tags: {
+      type: [String],
+        validate: {
+          validator: function (v) {
+            return v.every(tag => tag.length >= 3 && tag.length <= 15);
+          },
+          message: 'Tags should be of length min 3 and max 15',
+        },
     },
     photos: {
       type: [String],

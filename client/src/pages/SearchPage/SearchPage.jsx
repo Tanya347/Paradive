@@ -16,13 +16,17 @@ function SearchPage() {
   const { data, loading } = useFetch("/posts");
   const [showScrollButton, setShowScrollButton] = useState(false);
 
-  const keys = ["type", "title", "location"];
+  const keys = ["title", "location"];
 
   const search = (data) => {
     return data.filter((item) =>
-      keys.some((key) => item[key].toLowerCase().includes(query))
+      keys.some((key) => item[key].toLowerCase().includes(query)) ||
+    (item.tags && item.tags.some(tag => tag.toLowerCase().includes(query)))
     );
   };
+
+  const spinner = document.getElementById("spinner");
+  spinner.style.display = "none";
 
   useEffect(() => {
     Aos.init({duration: 1000});
@@ -82,7 +86,9 @@ function SearchPage() {
                     <span>Location : </span> {item.location}
                   </h6>
                   <h6>
-                    <span>Activity : </span> {item.type}
+                    <span>Activity : </span> {item.tags.map((tag, ind) => (
+                      <div className="tag-container">{tag}</div>
+                    ))}
                   </h6>
                   <p>{item.desc.slice(0, 60)}...</p>
                   <Link to={`/${item._id}`}>

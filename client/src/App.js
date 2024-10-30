@@ -6,8 +6,6 @@ import Register from "./pages/Register/Register";
 import Post from "./pages/post/Post";
 import CreatePost from "./pages/createPost/CreatePost";
 import { useAuth } from "./context/authContext";
-import Activity from "./pages/Activity/Activity";
-import AllActivity from "./pages/allActivity/AllActivity";
 import UserPage from "./pages/userPage/UserPage";
 import EditPost from "./pages/editPost/EditPost"
 import { ToastContainer } from "react-toastify";
@@ -40,7 +38,6 @@ function App() {
                 <EditPost />
               </ProtectedRoute>
             }/>
-            <Route path="/activity/:id" element={<Activity />} />
             <Route
               path="/new"
               element={
@@ -50,7 +47,6 @@ function App() {
               }
               />
             <Route path="/explore" element={<SearchPage />} />
-            <Route path="/all" element={<AllActivity />} />
             <Route path="/user/:id" element={<UserPage />} />
           </Routes>
         </BrowserRouter>
