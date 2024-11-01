@@ -11,7 +11,7 @@ import User from "../models/User.js";
 const router = express.Router();
 
 router.put("/:id", protect, isOwner(User), updateUser);
-router.delete("/:id", protect, isOwner(User), deleteUser);
+router.delete("/", protect, deleteUser);
 router.get("/:id", getUser);
 router.get("/", protect, restrictTo('admin'), getUsers);
 

@@ -8,12 +8,14 @@ import { useState } from 'react';
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { useEffect } from 'react';
-import Modal from '../../components/modal/Modal';
+import Modal from '../../components/EditProfile/EditProfile';
 import { useAuth } from '../../context/authContext';
 import { ClipLoader } from 'react-spinners';
+import Deactivate from '../../components/Deactivate/Deactivate';
 
 const UserPage = () => {
     const [open, setOpen] = useState(false);
+    const [deactOpen, setDeactOpen] = useState(false);
     const {user} = useAuth();
     const {data, loading} = useFetch('/posts');
     const [postData, setPostData] = useState([]);
@@ -63,8 +65,16 @@ const UserPage = () => {
                             </p>
                         </div>
                         </div>
-                        <div className="edit-button">
-                            <button onClick={() => setOpen(true)}>Edit Profile</button>
+                        <div className="action-buttons-container">
+                            <div className="edit-button">
+                                <button onClick={() => setOpen(true)}>Edit Profile</button>
+                            </div>
+                            <div className="reset-password-button">
+                                <button>Reset Password</button>
+                            </div>
+                            <div className="deactivate-button">
+                                <button onClick={() => setDeactOpen(true)}>Deactivate Account</button>
+                            </div>
                         </div>
                     </div>
                     
@@ -108,6 +118,7 @@ const UserPage = () => {
                     </div>
                     <Footer />
                     {open && <Modal setOpen={setOpen} />}
+                    {deactOpen && <Deactivate setOpen={setDeactOpen} id = {user._id} />}
                 </div>
             }
         </>

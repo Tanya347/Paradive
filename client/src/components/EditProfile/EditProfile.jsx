@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import "./modal.css"
+import "./editProfile.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { handleUpdateUser } from '../../apis/useEdit';
 import { useAuth } from '../../context/authContext';
 import { handleChange } from '../../commons';
@@ -92,7 +92,6 @@ const Modal = ({setOpen}) => {
                             value={info.desc}
                             onChange={(e) => handleChange(e, setInfo)}
                             id="desc"
-                            //   value={data.desc}
                             />
                         </div>
                     </div>

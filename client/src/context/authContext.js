@@ -15,6 +15,7 @@ const initialState = {
 const actionTypes = {
   LOGIN: "LOGIN",
   LOGOUT: "LOGOUT",
+  DEACTIVATE: "DEACTIVATE",
   VERIFY_USER: "VERIFY_USER",
   SET_ERROR: "SET_ERROR",
   SET_LOADING: "SET_LOADING"
@@ -26,6 +27,8 @@ const authReducer = (state, action) => {
     case actionTypes.LOGIN:
       return { ...state, user: action.payload, loading: false, error: null };
     case actionTypes.LOGOUT:
+      return { ...state, user: null, loading: false, error: null };
+    case actionTypes.DEACTIVATE:
       return { ...state, user: null, loading: false, error: null };
     case actionTypes.VERIFY_USER:
       return { ...state, user: action.payload, loading: false };
@@ -87,7 +90,24 @@ export const AuthProvider = ({ children }) => {
       dispatch({ type: actionTypes.LOGOUT });
       localStorage.removeItem("user");
     } catch (err) {
-      const errorMessage = err.response?.data?.message || "Failed to create post. Please try again.";
+      const errorMessage = err.response?.data?.message || "Failed to logout. Please try again.";
+      toast.error(errorMessage);
+      console.error(err);
+      dispatch({ type: actionTypes.SET_ERROR, payload: "Logout error" });
+    }
+  };
+
+  const deactivate = async () => {
+    try { 
+      const res = await axios.delete(`${process.env.REACT_APP_API_URL}/users`, {withCredentials: true});
+      if(res.data.status === 'success') {
+        toast.success("Deactivated Successfully. We're sorry to hear you go :(");
+        removeCookie("jwt");
+        dispatch({ type: actionTypes.DEACTIVATE });
+        localStorage.removeItem("user");
+      }
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || "Failed to logout. Please try again.";
       toast.error(errorMessage);
       console.error(err);
       dispatch({ type: actionTypes.SET_ERROR, payload: "Logout error" });
@@ -100,6 +120,7 @@ export const AuthProvider = ({ children }) => {
         user: state.user,
         loading: state.loading,
         error: state.error,
+        deactivate,
         login,
         logout
       }}

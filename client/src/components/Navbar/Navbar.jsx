@@ -2,7 +2,7 @@ import './navbar.css'
 import { useState } from 'react';
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../context/authContext"
 
 const Navbar = () => {
@@ -15,12 +15,14 @@ const Navbar = () => {
         }
     };
 
+    const navigate = useNavigate();
+
     const {user, logout} = useAuth();
     
     const handleClick = async (e) => {
         e.preventDefault();
         await logout();
-        // window.location.reload();
+        navigate('/')
     }
 
     window.addEventListener('scroll', changeBackground)

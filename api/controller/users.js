@@ -34,7 +34,8 @@ export const updateUser = catchAsync(async (req, res, next) => {
 });
 
 export const deleteUser = catchAsync(async (req, res, next) => {
-  await User.findByIdAndUpdate(req.user.id, {active: false});
+  res.cookie('jwt', '', { expires: new Date(0), httpOnly: true });
+  await User.findByIdAndDelete(req.user.id);
   res.status(200).json({
     status: "success", 
     data: null,
