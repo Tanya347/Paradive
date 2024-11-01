@@ -47,7 +47,11 @@ function App() {
               }
               />
             <Route path="/explore" element={<SearchPage />} />
-            <Route path="/user/:id" element={<UserPage />} />
+            <Route path="/user/:id" element={
+              <ProtectedRoute>
+                <UserPage />
+              </ProtectedRoute>
+            } />
           </Routes>
         </BrowserRouter>
       </>

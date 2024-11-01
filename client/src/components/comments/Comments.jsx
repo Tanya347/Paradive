@@ -50,7 +50,7 @@ const Comments = ({comments}) => {
                     >
                       <div className="comment-header">
                         <div className="comment-author">
-                          {c?.author?.profilePicture && <img src={c?.author?.profilePicture} alt="" />}
+                          {<img src={c?.author?.profilePicture ? c?.author?.profilePicture : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"} alt="" />}
                           <h4><span>@{c?.author?.username}</span> says</h4>
                         </div>
                         {user && user._id === c.author._id && <div className="comment-action-buttons">

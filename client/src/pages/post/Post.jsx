@@ -29,6 +29,7 @@ function Post() {
   const { data, loading } = useFetch(`/posts/${id}`);
   const { user } = useAuth();
   const [slideNumber, setSlideNumber] = useState(0);
+  const [isUser, setIsUser] = useState(false);
   const [open, setOpen] = useState(false);
   const spinner = document.getElementById("spinner");
   
@@ -42,6 +43,10 @@ function Post() {
     if(!loading)
       spinner.style.display = "none";
   }, [loading, spinner.style])
+
+  useEffect(() => {
+    setIsUser(data?.author?._id === user?._id);
+  }, [data?.author?._id, user._id])
 
   useEffect(() => {
 
@@ -72,11 +77,6 @@ function Post() {
   }, [data?.location]);
 
   const navigate = useNavigate();
-
-  let isUser
-  if (user) {
-    isUser = data.author === user._id;
-  }
 
   const handleDelete = async () => {
     try {
@@ -165,7 +165,7 @@ function Post() {
                 <p>
                   <FontAwesomeIcon className="icon" icon={faPersonSwimming} />
                   <span> Posted By  :  </span>
-                  {data?.username}
+                  {data?.author?.username}
                 </p>
                 <p>
                   <FontAwesomeIcon className="icon" icon={faMapLocationDot} />
@@ -178,7 +178,7 @@ function Post() {
                     <button className="post_button" style={{"marginRight":"5px"}} onClick={handleDelete}>Delete</button>
                     <button className="post_button" onClick={() => navigate(`/edit/${data._id}`)}>Edit</button>
                   </div>}
-                  <p class="starability-result" data-rating={data.rating}></p>
+                  <p class="starability-result" data-rating={data.rating || 0}></p>
                 </div>
   
             </div>

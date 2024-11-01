@@ -101,7 +101,7 @@ function SearchPage() {
         )}
       </div>
       <Footer />
-      {showScrollButton && <div className="scroll-to-top">
+      {showScrollButton && data.length > 4 && <div className="scroll-to-top">
         <FontAwesomeIcon onClick={scrollToTop} className="icon" icon={faArrowAltCircleUp} />
       </div>}
     </div>

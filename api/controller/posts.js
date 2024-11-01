@@ -1,3 +1,4 @@
+import Comment from "../models/Comment.js";
 import Post from "../models/Post.js";
 import User from "../models/User.js";
 import { catchAsync } from "../utils/catchAsync.js";
@@ -39,6 +40,8 @@ export const updatePost = catchAsync(async (req, res, next) => {
 
 export const deletePost = catchAsync(async (req, res, next) => {
   const post = await Post.findByIdAndDelete(req.params.id);
+  // Delete all comments associated with the post
+  await Comment.deleteMany({ _id: { $in: post.comments } });
   await User.findByIdAndUpdate(post.userId, { $pull: { posts: post._id } });
 
   res.status(200).json({
@@ -54,6 +57,9 @@ export const getPost = catchAsync(async (req, res, next) => {
       path: 'author',
       select: 'profilePicture _id username'
     }
+  }).populate({
+    path: 'author',
+    select: '_id username'
   });
 
   res.status(200).json({

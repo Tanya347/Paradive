@@ -27,7 +27,7 @@ export const createComment = catchAsync(async (req, res, next) => {
   });
 
 export const updateComment = catchAsync(async (req, res, next) => {
-  const comment = await Comment.findByIdAndUpdate(
+  await Comment.findByIdAndUpdate(
     req.params.id,
     { $set: req.body},
     { new: true }
@@ -39,12 +39,8 @@ export const updateComment = catchAsync(async (req, res, next) => {
 });
 
 export const deleteComment = catchAsync(async (req, res, next) => {
-  const deletedComment = await Comment.findByIdAndDelete(req.params.id);
-
-  if (!deletedComment) {
-    return res.status(404).json({ message: "Comment not found" });
-  }
-
+  const comment = await Comment.findByIdAndDelete(req.params.id);
+  await Post.findByIdAndUpdate(comment.parentPost, {$pull: { comments: comment._id}});
   res.status(200).json({ 
     status: "success",
     message: "Comment deleted successfully" 

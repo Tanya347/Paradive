@@ -2,6 +2,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export const createPost = async (postData, files) => {
+
   try {
     // Handle image uploads
     const list = await Promise.all(

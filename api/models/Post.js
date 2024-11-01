@@ -19,12 +19,7 @@ const PostSchema = new mongoose.Schema(
     },
     priceRange: {
       type: String,
-      validate: {
-        validator: function(v) {
-          return !v || validator.isCurrency(v, { symbol: '₹', allow_negatives: false });  // Validate price range as a currency
-        },
-        message: props => `${props.value} is not a valid price range`
-      }
+      required: [true, 'Price range is required'],
     },
     location: {
       type: String,

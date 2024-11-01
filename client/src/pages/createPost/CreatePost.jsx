@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { createPost } from "../../apis/usePost";
 import { handleChange } from '../../commons';
 import { ClipLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 function CreatePost() {
   const [files, setFiles] = useState([]);
@@ -51,8 +52,21 @@ function CreatePost() {
     setTags(tags.filter((tag) => tag !== tagToRemove));
   };
 
+  console.log(files.length)
+
   const handleClick = async (e) => {
     e.preventDefault();
+
+    if(!files  || files.length === 0) {
+      toast.error("Photos are required for post. Please select minimum 1.");
+      return;
+    }
+
+    if(files.length > 5) {
+      toast.error("Maximum 5 photos can be uploaded!");
+      return;
+    }
+
     setLoading(true); // Show loading indicator
     try {
       const postData = {
@@ -68,6 +82,7 @@ function CreatePost() {
       const postId = newPost._id;
       navigate(`/${postId}`);
     } catch (err) {
+      setLoading(false);
       console.error(err);
     } finally {
       setLoading(false); // Hide loading indicator
@@ -83,7 +98,7 @@ function CreatePost() {
           <div className="picsContainer">
 
             <div className="formInput">
-              <h2>Upload Images (Max 6)</h2>
+              <h2>Upload Images (Max 5)</h2>
               <label htmlFor="file">
                 <FontAwesomeIcon className="icon" icon={faPlusCircle} />
               </label>

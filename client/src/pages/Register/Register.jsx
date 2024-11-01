@@ -6,14 +6,14 @@ import Footer from "../../components/Footer/Footer";
 import "./register.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { handleChange } from '../../commons';
 import axios from "axios";
 import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
 
 function Register() {
-  const navigate = useNavigate();
+  const spinner = document.getElementById("spinner");
+  spinner.style.display = "none";
 
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
@@ -43,12 +43,13 @@ function Register() {
           profilePicture: url,
         };
 
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, newUser, {withcredentials: false})
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, newUser, {withcredentials: true})
         if(res.data.status === 'success') {
           toast.success("Registered Successfully!");
         }
-        navigate("/login");
+        
       } catch (err) {
+        setLoading(false);
         const errorMessage = err.response?.data?.message || "Failed to register. Please try again.";
         toast.error(errorMessage);
         console.error(err);
@@ -56,11 +57,16 @@ function Register() {
       }
     } else {
       try {
-        await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, info, {withcredentials: false})
-
-        navigate("/login");
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, info, {withcredentials: true})
+        if(res.data.status === 'success') {
+          toast.success("Registered Successfully!");
+        }
       } catch (err) {
-        console.log(err)
+        setLoading(false);
+        const errorMessage = err.response?.data?.message || "Failed to register. Please try again.";
+        toast.error(errorMessage);
+        console.error(err);
+        throw err;
       }
     }
     setLoading(false);

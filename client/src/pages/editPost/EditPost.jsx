@@ -11,6 +11,7 @@ import Footer from '../../components/Footer/Footer';
 import { handleChange } from '../../commons';
 import { editPost } from '../../apis/useEdit';
 import { ClipLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 
 const EditPost = () => {
 
@@ -65,7 +66,19 @@ const EditPost = () => {
 
     const handleClick = async(e) => {
         e.preventDefault();
+
+        const photosToDelete = Array.from(selectedPhotos);
+        const updatedPhotos = info.photos.filter((photo) => !photosToDelete.includes(photo));
+      
+        // Step 2: Calculate the total number of photos after adding new ones
+        const totalPhotosCount = updatedPhotos.length + newFiles.length;
+        if (totalPhotosCount > 5) {
+          toast.error("Photos shouldn't exceed 5. Please remove some before uploading.");
+          return; // Early return to prevent the edit
+        }
+
         setPostLoader(true);
+
         try {
             await editPost(id, info, selectedPhotos, newFiles, rating, tags); // Call the service function
             navigate(`/${id}`); // Navigate to the updated post
@@ -125,7 +138,7 @@ const EditPost = () => {
                                 </div>
                                 <div className="picsContainer">
                                     <div className="formInput">
-                                        <h2>Upload New Images (Max 6)</h2>
+                                        <h2>Upload New Images</h2>
                                         <label htmlFor="file">
                                             <FontAwesomeIcon className="icon" icon={faPlusCircle} />
                                         </label>
