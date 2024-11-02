@@ -10,7 +10,7 @@ import { ClipLoader } from 'react-spinners';
 
 const Modal = ({setOpen}) => {
 
-    const {user} = useAuth();
+    const {user, login} = useAuth();
     const [info, setInfo] = useState({});
     const [file, setFile] = useState("");
     const [loading, setLoading] = useState(false);
@@ -22,8 +22,18 @@ const Modal = ({setOpen}) => {
     const handleClick = async(e) => {
         e.preventDefault();
         setLoading(true);
-        await handleUpdateUser(user, info, file, setOpen);
-        setLoading(false);
+        try{
+            const newUser = await handleUpdateUser(user, info, file, setOpen);
+            login(newUser)
+        }
+        catch(err) {
+            setLoading(false);
+            console.log(err);
+        }
+        finally {
+            setOpen(false);
+            setLoading(false);
+        }
     }
 
   return (

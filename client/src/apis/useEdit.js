@@ -9,7 +9,7 @@ const uploadImage = async (file) => {
   
     try {
       const uploadRes = await axios.post(
-        "https://api.cloudinary.com/v1_1/dmjd7myiw/image/upload",
+        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_KEY}/image/upload`,
         data,
         { withcredentials: false }
       );
@@ -24,16 +24,14 @@ const uploadImage = async (file) => {
   // Function to update user information
   const updateUser = async (userId, newUserData) => {
     try {
-      if (process.env.REACT_APP_MODE === "development") {
-        await axios.put(`/users/${userId}`, newUserData, { withCredentials: true });
-      } else {
-        const res = await axios.put(`${process.env.REACT_APP_API_URL}/users/${userId}`, newUserData, {
-          withCredentials: true,
-        });
-        if(res.data.status === 'success') {
-          toast.success("User Profile Updated Successfully!");
-        }
+      console.log(userId)
+      const res = await axios.put(`${process.env.REACT_APP_API_URL}/users/${userId}`, newUserData, {
+        withCredentials: true,
+      });
+      if(res.data.status === 'success') {
+        toast.success("User Profile Updated Successfully!");
       }
+      return res.data.data.user;
     } catch (err) {
       const errorMessage = err.response?.data?.message || "Failed to update profile. Please try again.";
       toast.error(errorMessage);
@@ -43,7 +41,7 @@ const uploadImage = async (file) => {
   };
   
   // Function that handles the entire process of updating user profile
-  export const handleUpdateUser = async (user, info, file, setOpen) => {
+  export const handleUpdateUser = async (user, info, file) => {
     try {
       let newUser = { ...info };
   
@@ -54,12 +52,10 @@ const uploadImage = async (file) => {
       }
   
       // Update user information (whether or not there is an image)
-      await updateUser(user._id, newUser);
-  
-      setOpen(false);
-      window.location.reload(); // Optional, to refresh the user info on the page
+      const res = await updateUser(user._id, newUser);
+      return res;
     } catch (err) {
-      console.error("Failed to update profile:", err);
+      toast.error("Failed to update profile!");
     }
   };
 
@@ -78,7 +74,7 @@ export const editPost = async (id, info, selectedPhotos, newFiles, rating, tags)
         data.append("file", file);
         data.append("upload_preset", "upload");
         const uploadRes = await axios.post(
-          "https://api.cloudinary.com/v1_1/dmjd7myiw/image/upload",
+          `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_KEY}/image/upload`,
           data
         );
         return uploadRes.data.url; // Assuming response contains the URL

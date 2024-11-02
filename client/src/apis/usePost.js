@@ -1,6 +1,53 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
+export const register = async (file, info) => {
+  
+  let profilePictureUrl;
+    
+  if (file) {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "upload");
+  
+    try {
+      const uploadRes = await axios.post(
+        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_KEY}/image/upload`,
+        data,
+        { withCredentials: false } 
+      );
+      profilePictureUrl = uploadRes.data.url;
+    } catch (err) {
+      toast.error("Failed to upload the image. Please try again.");
+      console.error(err);
+      return; 
+    }
+  }
+  
+  const newUser = {
+    ...info,
+    profilePicture: profilePictureUrl, 
+  };
+  
+  try {
+    const res = await axios.post(
+      `${process.env.REACT_APP_API_URL}/auth/register`,
+      newUser,
+      { withCredentials: true }
+    );
+  
+    if (res.data.status === 'success') {
+      toast.success("Registered Successfully!");
+    }
+
+    return res;
+  } catch (err) {
+    const errorMessage = err.response?.data?.message || "Failed to register. Please try again.";
+    toast.error(errorMessage);
+    console.error(err);
+  }
+}
+
 export const createPost = async (postData, files) => {
 
   try {
@@ -11,7 +58,7 @@ export const createPost = async (postData, files) => {
         data.append("file", file);
         data.append("upload_preset", "upload");
         const uploadRes = await axios.post(
-          "https://api.cloudinary.com/v1_1/dmjd7myiw/image/upload",
+          `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_KEY}/image/upload`,
           data, { withcredentials: false }
         );
         const { url } = uploadRes.data;

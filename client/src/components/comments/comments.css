@@ -1,3 +1,14 @@
+.comments-container {
+    padding-top: 20px;
+}
+
+.comments-container .comments-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
 .comments {
     background-color: #EEEEEE;
     overflow-y: scroll;

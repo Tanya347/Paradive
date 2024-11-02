@@ -1,11 +1,11 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import "../AddComment/addComment.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from '../../context/authContext';
 import { updateComment } from '../../apis/useEdit';
 
-const EditComment = ({setOpen, commentId, comment}) => {
+const EditComment = ({setOpen, commentId, comment, onCommentUpdated}) => {
     const {user} = useAuth();
     const [comm, setComm] = useState("");
 
@@ -20,9 +20,9 @@ const EditComment = ({setOpen, commentId, comment}) => {
     const handleClick = async (e) => {
         e.preventDefault();
         try {
-            await updateComment(commentId, comm); // Call the service function
+            await updateComment(commentId, comm); 
             setOpen(false);
-            window.location.reload();
+            onCommentUpdated();
         } catch (err) {
             console.log(err);
         }

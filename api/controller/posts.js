@@ -52,12 +52,6 @@ export const deletePost = catchAsync(async (req, res, next) => {
 
 export const getPost = catchAsync(async (req, res, next) => {
   const post = await Post.findById(req.params.id).populate({
-    path: 'comments',
-    populate: {
-      path: 'author',
-      select: 'profilePicture _id username'
-    }
-  }).populate({
     path: 'author',
     select: '_id username'
   });

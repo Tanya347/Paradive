@@ -6,7 +6,7 @@ import { handleChange } from '../../commons';
 import './addComment.css'
 import { addComment } from '../../apis/usePost';
 
-const AddComment = ({setOpen, postId}) => {
+const AddComment = ({setOpen, postId, onCommentUpdated}) => {
     const {user} = useAuth();
     const [info, setInfo] = useState({});
 
@@ -14,9 +14,9 @@ const AddComment = ({setOpen, postId}) => {
         e.preventDefault();
     
         try {
-          await addComment(info, postId); // Use the service function to handle the comment creation
+          await addComment(info, postId); 
           setOpen(false);
-          window.location.reload();
+          onCommentUpdated();
         } catch (err) {
           console.log(err);
         }

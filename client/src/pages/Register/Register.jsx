@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./register.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { handleChange } from '../../commons';
-import axios from "axios";
-import { toast } from "react-toastify";
+import { useAuth } from "../../context/authContext";
 import { ClipLoader } from "react-spinners";
+import { register } from "../../apis/usePost";
 
 function Register() {
   const spinner = document.getElementById("spinner");
@@ -18,60 +18,25 @@ function Register() {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleClick = async (e) => {
     e.preventDefault();
     setLoading(true);
-
-    if (file) {
-      const data = new FormData();
-
-      data.append("file", file);
-      data.append("upload_preset", "upload");
-
-
-      try {
-        const uploadRes = await axios.post(
-          "https://api.cloudinary.com/v1_1/dmjd7myiw/image/upload",
-          data, { withcredentials: false }
-        );
-
-        const { url } = uploadRes.data;
-
-        const newUser = {
-          ...info,
-          profilePicture: url,
-        };
-
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, newUser, {withcredentials: true})
-        if(res.data.status === 'success') {
-          toast.success("Registered Successfully!");
-        }
-        
-      } catch (err) {
-        setLoading(false);
-        const errorMessage = err.response?.data?.message || "Failed to register. Please try again.";
-        toast.error(errorMessage);
-        console.error(err);
-        throw err;
-      }
-    } else {
-      try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, info, {withcredentials: true})
-        if(res.data.status === 'success') {
-          toast.success("Registered Successfully!");
-        }
-      } catch (err) {
-        setLoading(false);
-        const errorMessage = err.response?.data?.message || "Failed to register. Please try again.";
-        toast.error(errorMessage);
-        console.error(err);
-        throw err;
-      }
+  
+    try {
+      const res = await register(file, info);
+      navigate("/");
+      login(res.data.user);
     }
+    catch (err) {
+      setLoading(false);
+      console.log(err);
+    }
+  
     setLoading(false);
   };
-
 
 
   return (

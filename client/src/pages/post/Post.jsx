@@ -19,7 +19,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import useFetch from "../../apis/useFetch";
 import { useState } from "react";
 import { useAuth } from "../../context/authContext";
-import AddComment from "../../components/AddComment/AddComment";
 import Comments from "../../components/comments/Comments";
 import { toast } from "react-toastify";
 
@@ -30,7 +29,6 @@ function Post() {
   const { user } = useAuth();
   const [slideNumber, setSlideNumber] = useState(0);
   const [isUser, setIsUser] = useState(false);
-  const [open, setOpen] = useState(false);
   const spinner = document.getElementById("spinner");
   
   const [viewState, setViewState] = useState({
@@ -102,6 +100,16 @@ function Post() {
     setSlideNumber(newSlideNumber)
   }
 
+  const formatDate = (date) => {
+    const newDate = new Date(date);
+    const formattedDate = new Intl.DateTimeFormat('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }).format(newDate);
+    return formattedDate
+  }
+
   return (
     <>
       {
@@ -160,7 +168,7 @@ function Post() {
                 <p>
                   <FontAwesomeIcon className="icon" icon={faCalendar} />
                   <span> Visited On  :  </span>
-                  {data?.date}
+                  {formatDate(data?.date)}
                 </p>
                 <p>
                   <FontAwesomeIcon className="icon" icon={faPersonSwimming} />
@@ -182,23 +190,13 @@ function Post() {
                 </div>
   
             </div>
-            <div className="comments-container">
-              <div className="comments-header">
-                <div className="title">
-                  <span>Comments  :  </span>
-                  {data?.comments?.length}
-                </div>
-                <div className="post_button" onClick={() => setOpen(true)}>
-                  New Comment
-                </div>
-              </div>
-                <Comments comments={data?.comments} />
-            </div>
+         
+            <Comments postId={data?._id} />
+
           </div>
         </div>
    
         <Footer />
-        {open && <AddComment setOpen={setOpen} postId={id}/>}
       </div>
       }
     </>

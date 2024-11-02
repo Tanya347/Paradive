@@ -129,17 +129,6 @@ html {
     flex-wrap: wrap;
 }
 
-.comments-container {
-    padding-top: 20px;
-}
-
-.comments-container .comments-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
 .post_button {
     width: fit-content;
     padding: 10px 25px;

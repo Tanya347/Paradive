@@ -47,3 +47,15 @@ export const deleteComment = catchAsync(async (req, res, next) => {
   });
 });
 
+export const getComments = catchAsync(async(req, res, next) => {
+  const comments = await Comment.find({parentPost: req.params.id}).populate({
+    path: 'author',
+    select: '_id username profilePicture'
+  });
+  res.status(200).json({
+    status: "success",
+    comments,
+    message: "Comments fetched successfully"
+  });
+})
+

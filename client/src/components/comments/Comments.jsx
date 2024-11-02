@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faEdit,
@@ -9,13 +9,33 @@ import { useAuth } from '../../context/authContext';
 import "./comments.css"
 import EditComment from '../EditComment/EditComment';
 import { toast } from 'react-toastify';
+import AddComment from '../AddComment/AddComment';
 
-const Comments = ({comments}) => {
+const Comments = ({postId}) => {
     const [open, setOpen] = useState(false);
+    const [openAdd, setOpenAdd] = useState(false);
     const [commentId, setCommentId] = useState("");
     const [comment, setComment] = useState("");
+    const [comments, setComments] = useState([]);
     const [isExpanded, setIsExpanded] = useState(false);
     const { user } = useAuth();
+    const [reload, setReload] = useState(false);
+
+    useEffect(() => {
+      // Fetch comments data
+      const fetchComments = async () => {
+        try {
+          const res = await axios.get(
+            `${process.env.REACT_APP_API_URL}/comments/${postId}`, {withCredentials: true}
+          );
+          setComments(res.data.comments);
+        } catch (err) {
+          console.error("Error fetching comments:", err);
+        }
+      };
+  
+      fetchComments();
+    }, [postId, reload]); // Re-fetch when postId or reload changes
 
     const handleCommentDelete = async (id) => {
         try {
@@ -23,8 +43,9 @@ const Comments = ({comments}) => {
           const res = await axios.delete(`${process.env.REACT_APP_API_URL}/comments/${id}`, {withCredentials: true})
           if(res.data.status === 'success') {
             toast.success("Comment Deleted successfully!");
+            setReload((prev) => !prev);
           }
-          window.location.reload();
+          // window.location.reload();
         } catch (err) {
           const errorMessage = err.response?.data?.message || "Failed to delete comment. Please try again.";
           toast.error(errorMessage);
@@ -39,7 +60,16 @@ const Comments = ({comments}) => {
       setOpen(true)
     }
   return (
-    <div className="">
+    <div className="comments-container">
+        <div className="comments-header">
+          <div className="title">
+            <span>Comments  :  </span>
+            {comments?.length}
+          </div>
+          <div className="post_button" onClick={() => setOpenAdd(true)}>
+            New Comment
+          </div>
+        </div>
         <div className="comments">
         {comments?.length > 0 ? (
             <>
@@ -47,6 +77,7 @@ const Comments = ({comments}) => {
                     <div className="comment-box" key={ind}
                       onMouseOver={() => setIsExpanded(true)} 
                       onMouseLeave={() => setIsExpanded(false)}
+                      onClick={() => setIsExpanded((prev) => !prev)}
                     >
                       <div className="comment-header">
                         <div className="comment-author">
@@ -75,7 +106,17 @@ const Comments = ({comments}) => {
                     </>
                 )}
     </div>
-    {open && <EditComment setOpen={setOpen} commentId={commentId} comment={comment}/>}
+    {open && <EditComment 
+      setOpen={setOpen}
+      commentId={commentId}
+      comment={comment}
+      onCommentUpdated={() => setReload((prev) => !prev)}
+    />}
+    {openAdd && <AddComment
+      setOpen={setOpenAdd} 
+      postId={postId}
+      onCommentUpdated={() => setReload((prev) => !prev)}
+    />}
     </div>
   )
 }

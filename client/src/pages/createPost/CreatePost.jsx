@@ -52,8 +52,6 @@ function CreatePost() {
     setTags(tags.filter((tag) => tag !== tagToRemove));
   };
 
-  console.log(files.length)
-
   const handleClick = async (e) => {
     e.preventDefault();
 

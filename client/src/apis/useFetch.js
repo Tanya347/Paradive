@@ -24,7 +24,7 @@ const useFetch = (url) => {
     const reFetch = async () => {
         setLoading(true);
         try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/${url}`)
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}${url}`)
 
             setData(res.data);
         } catch (err) {
