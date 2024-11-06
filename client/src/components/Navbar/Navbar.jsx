@@ -21,7 +21,7 @@ const Navbar = () => {
     
     const handleClick = async (e) => {
         e.preventDefault();
-        await logout();
+        await logout("Logged Out Successfully!");
         navigate('/')
     }
 

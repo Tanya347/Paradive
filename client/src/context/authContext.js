@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(userData));
   };
 
-  const logout = async () => {
+  const logout = async (message) => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/auth/logout`,
@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }) => {
         { withCredentials: true }
       );
       if(res.data.status === 'success') {
-        toast.success("Logged Out Successfully!");
+        toast.success(`${message}`);
       }
       removeCookie("jwt");
       dispatch({ type: actionTypes.LOGOUT });

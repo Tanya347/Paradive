@@ -89,9 +89,9 @@ export const protect = catchAsync(async (req, res, next) => {
     return next(new AppError('The user belonging to this token does no longer exist.', 401));
   }
 
-  // if(freshUser.changedPasswordAfter(decoded.iat)) {
-  //   return next(new AppError('User recently changed password! Please login again.', 401));
-  // }
+  if(freshUser.changedPasswordAfter(decoded.iat)) {
+    return next(new AppError('User recently changed password! Please login again.', 401));
+  }
 
   req.user = freshUser;
   next();
@@ -127,6 +127,23 @@ export const logout = catchAsync(async (req, res, next) => {
     status: 'success', 
     message: "Successfully logged out"
   })
+})
+
+export const updatePassword = catchAsync(async(req, res, next) => {
+  const user = await User.findById(req.user.id).select('+password');
+  if(!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+    return next(new AppError('Your current password is wrong.', 401))
+  }
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+
+  const token = signToken(user._id);
+  res.status(200).json({
+    status: 'success',
+    user,
+    token,
+  });
 })
 
 

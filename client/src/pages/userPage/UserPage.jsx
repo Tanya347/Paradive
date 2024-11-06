@@ -12,25 +12,21 @@ import Modal from '../../components/EditProfile/EditProfile';
 import { useAuth } from '../../context/authContext';
 import { ClipLoader } from 'react-spinners';
 import Deactivate from '../../components/Deactivate/Deactivate';
+import ResetPassword from '../../components/ResetPassword/ResetPassword';
 
 const UserPage = () => {
     const [open, setOpen] = useState(false);
     const [deactOpen, setDeactOpen] = useState(false);
+    const [resetOpen, setResetOpen] = useState(false);
     const {user} = useAuth();
     const {data, loading} = useFetch('/posts');
     const [postData, setPostData] = useState([]);
-    const spinner = document.getElementById("spinner");
 
     // populate not working in deployed version so have to do this instead
     useEffect(() => {
         const filteredArray = data.filter(item => item.author === user._id)
         setPostData(filteredArray)
     }, [data, user._id])
-
-    useEffect(() => {
-        if(!loading)
-            spinner.style.display = "none";
-    }, [loading, spinner.style])
 
     useEffect(() => {
         Aos.init({duration: 1000});
@@ -70,7 +66,7 @@ const UserPage = () => {
                                 <button onClick={() => setOpen(true)}>Edit Profile</button>
                             </div>
                             <div className="reset-password-button">
-                                <button>Reset Password</button>
+                                <button onClick={() => setResetOpen(true)}>Reset Password</button>
                             </div>
                             <div className="deactivate-button">
                                 <button onClick={() => setDeactOpen(true)}>Deactivate Account</button>
@@ -119,6 +115,7 @@ const UserPage = () => {
                     <Footer />
                     {open && <Modal setOpen={setOpen} />}
                     {deactOpen && <Deactivate setOpen={setDeactOpen} id = {user._id} />}
+                    {resetOpen && <ResetPassword setResetOpen={setResetOpen} />}
                 </div>
             }
         </>

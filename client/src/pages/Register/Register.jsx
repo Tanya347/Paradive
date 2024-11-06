@@ -12,9 +12,6 @@ import { ClipLoader } from "react-spinners";
 import { register } from "../../apis/usePost";
 
 function Register() {
-  const spinner = document.getElementById("spinner");
-  spinner.style.display = "none";
-
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
   const [loading, setLoading] = useState(false);

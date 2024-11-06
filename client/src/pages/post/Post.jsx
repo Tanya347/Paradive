@@ -29,19 +29,13 @@ function Post() {
   const { user } = useAuth();
   const [slideNumber, setSlideNumber] = useState(0);
   const [isUser, setIsUser] = useState(false);
-  const spinner = document.getElementById("spinner");
   
   const [viewState, setViewState] = useState({
     latitude: 37.8,
     longitude: -122.4,
     zoom: 10
   });
-
-  useEffect(() => {
-    if(!loading)
-      spinner.style.display = "none";
-  }, [loading, spinner.style])
-
+  
   useEffect(() => {
     setIsUser(data?.author?._id === user?._id);
   }, [data?.author?._id, user._id])

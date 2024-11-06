@@ -24,10 +24,7 @@ function SearchPage() {
     (item.tags && item.tags.some(tag => tag.toLowerCase().includes(query)))
     );
   };
-
-  const spinner = document.getElementById("spinner");
-  spinner.style.display = "none";
-
+  
   useEffect(() => {
     Aos.init({duration: 1000});
 

@@ -29,19 +29,19 @@ const PORT = process.env.PORT || 7700;
 
 const connect = async () => {
   try {
-    await mongoose.connect(process.env.MONGO);
+    mongoose.connect(process.env.MONGO);
     console.log("Connected to mongoDB.");
   } catch (error) {
     throw error;
   }
 };
 
-app.use(helmet());
 
 mongoose.connection.on("disconnected", () => {
   console.log("mongoDB disconnected!");
 });
 
+app.use(helmet());
 app.use(express.json({limit: '10kb'}));
 app.use(cookieParser());
 

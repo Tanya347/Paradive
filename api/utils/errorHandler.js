@@ -38,7 +38,7 @@ const sendErrorProd = (err, res) => {
         })
     }
     else {
-        // console.error('ERROR', err);
+        console.error('ERROR', err);
         res.status(500).json({
             status: 'error',
         message: 'Oops. Something went wrong!'
@@ -50,7 +50,6 @@ export const errorHandler = (err, req, res, next) => {
     err.statusCode = err.statusCode || 500;
     err.status = err.status || 'error';
 
-    // Check environment (development or production)
     if (process.env.NODE_ENV === 'development') {
 
         sendErrorDev(err, res);

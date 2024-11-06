@@ -16,8 +16,6 @@ function Login({ title, link }) {
     password: undefined,
   });
   const [loading, setLoading] = useState(false);
-  const spinner = document.getElementById("spinner");
-  spinner.style.display = "none";
   const {login} = useAuth();
   const navigate = useNavigate();
 

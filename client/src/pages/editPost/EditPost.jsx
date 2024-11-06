@@ -18,7 +18,6 @@ const EditPost = () => {
     const location = useLocation();
     const id = location.pathname.split("/")[2];
     const navigate = useNavigate();
-    const spinner = document.getElementById("spinner");
     const [postLoader, setPostLoader] = useState(false);
     const { data, loading} = useFetch(`/posts/${id}`);
     const [info, setInfo] = useState({});
@@ -58,11 +57,6 @@ const EditPost = () => {
             setRating(data.rating)
         
     }, [data, data.rating, data.tags])
-
-    useEffect (() => {
-        if(!loading)
-            spinner.style.display = "none";
-    }, [loading, spinner.style])
 
     const handleClick = async(e) => {
         e.preventDefault();

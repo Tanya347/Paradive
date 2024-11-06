@@ -21,8 +21,6 @@ function CreatePost() {
   const [inputValue, setInputValue] = useState('');
   const [tags, setTags] = useState([]);
   const { user } = useAuth();
-  const spinner = document.getElementById("spinner");
-  spinner.style.display = "none";
 
   const handleStarClick = (selectedRating) => {
     setRating(selectedRating);

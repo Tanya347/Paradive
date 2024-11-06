@@ -8,15 +8,12 @@ import { useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 
 function ActivityCard() {
-  const spinner = document.getElementById("spinner");
   const { data, loading } = useFetch("/posts");
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     setPosts(data.slice(0, 3))
-    if(!loading)
-      spinner.style.display = "none";
-  }, [data, spinner.style, loading])
+  }, [data, loading])
 
   useEffect(() => {
     Aos.init({duration: 1000});
@@ -24,9 +21,7 @@ function ActivityCard() {
 
   return (
     <div className="container">
-
-      {
-        !loading && <>
+        <>
             <h2>Featured Posts</h2>
             <div className="postcards">
               {loading ? (
@@ -57,7 +52,6 @@ function ActivityCard() {
               )}
             </div>
         </>
-      }
     </div>
   );
 }
