@@ -38,7 +38,7 @@ function Post() {
   
   useEffect(() => {
     setIsUser(data?.author?._id === user?._id);
-  }, [data?.author?._id, user._id])
+  }, [data?.author?._id, user?._id])
 
   useEffect(() => {
 

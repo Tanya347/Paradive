@@ -9,6 +9,7 @@ import { useAuth } from "./context/authContext";
 import UserPage from "./pages/userPage/UserPage";
 import EditPost from "./pages/editPost/EditPost"
 import { ToastContainer } from "react-toastify";
+import { Activity } from "./pages/activity/Activity";
 
 function App() {
   const { user } = useAuth();
@@ -33,6 +34,7 @@ function App() {
               />
             <Route path="/register" element={<Register />} />
             <Route path="/:id" element={<Post />} />
+            <Route path="/activity/:id" element={<Activity />} />
             <Route path="/edit/:id" element={
               <ProtectedRoute>
                 <EditPost />

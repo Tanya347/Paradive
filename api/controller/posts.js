@@ -63,7 +63,17 @@ export const getPost = catchAsync(async (req, res, next) => {
 });
 
 export const getPosts = catchAsync(async (req, res, next) => {
-  const posts = await Post.find();
+  const { tag } = req.query;
+  let posts;
+
+  if (tag) {
+    // Fetch posts that contain the specified tag
+    posts = await Post.find({ tags: tag });
+  } else {
+    // Fetch all posts if no tag is specified
+    posts = await Post.find();
+  }
+  
   res.status(200).json({
     status: "success",
     data: posts
