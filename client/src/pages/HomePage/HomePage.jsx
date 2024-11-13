@@ -26,7 +26,7 @@ function HomePage() {
         </div>
         <div className="featuredActivities">
           
-          <h2>Explore Activities</h2>
+          {/* <h2>Explore Activities</h2>
           <div className="activities">
 
             <ActivityCard 
@@ -47,10 +47,10 @@ function HomePage() {
               name={activities[2].name}
               link={activities[2].link}
             />
-          </div>
-          <Link to="all">
+          </div> */}
+          {/* <Link to="all">
             <button className="viewMore">View More</button>
-          </Link>
+          </Link> */}
         </div>
         <div className="featuredPosts">
           <div className="postBackground">
