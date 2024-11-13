@@ -16,7 +16,7 @@ function App() {
 
   const ProtectedRoute = ({ children }) => {
     if (!user) {
-      return <Login title="Login to Create Post" link="/new" />;
+      return <Login title="Login to Access Page" link="/new" />;
     } else {
       return children;
     }
@@ -49,7 +49,7 @@ function App() {
               }
               />
             <Route path="/explore" element={<SearchPage />} />
-            <Route path="/user/:id" element={
+            <Route path="/profile" element={
               <ProtectedRoute>
                 <UserPage />
               </ProtectedRoute>

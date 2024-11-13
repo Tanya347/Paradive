@@ -24,15 +24,19 @@ function Register() {
   
     try {
       const res = await register(file, info);
-      navigate("/");
-      login(res.data.user);
+      console.log(res)
+      if(res.data.status === 'success') {
+        login(res.data.user);
+        navigate("/");
+      }
     }
     catch (err) {
       setLoading(false);
       console.log(err);
     }
-  
-    setLoading(false);
+    finally {
+      setLoading(false);
+    }
   };
 
 

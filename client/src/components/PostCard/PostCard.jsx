@@ -6,6 +6,7 @@ import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { useEffect } from "react";
 import { ClipLoader } from "react-spinners";
+import { formatDate } from "../../commons";
 
 function ActivityCard() {
   const { data, loading } = useFetch("/posts");
@@ -39,7 +40,7 @@ function ActivityCard() {
                           <span>Posted By : </span> {item.username}
                         </h6>
                         <h6>
-                          <span>Date : </span> {item.date}
+                          <span>Date : </span> {formatDate(item.date)}
                         </h6>
                         <p>{item.desc.slice(0, 60)}...</p>
                         <Link to={`/${item._id}`}>

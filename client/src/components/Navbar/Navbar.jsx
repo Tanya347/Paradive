@@ -46,7 +46,7 @@ const Navbar = () => {
                     {user ? (<>
 
                         <li onClick={handleClick} style={{ cursor: "pointer" }}><p>Logout</p></li>
-                        <Link to={`/user/${user._id}`}>
+                        <Link to={'/profile'}>
                             <li><div className="profilePicture">
                                 <img src={user.profilePicture || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"} alt="" />
                             </div></li>

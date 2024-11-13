@@ -21,6 +21,7 @@ import { useState } from "react";
 import { useAuth } from "../../context/authContext";
 import Comments from "../../components/comments/Comments";
 import { toast } from "react-toastify";
+import { formatDate } from "../../commons";
 
 function Post() {
   const location = useLocation();
@@ -92,16 +93,6 @@ function Post() {
       newSlideNumber = slideNumber === size - 1 ? 0 : slideNumber + 1;
     }
     setSlideNumber(newSlideNumber)
-  }
-
-  const formatDate = (date) => {
-    const newDate = new Date(date);
-    const formattedDate = new Intl.DateTimeFormat('en-GB', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    }).format(newDate);
-    return formattedDate
   }
 
   return (

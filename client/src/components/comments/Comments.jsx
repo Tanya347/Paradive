@@ -45,7 +45,6 @@ const Comments = ({postId}) => {
             toast.success("Comment Deleted successfully!");
             setReload((prev) => !prev);
           }
-          // window.location.reload();
         } catch (err) {
           const errorMessage = err.response?.data?.message || "Failed to delete comment. Please try again.";
           toast.error(errorMessage);
@@ -66,9 +65,9 @@ const Comments = ({postId}) => {
             <span>Comments  :  </span>
             {comments?.length}
           </div>
-          <div className="post_button" onClick={() => setOpenAdd(true)}>
+          {user && <div className="post_button" onClick={() => setOpenAdd(true)}>
             New Comment
-          </div>
+          </div>}
         </div>
         <div className="comments">
         {comments?.length > 0 ? (

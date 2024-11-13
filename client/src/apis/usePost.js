@@ -45,6 +45,7 @@ export const register = async (file, info) => {
     const errorMessage = err.response?.data?.message || "Failed to register. Please try again.";
     toast.error(errorMessage);
     console.error(err);
+    return err;
   }
 }
 
