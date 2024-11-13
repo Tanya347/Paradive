@@ -37,9 +37,6 @@ function ActivityCard() {
                         <img id="post-image" src={item.photos[0]} alt="" />
                         <h4>{item.title}</h4>
                         <h6>
-                          <span>Posted By : </span> {item.username}
-                        </h6>
-                        <h6>
                           <span>Date : </span> {formatDate(item.date)}
                         </h6>
                         <p>{item.desc.slice(0, 60)}...</p>
