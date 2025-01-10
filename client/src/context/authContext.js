@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
         dispatch({ type: actionTypes.SET_LOADING });
         try {
           const { data } = await axios.post(
-            "http://localhost:4000/verify", // Update with your verification endpoint
+            "http://localhost:7700/api/auth/verify", 
             {},
             { withCredentials: true }
           );
